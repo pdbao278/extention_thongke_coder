@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Phần tử Tab 2: Bảng điểm theo lớp học phần
   const selectSearchSection = document.getElementById('select-search-section');
   const inputSearchKeyword = document.getElementById('input-search-keyword');
+  const chkSearchScoreGtZero = document.getElementById('chk-search-score-gt-zero');
   const searchStatTotal = document.getElementById('search-stat-total');
   const searchStatSubmitted = document.getElementById('search-stat-submitted');
   const searchThead = document.getElementById('search-thead');
@@ -375,6 +376,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!selectSearchSection) return;
     const secId = selectSearchSection.value;
     const kw = inputSearchKeyword ? inputSearchKeyword.value.trim() : '';
+    const isGtZero = chkSearchScoreGtZero ? chkSearchScoreGtZero.checked : false;
 
     // Nếu chưa có rankingStudentsList nhưng đã có HTML tab hiện tại, nạp trước
     if ((!rankingStudentsList || rankingStudentsList.length === 0) && lastFetchedHtml) {
@@ -386,7 +388,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       sectionId: secId,
       rankingStudents: rankingStudentsList,
       problems: rankingProblemsList,
-      keyword: kw
+      keyword: kw,
+      onlyGreaterThanZero: isGtZero
     });
 
     currentSectionResult = result;
@@ -415,7 +418,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!secId) {
         searchTbody.innerHTML = `<tr><td colspan="${totalCols}" class="text-center text-muted" style="padding: 16px;">Vui lòng chọn lớp học phần ở trên</td></tr>`;
       } else if (submittedStudents.length === 0) {
-        searchTbody.innerHTML = `<tr><td colspan="${totalCols}" class="text-center text-muted" style="padding: 16px;">Chưa có sinh viên nào trong lớp này nộp bài trên BXH</td></tr>`;
+        searchTbody.innerHTML = `<tr><td colspan="${totalCols}" class="text-center text-muted" style="padding: 16px;">${isGtZero ? 'Chưa có sinh viên nào trong lớp này có điểm &gt; 0 trên BXH' : 'Chưa có sinh viên nào trong lớp này nộp bài trên BXH'}</td></tr>`;
       } else {
         const fragment = document.createDocumentFragment();
 
@@ -453,6 +456,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (selectSearchSection) {
     selectSearchSection.addEventListener('change', () => {
       runSearchAndRender();
+    });
+  }
+
+  if (chkSearchScoreGtZero) {
+    chkSearchScoreGtZero.addEventListener('change', async () => {
+      const isChecked = chkSearchScoreGtZero.checked;
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+        await chrome.storage.local.set({ searchOnlyGreaterThanZero: isChecked });
+      }
+      runSearchAndRender();
+      showToast(isChecked ? 'Đã bật: Chỉ lấy thí sinh > 0 điểm' : 'Đã tắt: Lấy cả thí sinh 0 điểm');
     });
   }
 
@@ -596,9 +610,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function loadSavedSettings() {
     if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-      const store = await chrome.storage.local.get(['onlyGreaterThanZero', 'filterMode', 'onlyFreshman', 'freshmanPrefix', 'studentMap']);
+      const store = await chrome.storage.local.get(['onlyGreaterThanZero', 'searchOnlyGreaterThanZero', 'filterMode', 'onlyFreshman', 'freshmanPrefix', 'studentMap']);
       if (chkOnlyScoreGtZero && store.onlyGreaterThanZero !== undefined) {
         chkOnlyScoreGtZero.checked = store.onlyGreaterThanZero;
+      }
+      if (chkSearchScoreGtZero && store.searchOnlyGreaterThanZero !== undefined) {
+        chkSearchScoreGtZero.checked = store.searchOnlyGreaterThanZero;
       }
       if (selectFilterMode && store.filterMode) {
         selectFilterMode.value = store.filterMode;

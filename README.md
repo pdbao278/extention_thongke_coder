@@ -26,6 +26,7 @@ Tiện ích mở rộng (Chrome Extension) hỗ trợ tự động đọc dữ l
     - `Kỹ thuật lập trình - Nhóm 1`, `Nhóm 2`
   - **Chỉ hiển thị danh sách những sinh viên đã nộp bài**: Tự động lọc ra các thí sinh trong lớp học phần đã nộp bài và có kết quả trên Bảng xếp hạng kỳ thi.
   - **Bỏ cột lớp, thay bằng điểm từng câu**: Cả bảng xem trực quan và file Excel xuất ra đều bỏ cột Lớp hành chính, thay thế bằng các cột điểm chi tiết cho từng bài thi (`Bài 1`, `Bài 2`, `Bài 3`... và `Total`).
+  - **Tùy chọn lọc điểm > 0**: Ô chọn *Chỉ lấy thí sinh có tổng điểm > 0 (bỏ qua 0 điểm)* giúp lọc nhanh danh sách sinh viên đã ghi được điểm trong lớp.
   - **Thẻ thống kê sĩ số**: Hiển thị nhanh số sinh viên đã nộp bài / tổng sĩ số của lớp học phần.
   - **Tìm nhanh tức thì**: Ô tìm kiếm theo Mã sinh viên hoặc Họ và tên trong lớp.
   - **Nút "Xuất file Excel lớp này"**: Tải về file Excel bảng điểm chi tiết của lớp học phần đã chọn.

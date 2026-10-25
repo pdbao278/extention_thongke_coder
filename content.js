@@ -449,6 +449,16 @@
       ? HuscRankingCore.getClassSections()
       : [];
 
+    let searchOnlyGtZero = false;
+    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+      try {
+        const stored = await chrome.storage.local.get(['searchOnlyGreaterThanZero']);
+        if (stored && stored.searchOnlyGreaterThanZero !== undefined) {
+          searchOnlyGtZero = stored.searchOnlyGreaterThanZero;
+        }
+      } catch (e) {}
+    }
+
     let sectionsOptionsHtml = '<option value="">-- Chọn lớp học phần --</option>';
     sections.forEach(sec => {
       sectionsOptionsHtml += `<option value="${sec.id}">${sec.label}</option>`;
@@ -483,6 +493,14 @@
               <label class="husc-search-label" for="husc-search-input-kw">Tìm nhanh MSSV / Họ tên:</label>
               <input type="text" id="husc-search-input-kw" placeholder="Tìm theo MSSV hoặc Họ tên..." style="width: 100%; padding: 8px 12px; font-size: 13px; border: 1.5px solid #cbd5e1; border-radius: 8px; outline: none; box-sizing: border-box;">
             </div>
+          </div>
+
+          <!-- Tùy chọn chỉ lấy > 0 điểm -->
+          <div class="husc-filter-card husc-filter-chk-card" style="margin-bottom: 12px; padding: 10px 14px;">
+            <label class="husc-chk-item" style="cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0;">
+              <input type="checkbox" id="husc-search-chk-gt-zero" ${searchOnlyGtZero ? 'checked' : ''}>
+              <span class="husc-chk-label" style="font-size: 13px; color: #1e293b;">Chỉ lấy thí sinh có <b>tổng điểm &gt; 0</b> (bỏ qua 0 điểm)</span>
+            </label>
           </div>
 
           <!-- Thẻ thống kê số lượng đã nộp -->
@@ -560,6 +578,7 @@
   function bindSearchModalEvents(rankingStudents, problems, hasRankingTable) {
     const selectSection = document.getElementById('husc-search-select-section');
     const inputKw = document.getElementById('husc-search-input-kw');
+    const chkGtZero = document.getElementById('husc-search-chk-gt-zero');
     const thead = document.getElementById('husc-search-thead');
     const tbody = document.getElementById('husc-search-tbody');
     const countTotal = document.getElementById('husc-search-count-total');
@@ -571,6 +590,11 @@
     function renderSectionData() {
       const secId = selectSection ? selectSection.value : '';
       const kw = inputKw ? inputKw.value.trim() : '';
+      const isGtZero = chkGtZero ? chkGtZero.checked : false;
+
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+        chrome.storage.local.set({ searchOnlyGreaterThanZero: isGtZero });
+      }
 
       // Gọi hàm filterSubmittedStudentsBySection trong core.js:
       // CHỈ LẤY NHỮNG AI ĐÃ NỘP BÀI TRÊN BXH, BỎ CỘT LỚP, CÓ ĐIỂM TỪNG CÂU
@@ -578,7 +602,8 @@
         sectionId: secId,
         rankingStudents: rankingStudents,
         problems: problems,
-        keyword: kw
+        keyword: kw,
+        onlyGreaterThanZero: isGtZero
       });
 
       currentSectionResult = result;
@@ -603,7 +628,7 @@
       if (!secId) {
         tbody.innerHTML = `<tr><td colspan="${totalColumns}" style="padding: 24px; color: #64748b;">Vui lòng chọn lớp học phần ở trên để xem danh sách thí sinh đã nộp bài</td></tr>`;
       } else if (submittedStudents.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="${totalColumns}" style="padding: 24px; color: #64748b;">Chưa có sinh viên nào trong lớp này nộp bài trên BXH</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="${totalColumns}" style="padding: 24px; color: #64748b;">${isGtZero ? 'Chưa có sinh viên nào trong lớp này có điểm &gt; 0 trên BXH' : 'Chưa có sinh viên nào trong lớp này nộp bài trên BXH'}</td></tr>`;
       } else {
         const fragment = document.createDocumentFragment();
 
@@ -641,6 +666,12 @@
 
     if (selectSection) {
       selectSection.addEventListener('change', () => {
+        renderSectionData();
+      });
+    }
+
+    if (chkGtZero) {
+      chkGtZero.addEventListener('change', () => {
         renderSectionData();
       });
     }

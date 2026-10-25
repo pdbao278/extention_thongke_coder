@@ -1001,6 +1001,7 @@ const HuscRankingCore = {
     const rankingStudents = options.rankingStudents || [];
     const problems = options.problems || [];
     const keyword = (options.keyword || '').trim().toLowerCase();
+    const onlyGreaterThanZero = !!options.onlyGreaterThanZero;
 
     // Bản đồ thí sinh trên BXH theo MSSV
     const rankingMap = {};
@@ -1061,6 +1062,17 @@ const HuscRankingCore = {
           const m1 = cleanId.toLowerCase().includes(keyword);
           const m2 = (st.fullName || '').toLowerCase().includes(keyword);
           if (!m1 && !m2) return;
+        }
+
+        // Lọc người có tổng điểm > 0 nếu tùy chọn được bật
+        if (onlyGreaterThanZero) {
+          let totalVal = 0;
+          if (bxhEntry.total && typeof bxhEntry.total.value === 'number') {
+            totalVal = bxhEntry.total.value;
+          } else if (bxhEntry.total && bxhEntry.total.display) {
+            totalVal = parseFloat(String(bxhEntry.total.display).replace(',', '.')) || 0;
+          }
+          if (totalVal <= 0) return;
         }
 
         submitted.push({
