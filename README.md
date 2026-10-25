@@ -1,35 +1,51 @@
-# CODER HUSC - Extension Xuất Bảng Xếp Hạng Excel Chuẩn SPIT
+# CODER HUSC - Extension Xuất Bảng Xếp Hạng Excel & Quản Lý Sinh Viên Theo Môn Lớp
 
-Tiện ích mở rộng (Chrome Extension) hỗ trợ tự động đọc dữ liệu bảng xếp hạng từ website [CODER HUSC](https://coder.husc.edu.vn), lọc các tài khoản theo định dạng **Mã sinh viên** (ví dụ: `23T1020034`, `26T1020029`, `26T1130037`...) và xuất ra file Excel (.xlsx) với định dạng chuẩn đẹp giống hệt mẫu bảng xếp hạng SPIT.
+Tiện ích mở rộng (Chrome Extension) hỗ trợ tự động đọc dữ liệu bảng xếp hạng từ website [CODER HUSC](https://coder.husc.edu.vn), nhận diện mã sinh viên, tra cứu họ tên tự động và xuất ra file Excel (.xlsx) chuẩn mẫu SPIT. Đồng thời tích hợp bộ công cụ tra cứu sinh viên theo Môn học và Nhóm học phần tiện lợi ngay trên thanh Header của website.
 
 ---
 
 ## 🎯 Các tính năng nổi bật
 
-1. **Menu xả xuống lọc đối tượng thí sinh (Chọn 1 trong 3)**:
-   - **Chỉ lấy có Mã sinh viên (Expert)**: Tự động nhận diện thí sinh theo mã sinh viên chuẩn ĐH Khoa học Huế (`\d{2}[A-Za-z]\d{7}` như `23T1020034`).
-   - **Chỉ lấy Tân sinh viên (Newbie)**: Chỉ giữ lại các bạn tân sinh viên khóa mới nhất (mặc định lấy 2 số năm hiện tại + `T`, ví dụ: `26T...` và cho phép tùy chỉnh số khóa).
-   - **Lấy tất cả (kể cả không có Mã sinh viên)**: Giữ lại toàn bộ mọi tài khoản tham gia trên bảng xếp hạng (kể cả tài khoản tự do, admin, khách không có mã SV).
+### 1. Hai nút chức năng độc lập trên thanh Header (Góc phải sau Tên người dùng)
+- **Nút "Thống kê" (Nền xanh dương gradient)**:
+  - Mở bảng điều khiển phân tích bảng xếp hạng cuộc thi hiện tại.
+  - Bộ lọc đối tượng:
+    - *Chỉ lấy có Mã sinh viên (Expert)*.
+    - *Chỉ lấy Tân sinh viên (Newbie)* (mặc định lấy 2 số năm hiện tại + `T`, ví dụ: `26T...`).
+    - *Lấy tất cả* (kể cả tài khoản không có mã SV).
+  - Tùy chọn: *Chỉ lấy thí sinh có tổng điểm > 0* (bỏ qua 0 điểm).
+  - **Bảng xem trước dữ liệu nhanh**: Đã thay cột "Họ tên" (bị lặp với cột MSSV) thành các cột điểm từng câu chi tiết (`Bài 1`, `Bài 2`, `Bài 3`...) và `Total`.
+  - Nút **Xuất file Excel** bảng xếp hạng cuộc thi chuẩn định dạng SPIT.
 
-2. **Lọc thí sinh có Tổng điểm > 0 (nằm ngay dưới menu xả xuống)**:
-   - Tích chọn: **"Chỉ lấy thí sinh có tổng điểm > 0 (bỏ qua 0 điểm)"**.
-   - Khi bật tùy chọn này, các thí sinh có tổng điểm bằng 0 sẽ tự động được loại bỏ khỏi danh sách xuất Excel.
+- **Nút "Tìm SV (Môn/Lớp)" (Nền xanh emerald gradient - Nằm bên phải nút Thống kê)**:
+  - Tách riêng chuyên biệt để phục vụ việc tra cứu và quản lý điểm số theo lớp học phần.
+  - **1 Dropdown duy nhất theo lớp học phần**:
+    - Placeholder: `-- Chọn lớp học phần --`
+    - `Ngôn ngữ lập trình - Nhóm 1` đến `Nhóm 8`
+    - `Kỹ thuật lập trình - Nhóm 1`, `Nhóm 2`
+  - **Chỉ hiển thị danh sách những sinh viên đã nộp bài**: Tự động lọc ra các thí sinh trong lớp học phần đã nộp bài và có kết quả trên Bảng xếp hạng kỳ thi.
+  - **Bỏ cột lớp, thay bằng điểm từng câu**: Cả bảng xem trực quan và file Excel xuất ra đều bỏ cột Lớp hành chính, thay thế bằng các cột điểm chi tiết cho từng bài thi (`Bài 1`, `Bài 2`, `Bài 3`... và `Total`).
+  - **Thẻ thống kê sĩ số**: Hiển thị nhanh số sinh viên đã nộp bài / tổng sĩ số của lớp học phần.
+  - **Tìm nhanh tức thì**: Ô tìm kiếm theo Mã sinh viên hoặc Họ và tên trong lớp.
+  - **Nút "Xuất file Excel lớp này"**: Tải về file Excel bảng điểm chi tiết của lớp học phần đã chọn.
 
-4. **Định dạng Excel chuẩn 100% như ảnh mẫu**:
-   - **Hàng 1**: Tiêu đề gộp cột `BẢNG XẾP HẠNG [TÊN KỲ THI]` (Nền xanh Navy đậm `#1F4E79`, chữ trắng in hoa đậm, căn giữa).
-   - **Hàng 2**: Tiêu đề các cột `Rank`, `Tên Thành Viên`, `1 (20)`, `2 (20)`, `3 (30)`... `Total`, `Note`, `Họ tên`, `Lớp` (Nền xanh dương `#4472C4`, chữ đen in đậm, căn giữa).
-   - **Top 1, 2, 3 (NHẤT, NHÌ, BA)**: Nền **MÀU ĐỎ TƯƠI** (`#FF0000`), chữ đậm, tự động điền cột Note: `NHẤT`, `NHÌ`, `BA`.
-   - **Cột Tên Thành Viên**: Tích hợp sẵn liên kết Hyperlink dẫn thẳng tới trang profile thí sinh trên CODER HUSC.
-   - **Định dạng số điểm**: Hiển thị điểm số theo chuẩn thập phân Việt Nam (`20,00`, `30,00`, `100,0`).
-   - Đầy đủ viền mỏng (Thin Border) cho toàn bộ các ô trong bảng.
+---
 
-3. **Tự động điền Họ tên và Lớp**:
-   - Tích hợp tính năng **Danh bạ sinh viên (Mapping)**: Bạn có thể dán hoặc nhập danh sách sinh viên (`MSSV  Họ và tên  Lớp`), extension sẽ lưu an toàn trong trình duyệt và tự động tra cứu để điền chính xác Họ tên, Lớp cho từng sinh viên.
-   - Tự động nhận diện tên nếu thí sinh đặt username có kèm họ tên (ví dụ: `24T1020386_TranDinhKhanhQuan`).
+### 2. Quy ước xuất Excel bảng xếp hạng cuộc thi (Chuẩn mẫu SPIT)
+- **Cột Lớp để trống giá trị**: Cột thứ 10 (`Lớp`) vẫn giữ nguyên tiêu đề và đường viền chuẩn form, nhưng giá trị các ô của thí sinh được để trống theo đúng quy định mẫu SPIT (`Bang_Xep_Hang_SPIT_NEWBIE_CONTEST_17.xlsx`).
+- **Hàng 1**: Tiêu đề gộp cột `BẢNG XẾP HẠNG [TÊN KỲ THI]` (Nền xanh Navy đậm `#1F4E79`, chữ trắng in hoa đậm, căn giữa).
+- **Hàng 2**: Tiêu đề các cột `Rank`, `Tên Thành Viên`, `1 (20)`, `2 (20)`, `3 (30)`... `Total`, `Note`, `Họ tên`, `Lớp` (Nền xanh dương `#4472C4`, chữ đen in đậm, căn giữa).
+- **Top 1, 2, 3**: Nền trắng đồng nhất (đã bỏ màu đỏ và bỏ ghi sẵn NHẤT, NHÌ, BA theo yêu cầu, cột Note để trống để người dùng tùy ý ghi chú).
+- **Cột Tên Thành Viên**: Tích hợp sẵn liên kết Hyperlink dẫn thẳng tới trang profile thí sinh trên CODER HUSC.
+- **Định dạng số điểm**: Hiển thị điểm số theo chuẩn thập phân Việt Nam (`20,00`, `30,00`, `100,0`).
+- Đầy đủ viền mỏng (Thin Border) cho toàn bộ các ô trong bảng.
 
-4. **Hai cách sử dụng linh hoạt**:
-   - **Cách 1 (Nhanh nhất)**: Bấm trực tiếp nút **"Xuất Excel SPIT"** xuất hiện ngay trên trang bảng xếp hạng của CODER HUSC.
-   - **Cách 2**: Bấm icon Extension trên thanh công cụ để xuất từ tab hiện tại, hoặc kéo thả / dán mã HTML bất kỳ để xuất offline.
+---
+
+### 3. Tra cứu Họ tên chuẩn xác từ `data.txt`
+- Tự động bóc tách và phân cấp danh bạ sinh viên từ file `data.txt` thành 2 môn học và các nhóm học phần.
+- **Chỉ lấy dữ liệu từ file**: Đã bỏ chức năng tự tách tên sau ký tự `_`. Tên sinh viên được tra cứu chính xác 100% từ cơ sở dữ liệu `data.txt` / `students_data.js`.
+- **Xem trước hiển thị đúng Họ và tên**: Bảng xem trước hiển thị đầy đủ Họ tên của sinh viên tra từ file thay vì chỉ hiển thị mỗi mã sinh viên.
 
 ---
 
@@ -45,47 +61,25 @@ Tiện ích mở rộng (Chrome Extension) hỗ trợ tự động đọc dữ l
    ```
    e:\tool\coder
    ```
-5. Tiện ích **CODER HUSC - Xuất Bảng Xếp Hạng Excel** sẽ xuất hiện trên danh sách tiện ích của trình duyệt! (Bạn nên ghim tiện ích lên thanh công cụ để tiện sử dụng).
+5. Tiện ích **CODER HUSC - Xuất Bảng Xếp Hạng Excel** đã sẵn sàng sử dụng!
 
 ---
 
-## 📖 Hướng dẫn sử dụng chi tiết
+## 📖 Hướng dẫn sử dụng trên website CODER HUSC
 
-### Cách 1 (Tiện lợi nhất): Bấm nút "Thống kê" ở Header góc trái trên trang web
-1. Mở bất kỳ trang nào trên website [CODER HUSC](https://coder.husc.edu.vn).
-2. Ngay trên thanh Header ở góc trái (cạnh logo CODER HUSC), bạn sẽ thấy nút **"Thống kê"** màu xanh lá.
-3. Bấm vào nút này để mở bảng điều khiển nổi ngay trên trang web:
-   - Xem thống kê số lượng sinh viên, số bị loại.
-   - Bật/tắt tùy chọn: **Chỉ lấy điểm > 0** hoặc **Chỉ lấy Tân sinh viên (26T...)**.
-   - Bấm **"Xuất file Excel"** để tải file Excel về máy ngay lập tức!
-   - Không cần phải mở menu tiện ích Extension của Chrome.
-
-### Cách 2: Sử dụng qua Popup Extension (Giao diện siêu tinh gọn)
-1. Bấm vào biểu tượng extension trên thanh công cụ trình duyệt khi đang ở trang bảng xếp hạng.
-2. Bấm nút **"Xuất Excel từ Tab này"** để tải file Excel về máy.
-3. Hoặc bấm **"Xem trước dữ liệu"** để xem trước danh sách thí sinh.
-4. Tích chọn nhanh theo nhu cầu:
-   - ☑ **Chỉ lấy thí sinh có tổng điểm > 0**: Loại bỏ thí sinh 0 điểm.
-   - ☑ **Chỉ lấy Tân sinh viên**: Chỉ giữ lại các bạn có mã bắt đầu bằng `26T...` (tự động theo năm hiện tại).
-
-### Cách 3: Quản lý danh bạ để tự động điền Họ tên & Lớp
-1. Bấm vào icon Extension > Chọn tab **"Danh bạ SV"**.
-2. Dán danh sách sinh viên của bạn vào ô nhập liệu theo định dạng mỗi dòng một sinh viên:
-   ```text
-   26T1020029    Trần Nhơn Hoàng Đạt    26T102
-   26T1020007    Nguyễn Tuấn Anh        26T102
-   26T1020047    Nguyễn Gia Hiều        26T102
-   ```
-   *(Hỗ trợ phân cách bằng phím Tab từ Excel, dấu phẩy, dấu gạch đứng hoặc khoảng trắng)*.
-3. Bấm **"Lưu danh bạ"**. Dữ liệu sẽ được lưu tự động trên máy của bạn và áp dụng cho tất cả các lần xuất Excel tiếp theo!
+1. Đăng nhập và mở bất kỳ trang nào trên website [CODER HUSC](https://coder.husc.edu.vn).
+2. Nhìn lên thanh Header ở góc trên bên phải (sau avatar/tên tài khoản của bạn), bạn sẽ thấy cụm 2 nút:
+   - **Nút "Thống kê" (Xanh dương)**: Bấm vào để mở modal thống kê cuộc thi, chọn lọc Newbie/Expert, lọc điểm > 0 và bấm "Xuất file Excel".
+   - **Nút "Tìm SV (Môn/Lớp)" (Xanh emerald)**: Bấm vào để tra cứu sinh viên theo Môn học (Ngôn ngữ lập trình, Kỹ thuật lập trình), theo Nhóm học phần, kiểm tra xem sinh viên nào trong lớp đã nộp bài, đạt bao nhiêu điểm, hoặc xuất danh sách sinh viên theo lớp học phần ra file Excel!
 
 ---
 
 ## 📂 Danh mục các file trong tiện ích
 
 - `manifest.json`: Cấu hình Chrome Extension (Manifest V3).
-- `core.js`: Bộ máy xử lý bóc tách HTML, lọc MSSV và tạo file ExcelJS.
-- `content.js` & `content.css`: Tự động gắn nút "Xuất Excel SPIT" trên website.
-- `popup.html`, `popup.css`, `popup.js`: Giao diện điều khiển của tiện ích.
-- `exceljs.min.js`: Thư viện tạo file Excel chuẩn định dạng (.xlsx).
-- `Bang_Xep_Hang_SPIT_NEWBIE_CONTEST_17.xlsx`: File Excel mẫu thực tế tạo ra từ kỳ thi SPIT Newbie Contest 17 để bạn kiểm tra đối chiếu.
+- `core.js`: Bộ máy xử lý bóc tách HTML, đối chiếu sinh viên theo môn/lớp, xuất Excel chuẩn SPIT.
+- `students_data.js`: Cơ sở dữ liệu danh bạ trích xuất từ `data.txt` được tổ chức phân cấp theo Môn học & Nhóm học phần.
+- `content.js` & `content.css`: Gắn cụm 2 nút [Thống kê] & [Tìm SV (Môn/Lớp)] trên Header và hiển thị 2 modal độc lập.
+- `popup.html`, `popup.css`, `popup.js`: Giao diện Popup của extension trên thanh công cụ trình duyệt.
+- `data.txt`: File danh sách sinh viên gốc theo từng môn và nhóm học phần.
+- `exceljs.min.js`: Thư viện xử lý Excel chuẩn định dạng (.xlsx).

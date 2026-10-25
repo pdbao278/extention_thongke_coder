@@ -32,6 +32,7 @@
       ],
       "js": [
         "exceljs.min.js",
+        "students_data.js",
         "core.js",
         "content.js"
       ],
@@ -39,6 +40,17 @@
         "content.css"
       ],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "data.txt",
+        "students_data.js"
+      ],
+      "matches": [
+        "https://coder.husc.edu.vn/*"
+      ]
     }
   ]
 }

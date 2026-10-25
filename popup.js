@@ -1,5 +1,8 @@
 /**
  * popup.js - Quản lý tương tác và xuất dữ liệu trên giao diện Extension
+ * Tách riêng 2 chức năng:
+ *  1. Lọc và Tải Excel Bảng Xếp Hạng (không cộng dồn tìm kiếm)
+ *  2. Tìm kiếm & Tra cứu Sinh viên theo Môn & Lớp (độc lập, xuất Excel riêng)
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -15,6 +18,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       btn.classList.add('active');
       const targetContent = document.getElementById(targetId);
       if (targetContent) targetContent.classList.add('active');
+
+      // Nếu chuyển sang tab tìm kiếm, tự động nạp kết quả
+      if (targetId === 'tab-search') {
+        runSearchAndRender();
+      }
     });
   });
 
@@ -22,41 +30,56 @@ document.addEventListener('DOMContentLoaded', async () => {
   let currentParsedData = null;
   let lastFetchedHtml = '';
   let activeTabUrl = '';
+  let currentSearchResults = [];
+  let rankingMapByMssv = {};
+  let rankingStudentsList = [];
+  let rankingProblemsList = [];
+  let currentSectionResult = null;
 
-  // Khởi tạo các phần tử DOM
+  // Phần tử Tab 1: Lọc & Xuất Excel BXH
   const currentTabStatus = document.getElementById('current-tab-status');
   const currentTabTitle = document.getElementById('current-tab-title');
   const btnExportCurrent = document.getElementById('btn-export-current');
   const btnPreviewCurrent = document.getElementById('btn-preview-current');
-  const btnExportFromPreview = document.getElementById('btn-export-from-preview');
+  const selectFilterMode = document.getElementById('select-filter-mode');
+  const freshmanPrefixRow = document.getElementById('freshman-prefix-row');
+  const freshmanPrefixInput = document.getElementById('freshman-prefix-input');
+  const chkOnlyScoreGtZero = document.getElementById('chk-only-score-gt-zero');
 
-  // Preview elements
+  // Phần tử Tab 2: Bảng điểm theo lớp học phần
+  const selectSearchSection = document.getElementById('select-search-section');
+  const inputSearchKeyword = document.getElementById('input-search-keyword');
+  const searchStatTotal = document.getElementById('search-stat-total');
+  const searchStatSubmitted = document.getElementById('search-stat-submitted');
+  const searchThead = document.getElementById('search-thead');
+  const searchTbody = document.getElementById('search-tbody');
+  const btnExportSearch = document.getElementById('btn-export-search');
+
+  // Phần tử Tab 3: Xem trước BXH
   const statMatched = document.getElementById('stat-matched');
   const statSkipped = document.getElementById('stat-skipped');
   const statTotal = document.getElementById('stat-total');
   const previewContestTitle = document.getElementById('preview-contest-title');
+  const previewThead = document.getElementById('preview-thead');
   const previewTbody = document.getElementById('preview-tbody');
+  const btnExportFromPreview = document.getElementById('btn-export-from-preview');
 
-  // Student Mapping elements (tạm ẩn trên UI nhưng logic vẫn giữ)
+  // Phần tử Tab 4: Quản lý Danh bạ Sinh viên
   const studentCountBadge = document.getElementById('student-count');
   const studentImportInput = document.getElementById('student-import-input');
   const btnSaveStudents = document.getElementById('btn-save-students');
   const btnLoadSampleStudents = document.getElementById('btn-load-sample-students');
   const btnClearStudents = document.getElementById('btn-clear-students');
 
-  // Settings & Filter elements
-  const selectFilterMode = document.getElementById('select-filter-mode');
-  const freshmanPrefixRow = document.getElementById('freshman-prefix-row');
-  const freshmanPrefixInput = document.getElementById('freshman-prefix-input');
-  const chkOnlyScoreGtZero = document.getElementById('chk-only-score-gt-zero');
-
-  // Khởi tạo năm hiện tại mặc định
   const defaultYearPrefix = new Date().getFullYear().toString().slice(-2);
   if (freshmanPrefixInput && !freshmanPrefixInput.value) {
     freshmanPrefixInput.value = defaultYearPrefix;
   }
 
-  // 3. Sự kiện thay đổi chế độ lọc đối tượng (Dropdown chọn 1)
+  // =========================================================================
+  // CHỨC NĂNG 1: LỌC VÀ TẢI EXCEL BẢNG XẾP HẠNG (Chuyên biệt, không cộng dồn)
+  // =========================================================================
+
   if (selectFilterMode) {
     selectFilterMode.addEventListener('change', async () => {
       const mode = selectFilterMode.value;
@@ -93,7 +116,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Sự kiện thay đổi lọc điểm > 0
   if (chkOnlyScoreGtZero) {
     chkOnlyScoreGtZero.addEventListener('change', async () => {
       const isChecked = chkOnlyScoreGtZero.checked;
@@ -107,39 +129,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // 4. Nạp cấu hình từ chrome.storage
-  await loadSavedSettings();
-  await updateStudentCountDisplay();
-
-  // 5. Kiểm tra Tab hiện tại
-  try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab) {
-      activeTabUrl = tab.url || '';
-      if (activeTabUrl.includes('coder.husc.edu.vn')) {
-        currentTabStatus.className = 'status-indicator ready';
-        if (activeTabUrl.includes('rank')) {
-          currentTabTitle.textContent = 'Phát hiện bảng xếp hạng trên Tab!';
-        } else {
-          currentTabTitle.textContent = 'Đã kết nối trang CODER HUSC!';
-        }
-        btnExportCurrent.disabled = false;
-        if (btnPreviewCurrent) btnPreviewCurrent.disabled = false;
-      } else {
-        currentTabStatus.className = 'status-indicator not-husc';
-        currentTabTitle.textContent = 'Vui lòng mở trang CODER HUSC';
-        btnExportCurrent.classList.remove('btn-primary');
-        btnExportCurrent.classList.add('btn-secondary');
-      }
-    } else {
-      currentTabTitle.textContent = 'Không tìm thấy tab đang mở';
-    }
-  } catch (err) {
-    console.warn('Lỗi đọc tab:', err);
-    currentTabTitle.textContent = 'Đã kết nối tab trình duyệt';
-  }
-
-  // Hàm quét mã HTML từ Tab hiện tại
+  // Quét mã HTML từ Tab hiện tại
   async function fetchCurrentTabHtml() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab) throw new Error('Không tìm thấy tab trình duyệt!');
@@ -165,10 +155,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     lastFetchedHtml = pageHtml;
+    buildRankingMap(pageHtml);
     return pageHtml;
   }
 
-  // 6. Xử lý nút Xuất từ Tab hiện tại
+  // Xây dựng bản đồ thí sinh trên BXH để hỗ trợ đối chiếu bên bảng điểm lớp
+  function buildRankingMap(rawHtml) {
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(rawHtml, 'text/html');
+      const allBxh = HuscRankingCore.parseRankingData(doc, { filterMode: 'all', onlyGreaterThanZero: false });
+      rankingMapByMssv = {};
+      rankingStudentsList = allBxh.students || [];
+      rankingProblemsList = allBxh.problems || [];
+      if (allBxh && allBxh.students) {
+        allBxh.students.forEach(st => {
+          if (st.mssv) {
+            rankingMapByMssv[st.mssv.toUpperCase()] = st;
+          }
+        });
+      }
+    } catch (e) {
+      console.warn('Lỗi build ranking map:', e);
+    }
+  }
+
+  // Xử lý nút Xuất từ Tab hiện tại (Không cộng dồn tìm kiếm)
   btnExportCurrent.addEventListener('click', async () => {
     try {
       showToast('Đang quét dữ liệu từ tab hiện tại...');
@@ -180,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // 7. Xử lý nút Xem trước dữ liệu từ Tab hiện tại
+  // Xử lý nút Xem trước dữ liệu từ Tab hiện tại (Không cộng dồn tìm kiếm)
   if (btnPreviewCurrent) {
     btnPreviewCurrent.addEventListener('click', async () => {
       try {
@@ -204,6 +216,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const onlyGreaterThanZero = chkOnlyScoreGtZero ? chkOnlyScoreGtZero.checked : false;
       const freshmanPrefix = freshmanPrefixInput ? freshmanPrefixInput.value.trim() : defaultYearPrefix;
 
+      // CHỈ LỌC THEO TIÊU CHÍ BXH, KHÔNG CỘNG DỒN TÌM KIẾM
       const data = HuscRankingCore.parseRankingData(doc, {
         regex: regex,
         studentMap: studentMap,
@@ -224,7 +237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // 8. Nút xuất từ Tab Preview
+  // Nút xuất từ Tab Preview
   btnExportFromPreview.addEventListener('click', async () => {
     if (!currentParsedData) {
       showToast('Chưa có dữ liệu để xuất!', true);
@@ -242,6 +255,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const onlyGreaterThanZero = chkOnlyScoreGtZero ? chkOnlyScoreGtZero.checked : false;
     const freshmanPrefix = freshmanPrefixInput ? freshmanPrefixInput.value.trim() : defaultYearPrefix;
 
+    // CHỈ LỌC THEO TIÊU CHÍ BXH, KHÔNG CỘNG DỒN TÌM KIẾM
     const data = HuscRankingCore.parseRankingData(doc, {
       regex: regex,
       studentMap: studentMap,
@@ -276,41 +290,216 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // 9. Hiển thị bảng Preview
+  // Hiển thị bảng Preview BXH (Thay cột Họ tên thành điểm các câu)
   function renderPreview(data) {
     statMatched.textContent = data.matchedCount;
     statSkipped.textContent = data.skippedCount;
     statTotal.textContent = data.allCount;
     previewContestTitle.textContent = data.contestTitle;
 
+    const problems = data.problems || [];
+    const totalCols = 2 + problems.length + 2; // Rank, MSSV + các bài + Total, Note
+
+    // Cập nhật thead: Thay cột Họ tên thành điểm các câu
+    if (previewThead) {
+      let theadHtml = `
+        <tr>
+          <th style="width: 35px;">Rank</th>
+          <th style="text-align: left; min-width: 120px;">MSSV</th>
+      `;
+      problems.forEach(p => {
+        theadHtml += `<th style="width: 50px;" title="${p.label}">${p.probNum}</th>`;
+      });
+      theadHtml += `<th style="width: 60px;">Total</th><th style="width: 50px;">Note</th></tr>`;
+      previewThead.innerHTML = theadHtml;
+    }
+
     previewTbody.innerHTML = '';
     if (data.students.length === 0) {
-      previewTbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Không tìm thấy sinh viên nào</td></tr>';
+      previewTbody.innerHTML = `<tr><td colspan="${totalCols}" class="text-center text-muted" style="padding: 16px;">Không tìm thấy thí sinh nào phù hợp</td></tr>`;
       btnExportFromPreview.style.display = 'none';
       return;
     }
 
     btnExportFromPreview.style.display = 'block';
 
+    const fragment = document.createDocumentFragment();
     data.students.forEach((st) => {
       const tr = document.createElement('tr');
-      if (st.rank <= 3) tr.className = 'top-rank';
+      const nameInIdCol = st.fullName
+        ? `<b>${st.fullName}</b><div style="font-size: 10px; color: #64748b;">${st.mssv}</div>`
+        : `<b>${st.mssv}</b>`;
 
-      const scoresText = st.scores.map(s => s.display).join(' | ');
-
-      tr.innerHTML = `
+      let rowHtml = `
         <td><b>${st.rank}</b></td>
-        <td><a href="${st.profileUrl}" target="_blank">${st.mssv}</a></td>
-        <td>${scoresText}</td>
-        <td><b>${st.total.display}</b></td>
-        <td><span style="color: ${st.rank <= 3 ? '#b91c1c' : 'inherit'}">${st.note || '-'}</span></td>
-        <td style="text-align: left;">${st.fullName || '<span class="text-muted">(Chưa có)</span>'}</td>
+        <td style="text-align: left;">${nameInIdCol}</td>
       `;
-      previewTbody.appendChild(tr);
+
+      // Điểm từng câu
+      problems.forEach((p, pIdx) => {
+        const scoreObj = (st.scores && st.scores[pIdx]);
+        const valStr = scoreObj ? (scoreObj.display || scoreObj.points || '0,00') : '0,00';
+        const isZero = valStr === '0,00' || valStr === '0' || valStr === '0,0';
+        const styleColor = isZero ? 'color: #94a3b8;' : 'color: #15803d; font-weight: 600;';
+        rowHtml += `<td style="${styleColor}">${valStr}</td>`;
+      });
+
+      rowHtml += `
+        <td><b>${st.total ? st.total.display : '0,0'}</b></td>
+        <td>${st.note || '-'}</td>
+      `;
+
+      tr.innerHTML = rowHtml;
+      fragment.appendChild(tr);
+    });
+    previewTbody.appendChild(fragment);
+  }
+
+  // =========================================================================
+  // CHỨC NĂNG 2: BẢNG ĐIỂM THEO LỚP HỌC PHẦN (Dropdown duy nhất, chỉ hiện SV đã nộp, điểm từng câu)
+  // =========================================================================
+
+  function initSectionDropdown() {
+    if (!selectSearchSection) return;
+    const sections = HuscRankingCore.getClassSections ? HuscRankingCore.getClassSections() : [];
+    selectSearchSection.innerHTML = '<option value="">-- Chọn lớp học phần --</option>';
+    sections.forEach(sec => {
+      const opt = document.createElement('option');
+      opt.value = sec.id;
+      opt.textContent = sec.label;
+      selectSearchSection.appendChild(opt);
     });
   }
 
-  // 10. Quản lý Danh bạ Sinh viên (Mapping) - logic lưu trữ
+  function runSearchAndRender() {
+    if (!selectSearchSection) return;
+    const secId = selectSearchSection.value;
+    const kw = inputSearchKeyword ? inputSearchKeyword.value.trim() : '';
+
+    // Nếu chưa có rankingStudentsList nhưng đã có HTML tab hiện tại, nạp trước
+    if ((!rankingStudentsList || rankingStudentsList.length === 0) && lastFetchedHtml) {
+      buildRankingMap(lastFetchedHtml);
+    }
+
+    // Lọc theo lớp học phần, CHỈ LẤY NHỮNG AI ĐÃ NỘP BÀI TRÊN BXH, BỎ CỘT LỚP, CÓ ĐIỂM TỪNG CÂU
+    const result = HuscRankingCore.filterSubmittedStudentsBySection({
+      sectionId: secId,
+      rankingStudents: rankingStudentsList,
+      problems: rankingProblemsList,
+      keyword: kw
+    });
+
+    currentSectionResult = result;
+    const submittedStudents = result.students || [];
+    const problems = rankingProblemsList || [];
+    const totalCols = 3 + problems.length + 1; // Rank, Mã SV, Họ tên + từng bài + Total
+
+    // Cập nhật Header thead: Bỏ cột lớp, thêm điểm từng câu
+    if (searchThead) {
+      let theadHtml = `
+        <tr>
+          <th style="width: 35px;">Rank</th>
+          <th style="width: 100px;">Mã SV</th>
+          <th style="text-align: left; min-width: 130px;">Họ và tên</th>
+      `;
+      problems.forEach(p => {
+        theadHtml += `<th style="width: 55px;" title="${p.label}">${p.probNum}</th>`;
+      });
+      theadHtml += `<th style="width: 65px;">Total</th></tr>`;
+      searchThead.innerHTML = theadHtml;
+    }
+
+    // Cập nhật Body tbody: Chỉ hiện thí sinh đã nộp bài
+    if (searchTbody) {
+      searchTbody.innerHTML = '';
+      if (!secId) {
+        searchTbody.innerHTML = `<tr><td colspan="${totalCols}" class="text-center text-muted" style="padding: 16px;">Vui lòng chọn lớp học phần ở trên</td></tr>`;
+      } else if (submittedStudents.length === 0) {
+        searchTbody.innerHTML = `<tr><td colspan="${totalCols}" class="text-center text-muted" style="padding: 16px;">Chưa có sinh viên nào trong lớp này nộp bài trên BXH</td></tr>`;
+      } else {
+        const fragment = document.createDocumentFragment();
+
+        submittedStudents.forEach((st) => {
+          const tr = document.createElement('tr');
+          let rowHtml = `
+            <td><b>${st.rank}</b></td>
+            <td><b>${st.mssv}</b></td>
+            <td style="text-align: left; font-weight: 500;">${st.fullName}</td>
+          `;
+
+          // Điểm từng câu
+          problems.forEach((p, pIdx) => {
+            const scoreObj = (st.scores && st.scores[pIdx]);
+            const valStr = scoreObj ? (scoreObj.display || scoreObj.points || '0,00') : '0,00';
+            const isZero = valStr === '0,00' || valStr === '0' || valStr === '0,0';
+            const styleColor = isZero ? 'color: #94a3b8;' : 'color: #15803d; font-weight: 600;';
+            rowHtml += `<td style="${styleColor}">${valStr}</td>`;
+          });
+
+          // Total
+          rowHtml += `<td><b>${st.total ? st.total.display : '0,0'}</b></td>`;
+          tr.innerHTML = rowHtml;
+          fragment.appendChild(tr);
+        });
+
+        searchTbody.appendChild(fragment);
+      }
+    }
+
+    if (searchStatTotal) searchStatTotal.textContent = result.totalClassStudents;
+    if (searchStatSubmitted) searchStatSubmitted.textContent = submittedStudents.length;
+  }
+
+  if (selectSearchSection) {
+    selectSearchSection.addEventListener('change', () => {
+      runSearchAndRender();
+    });
+  }
+
+  if (inputSearchKeyword) {
+    let kwTimeout = null;
+    inputSearchKeyword.addEventListener('input', () => {
+      clearTimeout(kwTimeout);
+      kwTimeout = setTimeout(() => {
+        runSearchAndRender();
+      }, 150);
+    });
+  }
+
+  // Xuất file Excel bảng điểm lớp học phần (bỏ cột lớp, có điểm từng câu)
+  if (btnExportSearch) {
+    btnExportSearch.addEventListener('click', async () => {
+      if (!currentSectionResult || !currentSectionResult.students || currentSectionResult.students.length === 0) {
+        showToast('Chưa có thí sinh đã nộp bài nào để xuất!', true);
+        return;
+      }
+
+      const origHtml = btnExportSearch.innerHTML;
+      btnExportSearch.innerHTML = '<span>Đang tạo Excel...</span>';
+      btnExportSearch.disabled = true;
+
+      try {
+        const wb = await HuscRankingCore.createSectionScoreExcelWorkbook(currentSectionResult);
+        let safeFileName = `Bang_Diem_${currentSectionResult.sectionLabel}`
+          .replace(/[^0-9A-Za-zÀ-ỹ\s_-]/g, '')
+          .replace(/\s+/g, '_') + '.xlsx';
+
+        await HuscRankingCore.downloadExcel(wb, safeFileName);
+        showToast(`Đã xuất Excel bảng điểm ${currentSectionResult.students.length} thí sinh đã nộp!`);
+      } catch (err) {
+        console.error(err);
+        showToast('Lỗi xuất Excel: ' + err.message, true);
+      } finally {
+        btnExportSearch.innerHTML = origHtml;
+        btnExportSearch.disabled = false;
+      }
+    });
+  }
+
+  // =========================================================================
+  // TAB 4: Quản lý Danh bạ Sinh viên
+  // =========================================================================
+
   if (btnSaveStudents) {
     btnSaveStudents.addEventListener('click', async () => {
       const raw = studentImportInput.value.trim();
@@ -339,70 +528,109 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
 
-      await chrome.storage.local.set({ studentMap: map });
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+        await chrome.storage.local.set({ studentMap: map });
+      }
       cachedStudentMap = map;
       await updateStudentCountDisplay();
-      showToast(`Đã lưu ${added} sinh viên vào danh bạ!`);
+      studentImportInput.value = '';
+      showToast(`Đã lưu thành công ${added} sinh viên vào danh bạ!`);
+
+      if (lastFetchedHtml) {
+        parseAndPreview(lastFetchedHtml, false);
+      }
     });
   }
 
   if (btnLoadSampleStudents) {
     btnLoadSampleStudents.addEventListener('click', async () => {
-      const sample = [
-        '26T1020029\tTrần Nhơn Hoàng Đạt\t26T102',
-        '26T1020007\tNguyễn Tuấn Anh\t26T102',
-        '26T1020047\tNguyễn Gia Hiều\t26T102',
-        '26T1020209\tNgô Văn Vũ\t26T102',
-        '26T1029005\tLương Gia Đạt\t26T102',
-        '26T1020073\tNguyễn Khang\t26T102',
-        '26T1130037\tPhan Vinh Quang\t26T113',
-        '26T1020178\tĐặng Ngọc Minh Thư\t26T102',
-        '26T1130040\tThái Đạt Thành\t26T113'
-      ].join('\n');
+      const defaultDb = HuscRankingCore.DEFAULT_STUDENTS;
+      const count = Object.keys(defaultDb).length;
+      if (count === 0) {
+        showToast('Chưa nạp được dữ liệu từ data.txt!', true);
+        return;
+      }
+      const map = await getStoredStudentMap();
+      let added = 0;
+      for (const [mssv, info] of Object.entries(defaultDb)) {
+        if (!map[mssv]) {
+          map[mssv] = { fullName: info.fullName || info.studentName, className: info.className || '' };
+          added++;
+        }
+      }
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+        await chrome.storage.local.set({ studentMap: map });
+      }
+      cachedStudentMap = map;
+      await updateStudentCountDisplay();
+      showToast(`Đã nạp bổ sung ${added} sinh viên từ data.txt!`);
 
-      studentImportInput.value = sample;
-      showToast('Đã điền danh sách mẫu! Bấm "Lưu danh bạ" để áp dụng.');
+      if (lastFetchedHtml) {
+        parseAndPreview(lastFetchedHtml, false);
+      }
     });
   }
 
   if (btnClearStudents) {
     btnClearStudents.addEventListener('click', async () => {
-      if (confirm('Bạn có chắc chắn muốn xóa toàn bộ danh bạ sinh viên đã lưu?')) {
+      if (!confirm('Bạn có chắc chắn muốn xóa toàn bộ danh bạ tùy chỉnh đã lưu?')) return;
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
         await chrome.storage.local.remove(['studentMap']);
-        cachedStudentMap = {};
-        if (studentImportInput) studentImportInput.value = '';
-        await updateStudentCountDisplay();
-        showToast('Đã xóa danh bạ!');
+      }
+      cachedStudentMap = {};
+      await updateStudentCountDisplay();
+      showToast('Đã xóa toàn bộ danh bạ tùy chỉnh!');
+
+      if (lastFetchedHtml) {
+        parseAndPreview(lastFetchedHtml, false);
       }
     });
   }
 
-  async function updateStudentCountDisplay() {
-    if (!studentCountBadge) return;
-    const map = await getStoredStudentMap();
-    const count = Object.keys(map).length;
-    studentCountBadge.textContent = `${count} sinh viên`;
+  // =========================================================================
+  // Tiện ích phụ trợ & Khởi tạo
+  // =========================================================================
+
+  let cachedStudentMap = {};
+  let cachedRegex = null;
+
+  async function loadSavedSettings() {
+    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+      const store = await chrome.storage.local.get(['onlyGreaterThanZero', 'filterMode', 'onlyFreshman', 'freshmanPrefix', 'studentMap']);
+      if (chkOnlyScoreGtZero && store.onlyGreaterThanZero !== undefined) {
+        chkOnlyScoreGtZero.checked = store.onlyGreaterThanZero;
+      }
+      if (selectFilterMode && store.filterMode) {
+        selectFilterMode.value = store.filterMode;
+      } else if (selectFilterMode && store.onlyFreshman) {
+        selectFilterMode.value = 'freshman';
+      }
+      if (freshmanPrefixRow && selectFilterMode) {
+        freshmanPrefixRow.style.display = selectFilterMode.value === 'freshman' ? 'flex' : 'none';
+      }
+      if (freshmanPrefixInput && store.freshmanPrefix) {
+        freshmanPrefixInput.value = store.freshmanPrefix;
+      }
+      if (store.studentMap) {
+        cachedStudentMap = store.studentMap;
+      }
+    }
   }
 
   async function getStoredStudentMap() {
+    if (Object.keys(cachedStudentMap).length > 0) return cachedStudentMap;
     if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
       const res = await chrome.storage.local.get(['studentMap']);
-      return res.studentMap || {};
+      cachedStudentMap = res.studentMap || {};
     }
-    return {};
+    return cachedStudentMap;
+  }
+
+  function getStoredStudentMapSync() {
+    return cachedStudentMap;
   }
 
   async function getStoredRegex() {
-    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-      const res = await chrome.storage.local.get(['mssvRegex']);
-      if (res.mssvRegex) {
-        try {
-          return new RegExp(res.mssvRegex, 'i');
-        } catch (e) {
-          console.warn('Regex lỗi:', e);
-        }
-      }
-    }
     return HuscRankingCore.DEFAULT_MSSV_REGEX;
   }
 
@@ -410,46 +638,56 @@ document.addEventListener('DOMContentLoaded', async () => {
     return HuscRankingCore.DEFAULT_MSSV_REGEX;
   }
 
-  function getStoredStudentMapSync() {
-    return cachedStudentMap || {};
+  async function updateStudentCountDisplay() {
+    if (!studentCountBadge) return;
+    const map = await getStoredStudentMap();
+    const count = Object.keys(map).length;
+    const defaultCount = Object.keys(HuscRankingCore.DEFAULT_STUDENTS).length;
+    studentCountBadge.textContent = `${count} tùy chỉnh (${defaultCount} có sẵn)`;
   }
 
-  let cachedStudentMap = {};
-
-  async function loadSavedSettings() {
-    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-      const res = await chrome.storage.local.get(['onlyGreaterThanZero', 'onlyFreshman', 'filterMode', 'freshmanPrefix', 'studentMap']);
-      if (res.onlyGreaterThanZero !== undefined) {
-        if (chkOnlyScoreGtZero) chkOnlyScoreGtZero.checked = res.onlyGreaterThanZero;
-      }
-      
-      // Khôi phục chế độ lọc
-      let mode = res.filterMode;
-      if (!mode) {
-        mode = res.onlyFreshman ? 'freshman' : 'student_id';
-      }
-      if (selectFilterMode) {
-        selectFilterMode.value = mode;
-      }
-      if (freshmanPrefixRow) {
-        freshmanPrefixRow.style.display = mode === 'freshman' ? 'flex' : 'none';
-      }
-
-      if (res.freshmanPrefix && freshmanPrefixInput) {
-        freshmanPrefixInput.value = res.freshmanPrefix;
-      }
-      if (res.studentMap) cachedStudentMap = res.studentMap;
-    }
-  }
-
-  // Toast helper
-  function showToast(msg, isError = false) {
+  function showToast(message, isError = false) {
     const toast = document.getElementById('popup-toast');
     if (!toast) return;
-    toast.textContent = msg;
+    toast.textContent = message;
     toast.className = `popup-toast show ${isError ? 'error' : ''}`;
     setTimeout(() => {
       toast.className = 'popup-toast';
-    }, 3200);
+    }, 3000);
+  }
+
+  // Khởi tạo
+  if (typeof HuscRankingCore !== 'undefined' && HuscRankingCore.loadStudentsFromDataTxt) {
+    await HuscRankingCore.loadStudentsFromDataTxt();
+  }
+  await loadSavedSettings();
+  await updateStudentCountDisplay();
+  initSectionDropdown();
+
+  // Kiểm tra tab hiện tại
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab) {
+      activeTabUrl = tab.url || '';
+      if (activeTabUrl.includes('coder.husc.edu.vn')) {
+        currentTabStatus.className = 'status-indicator ready';
+        if (activeTabUrl.includes('rank')) {
+          currentTabTitle.textContent = 'Phát hiện bảng xếp hạng trên Tab!';
+          // Quét trước để có sẵn ranking map cho tab tìm kiếm
+          fetchCurrentTabHtml().catch(() => {});
+        } else {
+          currentTabTitle.textContent = 'Đã kết nối trang CODER HUSC!';
+        }
+        btnExportCurrent.disabled = false;
+        if (btnPreviewCurrent) btnPreviewCurrent.disabled = false;
+      } else {
+        currentTabStatus.className = 'status-indicator not-husc';
+        currentTabTitle.textContent = 'Vui lòng mở trang CODER HUSC';
+        btnExportCurrent.classList.remove('btn-primary');
+        btnExportCurrent.classList.add('btn-secondary');
+      }
+    }
+  } catch (err) {
+    console.warn('Lỗi đọc tab:', err);
   }
 });

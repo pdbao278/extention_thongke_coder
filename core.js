@@ -2,9 +2,168 @@
  * core.js - Trình phân tích HTML bảng xếp hạng CODER HUSC và xuất file Excel chuẩn SPIT
  */
 
+// Tải cơ sở dữ liệu sinh viên trích xuất từ data.txt (nếu có trong môi trường Node.js)
+if (typeof globalThis !== 'undefined' && !globalThis.HUSC_STUDENTS_DATABASE && typeof require !== 'undefined') {
+  try {
+    const loaded = require('./students_data.js');
+    globalThis.HUSC_STUDENTS_DATA = loaded;
+    globalThis.HUSC_STUDENTS_DATABASE = (loaded && loaded.byStudentId) ? loaded.byStudentId : loaded;
+  } catch (e) {}
+}
+
 const HuscRankingCore = {
   // Biểu thức chính quy nhận diện mã sinh viên HUSC (ví dụ: 23T1020034, 26T1020029, 26T1130037...)
   DEFAULT_MSSV_REGEX: /(\d{2}[A-Za-z]\d{7})/i,
+
+  // Bộ nhớ đệm danh bạ đọc trực tiếp từ data.txt
+  _loadedDataTxtMap: null,
+
+  // Cơ sở dữ liệu danh bạ mặc định (trích xuất từ data.txt)
+  get DEFAULT_STUDENTS() {
+    if (this._loadedDataTxtMap) {
+      return this._loadedDataTxtMap.byStudentId || this._loadedDataTxtMap;
+    }
+    const db = (typeof globalThis !== 'undefined' && globalThis.HUSC_STUDENTS_DATABASE) ||
+               (typeof window !== 'undefined' && window.HUSC_STUDENTS_DATABASE) ||
+               (typeof HUSC_STUDENTS_DATABASE !== 'undefined' ? HUSC_STUDENTS_DATABASE : null);
+    if (db) {
+      return db.byStudentId || db;
+    }
+    const hier = this.HIERARCHICAL_DATA;
+    if (hier && hier.byStudentId) {
+      return hier.byStudentId;
+    }
+    return {};
+  },
+
+  // Cơ sở dữ liệu phân cấp đầy đủ theo Môn học và Nhóm học phần
+  get HIERARCHICAL_DATA() {
+    if (this._loadedDataTxtMap && this._loadedDataTxtMap.bySubject) {
+      return this._loadedDataTxtMap;
+    }
+    if (typeof globalThis !== 'undefined' && globalThis.HUSC_STUDENTS_DATA) {
+      return globalThis.HUSC_STUDENTS_DATA;
+    }
+    if (typeof window !== 'undefined' && window.HUSC_STUDENTS_DATA) {
+      return window.HUSC_STUDENTS_DATA;
+    }
+    return null;
+  },
+
+  /**
+   * Lấy danh sách các môn học có trong hệ thống
+   */
+  getSubjects() {
+    const data = this.HIERARCHICAL_DATA;
+    if (data && data.metadata && data.metadata.subjects) {
+      return data.metadata.subjects.map(s => typeof s === 'string' ? s : s.subjectName);
+    }
+    if (data && data.bySubject) {
+      return Object.keys(data.bySubject);
+    }
+    return [];
+  },
+
+  /**
+   * Lấy danh sách các nhóm học phần thuộc môn học
+   */
+  getGroupsBySubject(subjectName) {
+    if (!subjectName || subjectName === 'all') return [];
+    const subName = (typeof subjectName === 'object' && subjectName !== null)
+      ? (subjectName.subjectName || '')
+      : String(subjectName);
+    const data = this.HIERARCHICAL_DATA;
+    if (data && data.bySubject && data.bySubject[subName]) {
+      return Object.keys(data.bySubject[subName].groups || {});
+    }
+    return [];
+  },
+
+  /**
+   * Lấy danh sách các lớp học phần phẳng (Hiển thị 1 dropdown duy nhất đúng như ảnh)
+   * Gồm: Ngôn ngữ lập trình - Nhóm 1..8, Kỹ thuật lập trình - Nhóm 1..2
+   */
+  getClassSections() {
+    const sections = [];
+    const hierData = this.HIERARCHICAL_DATA;
+
+    if (hierData && hierData.bySubject) {
+      for (const [subName, subObj] of Object.entries(hierData.bySubject)) {
+        if (!subObj.groups) continue;
+        const groupKeys = Object.keys(subObj.groups).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+        for (const grp of groupKeys) {
+          sections.push({
+            id: `${subName}|${grp}`,
+            subjectName: subName,
+            group: grp,
+            label: `${subName} - Nhóm ${parseInt(grp, 10)}`
+          });
+        }
+      }
+    }
+
+    if (sections.length === 0) {
+      // Fallback mặc định đúng chuẩn 10 lớp học phần
+      for (let g = 1; g <= 8; g++) {
+        sections.push({
+          id: `Ngôn ngữ lập trình|${g}`,
+          subjectName: 'Ngôn ngữ lập trình',
+          group: `${g}`,
+          label: `Ngôn ngữ lập trình - Nhóm ${g}`
+        });
+      }
+      for (let g = 1; g <= 2; g++) {
+        sections.push({
+          id: `Kỹ thuật lập trình|${g}`,
+          subjectName: 'Kỹ thuật lập trình',
+          group: `${g}`,
+          label: `Kỹ thuật lập trình - Nhóm ${g}`
+        });
+      }
+    }
+
+    return sections;
+  },
+
+  /**
+   * Tra cứu chi tiết thông tin sinh viên theo MSSV (gồm Họ tên, Lớp, Môn và Nhóm)
+   */
+  getStudentInfo(mssv) {
+    if (!mssv) return null;
+    const cleanId = mssv.trim().toUpperCase();
+    const defaultDb = this.DEFAULT_STUDENTS;
+    if (defaultDb && defaultDb[cleanId]) {
+      return defaultDb[cleanId];
+    }
+    const data = this.HIERARCHICAL_DATA;
+    if (data && data.byStudentId && data.byStudentId[cleanId]) {
+      return data.byStudentId[cleanId];
+    }
+    return null;
+  },
+
+  /**
+   * Tải và phân tích dữ liệu trực tiếp từ file data.txt của extension
+   */
+  async loadStudentsFromDataTxt() {
+    try {
+      if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.getURL) {
+        const url = chrome.runtime.getURL('data.txt');
+        const res = await fetch(url);
+        if (res.ok) {
+          const text = await res.text();
+          const parsed = this.parseStudentsFromText(text);
+          if (parsed && Object.keys(parsed).length > 0) {
+            this._loadedDataTxtMap = parsed;
+            return parsed;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Không thể tải data.txt:', e);
+    }
+    return this.DEFAULT_STUDENTS;
+  },
 
   /**
    * Phân tích tài liệu HTML để trích xuất dữ liệu bảng xếp hạng
@@ -246,15 +405,55 @@ const HuscRankingCore = {
       let fullName = '';
       let className = '';
 
-      if (studentMap[mssv]) {
+      // 1. Ưu tiên tra cứu trong studentMap (tùy chỉnh lưu trữ của người dùng nếu có)
+      if (studentMap && studentMap[mssv]) {
         fullName = studentMap[mssv].fullName || '';
         className = studentMap[mssv].className || '';
-      } else {
-        // Thử tách tên từ username nếu có dạng: 24T1020386_TranDinhKhanhQuan hoặc 26t1130040_thai_dat_thanh
-        const suffixMatch = username.match(/^[0-9A-Za-z]+[_-](.+)$/);
-        if (suffixMatch) {
-          fullName = this.cleanStudentName(suffixMatch[1]);
+      }
+
+      // 2. Tra cứu trong cơ sở dữ liệu data.txt / students_data.js
+      if (!fullName) {
+        const info = this.getStudentInfo(mssv);
+        if (info) {
+          fullName = info.fullName || info.studentName || '';
+          if (!className) className = info.className || '';
         }
+      }
+
+      if (!fullName) {
+        const defaultDb = this.DEFAULT_STUDENTS;
+        if (defaultDb && defaultDb[mssv]) {
+          fullName = defaultDb[mssv].fullName || defaultDb[mssv].studentName || '';
+          if (!className) {
+            className = defaultDb[mssv].className || '';
+          }
+        }
+      }
+
+      // 3. Tự động suy luận Lớp từ tiền tố MSSV nếu chưa có (ví dụ: 26T1080001 -> 26T108)
+      if (!className && mssv) {
+        const classMatch = mssv.match(/^(\d{2}[A-Za-z]\d{3})/i);
+        if (classMatch) {
+          className = classMatch[1].toUpperCase();
+        }
+      }
+
+      // Lấy thêm thông tin môn và nhóm từ CSDL phân cấp (nếu có)
+      let subjectName = '';
+      let group = '';
+      let classCode = '';
+      let enrollments = [];
+
+      const info = this.getStudentInfo(mssv);
+      if (info) {
+        if (!fullName && (info.fullName || info.studentName)) {
+          fullName = info.fullName || info.studentName;
+        }
+        if (!className && info.className) className = info.className;
+        enrollments = info.enrollments || [];
+        subjectName = info.subjectName || '';
+        group = info.group || '';
+        classCode = info.classCode || '';
       }
 
       students.push({
@@ -267,22 +466,18 @@ const HuscRankingCore = {
           value: rawTotal
         },
         fullName: fullName,
-        className: className
+        className: className,
+        subjectName: subjectName,
+        group: group,
+        classCode: classCode,
+        enrollments: enrollments
       });
     });
 
-    // 5. Đánh lại thứ tự Rank sau khi lọc
+    // 5. Đánh lại thứ tự Rank sau khi lọc (không tự ý ghi sẵn các top theo yêu cầu)
     students.forEach((st, index) => {
       st.rank = index + 1;
-      if (st.rank === 1) {
-        st.note = 'NHẤT';
-      } else if (st.rank === 2) {
-        st.note = 'NHÌ';
-      } else if (st.rank === 3) {
-        st.note = 'BA';
-      } else {
-        st.note = '';
-      }
+      st.note = ''; // Bỏ ghi sẵn các top (để trống cột Note) theo yêu cầu
     });
 
     let finalTitle = contestTitle.trim();
@@ -327,6 +522,168 @@ const HuscRankingCore = {
     // Tách CamelCase nếu có: TranDinhKhanhQuan -> Tran Dinh Khanh Quan
     cleaned = cleaned.replace(/([a-z])([A-Z])/g, '$1 $2');
     return cleaned;
+  },
+
+  /**
+   * Phân tích nội dung văn bản từ data.txt hoặc danh sách sinh viên
+   * Hỗ trợ cấu trúc phân cấp theo Môn học và Nhóm học phần
+   * @param {string} rawText
+   * @returns {Object} Map: MSSV -> { fullName, className, enrollments, subjectName, group, classCode }
+   */
+  parseStudentsFromText(rawText) {
+    const map = {};
+    const bySubject = {};
+    const byStudentId = {};
+
+    if (!rawText || typeof rawText !== 'string') return map;
+
+    // 1. Phân tách theo các khối comment môn học //
+    const parts = rawText.split(/(?=\/\/\s*[^\r\n]+)/);
+
+    parts.forEach(part => {
+      part = part.trim();
+      if (!part) return;
+
+      let subjectName = 'Chưa xác định';
+      const commentMatch = part.match(/^\/\/\s*([^\r\n]+)/);
+      if (commentMatch) {
+        subjectName = commentMatch[1].trim();
+        if (subjectName.toLowerCase().includes('kỹ thuật lập trình')) {
+          subjectName = 'Kỹ thuật lập trình';
+        } else if (subjectName.toLowerCase().includes('ngôn ngữ lập trình')) {
+          subjectName = 'Ngôn ngữ lập trình';
+        }
+      }
+
+      const objectMatches = part.match(/\{[\s\S]*?"students"\s*:\s*\[[\s\S]*?\]\s*\}/g);
+      if (!objectMatches) return;
+
+      objectMatches.forEach(blockStr => {
+        try {
+          const obj = JSON.parse(blockStr);
+          const searchName = obj.searchName || '';
+          const students = obj.students || [];
+
+          let subjectCode = '';
+          let group = '';
+          const nameParts = searchName.split('.');
+          if (nameParts.length >= 3) {
+            subjectCode = nameParts[2];
+            group = nameParts[3] || nameParts[nameParts.length - 1];
+          } else {
+            group = searchName;
+          }
+
+          if (!bySubject[subjectName]) {
+            bySubject[subjectName] = {
+              subjectName: subjectName,
+              subjectCode: subjectCode,
+              groups: {}
+            };
+          }
+
+          const groupStudents = [];
+
+          students.forEach(st => {
+            const id = st.studentId.trim().toUpperCase();
+            const name = st.studentName.trim();
+            const classMatch = id.match(/^(\d{2}[A-Za-z]\d{3})/i);
+            const className = classMatch ? classMatch[1].toUpperCase() : '';
+
+            groupStudents.push({
+              studentId: id,
+              studentName: name,
+              className: className
+            });
+
+            if (!byStudentId[id]) {
+              byStudentId[id] = {
+                studentId: id,
+                fullName: name,
+                className: className,
+                enrollments: []
+              };
+            }
+
+            byStudentId[id].enrollments.push({
+              subjectName: subjectName,
+              subjectCode: subjectCode,
+              group: group,
+              classCode: searchName
+            });
+
+            if (!byStudentId[id].subjectName) {
+              byStudentId[id].subjectName = subjectName;
+              byStudentId[id].subjectCode = subjectCode;
+              byStudentId[id].group = group;
+              byStudentId[id].classCode = searchName;
+            }
+
+            map[id] = byStudentId[id];
+          });
+
+          bySubject[subjectName].groups[group] = {
+            group: group,
+            classCode: searchName,
+            totalStudents: students.length,
+            students: groupStudents
+          };
+        } catch (e) {}
+      });
+    });
+
+    // 2. Nếu không có khối JSON, bóc tách theo dòng thông thường (MSSV Họ_tên Lớp)
+    if (Object.keys(map).length === 0) {
+      const lines = rawText.split(/\r?\n/);
+      lines.forEach(line => {
+        line = line.trim();
+        if (!line || line.startsWith('//')) return;
+        const parts = line.split(/[\t,;|]|\s{2,}/).map(s => s.trim()).filter(Boolean);
+        if (parts.length >= 2) {
+          const mssvMatch = parts[0].match(/(\d{2}[A-Za-z]\d{7})/i);
+          if (mssvMatch) {
+            const id = mssvMatch[1].toUpperCase();
+            const classMatch = id.match(/^(\d{2}[A-Za-z]\d{3})/i);
+            const className = parts[2] || (classMatch ? classMatch[1].toUpperCase() : '');
+            const stObj = {
+              studentId: id,
+              fullName: parts[1],
+              className: className,
+              enrollments: []
+            };
+            map[id] = stObj;
+            byStudentId[id] = stObj;
+          }
+        }
+      });
+    }
+
+    // Metadata
+    const subjectsMeta = Object.keys(bySubject).map(subName => {
+      const sub = bySubject[subName];
+      const grps = Object.keys(sub.groups);
+      let totalCount = 0;
+      grps.forEach(g => { totalCount += sub.groups[g].totalStudents; });
+      return {
+        subjectName: subName,
+        subjectCode: sub.subjectCode,
+        groups: grps,
+        totalEnrollments: totalCount
+      };
+    });
+
+    Object.defineProperty(map, 'bySubject', { value: bySubject, enumerable: false, writable: true });
+    Object.defineProperty(map, 'byStudentId', { value: byStudentId, enumerable: false, writable: true });
+    Object.defineProperty(map, 'metadata', {
+      value: {
+        subjects: subjectsMeta,
+        totalUniqueStudents: Object.keys(byStudentId).length
+      },
+      enumerable: false,
+      writable: true
+    });
+
+    return map;
   },
 
   /**
@@ -437,13 +794,8 @@ const HuscRankingCore = {
       const row = sheet.getRow(rowNum);
       row.height = 20;
 
-      const isTop3 = st.rank >= 1 && st.rank <= 3;
-      // Màu nền: Top 3 nền ĐỎ (#FF0000) như trong ảnh, các dòng sau nền TRẮNG
-      const rowFill = isTop3 ? {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFF0000' } // Đỏ tươi chuẩn ảnh
-      } : {
+      // Màu nền: Nền TRẮNG cho tất cả các dòng (bỏ màu đỏ top theo yêu cầu)
+      const rowFill = {
         type: 'pattern',
         pattern: 'solid',
         fgColor: { argb: 'FFFFFFFF' }
@@ -456,8 +808,7 @@ const HuscRankingCore = {
       rankCell.value = st.rank;
       rankCell.font = {
         name: 'Times New Roman',
-        size: 11,
-        bold: isTop3
+        size: 11
       };
       rankCell.alignment = { vertical: 'middle', horizontal: 'center' };
       rankCell.fill = rowFill;
@@ -490,8 +841,8 @@ const HuscRankingCore = {
       // Cột các bài tập
       data.problems.forEach((p, pIdx) => {
         const probCell = row.getCell(colIdx++);
-        const scoreObj = st.scores[pIdx];
-        const valStr = scoreObj ? scoreObj.display : '0,00';
+        const scoreObj = (st.scores && st.scores[pIdx]) || (st.problemResults && st.problemResults[pIdx]);
+        const valStr = scoreObj ? (scoreObj.display || scoreObj.points || '0,00') : '0,00';
         probCell.value = valStr;
         probCell.font = {
           name: 'Times New Roman',
@@ -537,9 +888,9 @@ const HuscRankingCore = {
       nameCell.fill = rowFill;
       nameCell.border = thinBorder;
 
-      // Cột Lớp
+      // Cột Lớp (Không ghi lớp ở excel theo yêu cầu)
       const classCell = row.getCell(colIdx++);
-      classCell.value = st.className;
+      classCell.value = '';
       classCell.font = {
         name: 'Times New Roman',
         size: 11
@@ -547,6 +898,417 @@ const HuscRankingCore = {
       classCell.alignment = { vertical: 'middle', horizontal: 'center' };
       classCell.fill = rowFill;
       classCell.border = thinBorder;
+    });
+
+    return workbook;
+  },
+
+  /**
+   * Chức năng chuyên biệt: TÌM KIẾM VÀ TRA CỨU SINH VIÊN THEO MÔN & LỚP
+   * Tách riêng hoàn toàn với luồng lọc tải file Excel bảng xếp hạng cuộc thi
+   * @param {Object} options { subject, group, keyword, rankingMap }
+   * @returns {Array} Danh sách sinh viên tìm thấy
+   */
+  searchStudents(options = {}) {
+    const subject = options.subject || 'all';
+    const group = options.group || 'all';
+    const keyword = (options.keyword || '').trim().toLowerCase();
+    const rankingMap = options.rankingMap || {};
+
+    const hierData = this.HIERARCHICAL_DATA;
+    const allStudents = [];
+
+    if (hierData && hierData.bySubject) {
+      for (const [subName, subObj] of Object.entries(hierData.bySubject)) {
+        if (!subObj.groups) continue;
+        for (const [grpName, grpData] of Object.entries(subObj.groups)) {
+          const list = Array.isArray(grpData) ? grpData : (grpData.students || []);
+          for (const st of list) {
+            allStudents.push({
+              studentId: st.studentId,
+              mssv: st.studentId,
+              fullName: st.studentName || st.fullName || '',
+              className: st.className || '',
+              subject: subName,
+              group: grpName
+            });
+          }
+        }
+      }
+    }
+
+    const filtered = allStudents.filter(st => {
+      if (subject !== 'all' && st.subject !== subject) return false;
+      if (group !== 'all' && st.group !== group) return false;
+      if (keyword) {
+        const m1 = (st.studentId || '').toLowerCase().includes(keyword);
+        const m2 = (st.fullName || '').toLowerCase().includes(keyword);
+        const m3 = (st.className || '').toLowerCase().includes(keyword);
+        if (!m1 && !m2 && !m3) return false;
+      }
+      return true;
+    });
+
+    return filtered.map((st, idx) => {
+      const cleanId = (st.studentId || '').toUpperCase();
+      const bxhEntry = rankingMap[cleanId];
+      return {
+        stt: idx + 1,
+        ...st,
+        bxhRank: bxhEntry ? bxhEntry.rank : null,
+        bxhScore: bxhEntry && bxhEntry.total ? bxhEntry.total.display : '-',
+        isSubmitted: !!bxhEntry,
+        status: bxhEntry ? `Đã nộp bài (Hạng #${bxhEntry.rank})` : 'Chưa nộp bài'
+      };
+    });
+  },
+
+  /**
+   * Lấy danh sách lớp học phần dạng phẳng để hiển thị dropdown đúng như yêu cầu:
+   * "-- Chọn lớp học phần --", "Ngôn ngữ lập trình - Nhóm 1", "Ngôn ngữ lập trình - Nhóm 2"...
+   */
+  getClassSections() {
+    const sections = [];
+    const hierData = this.HIERARCHICAL_DATA;
+    if (!hierData || !hierData.bySubject) return sections;
+
+    for (const [subName, subObj] of Object.entries(hierData.bySubject)) {
+      if (!subObj.groups) continue;
+      const groupKeys = Object.keys(subObj.groups);
+      groupKeys.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+      for (const grp of groupKeys) {
+        const grpNumber = parseInt(grp, 10);
+        sections.push({
+          id: `${subName}|${grp}`,
+          subjectName: subName,
+          group: grp,
+          groupNumber: grpNumber,
+          label: `${subName} - Nhóm ${grpNumber}`
+        });
+      }
+    }
+    return sections;
+  },
+
+  /**
+   * Lọc danh sách sinh viên theo lớp học phần VÀ CHỈ LẤY NHỮNG AI ĐÃ NỘP BÀI TRÊN BXH
+   * Bỏ cột lớp, có đầy đủ điểm chi tiết từng câu
+   * @param {Object} options { sectionId, rankingStudents, problems, keyword }
+   * @returns {Object} { sectionLabel, problems, students }
+   */
+  filterSubmittedStudentsBySection(options = {}) {
+    const sectionId = options.sectionId || '';
+    const rankingStudents = options.rankingStudents || [];
+    const problems = options.problems || [];
+    const keyword = (options.keyword || '').trim().toLowerCase();
+
+    // Bản đồ thí sinh trên BXH theo MSSV
+    const rankingMap = {};
+    rankingStudents.forEach(st => {
+      if (st.mssv) {
+        rankingMap[st.mssv.toUpperCase()] = st;
+      }
+    });
+
+    // Lấy danh sách sinh viên của lớp học phần từ CSDL
+    let targetStudents = [];
+    let sectionLabel = 'Tất cả lớp học phần';
+
+    if (sectionId && sectionId.includes('|')) {
+      const [subName, grp] = sectionId.split('|');
+      const hierData = this.HIERARCHICAL_DATA;
+      if (hierData && hierData.bySubject && hierData.bySubject[subName] && hierData.bySubject[subName].groups) {
+        const grpData = hierData.bySubject[subName].groups[grp];
+        if (grpData) {
+          const list = Array.isArray(grpData) ? grpData : (grpData.students || []);
+          targetStudents = list.map(s => ({
+            studentId: s.studentId,
+            fullName: s.studentName || s.fullName || '',
+            subjectName: subName,
+            group: grp
+          }));
+        }
+      }
+      sectionLabel = `${subName} - Nhóm ${parseInt(grp, 10)}`;
+    } else {
+      // Nếu không chọn sectionId cụ thể, lấy tất cả sinh viên
+      const hierData = this.HIERARCHICAL_DATA;
+      if (hierData && hierData.bySubject) {
+        for (const [subName, subObj] of Object.entries(hierData.bySubject)) {
+          if (!subObj.groups) continue;
+          for (const [grp, grpData] of Object.entries(subObj.groups)) {
+            const list = Array.isArray(grpData) ? grpData : (grpData.students || []);
+            for (const s of list) {
+              targetStudents.push({
+                studentId: s.studentId,
+                fullName: s.studentName || s.fullName || '',
+                subjectName: subName,
+                group: grp
+              });
+            }
+          }
+        }
+      }
+    }
+
+    // CHỈ GIỮ LẠI NHỮNG AI ĐÃ NỘP BÀI TRÊN BXH (Bỏ qua những ai chưa nộp)
+    const submitted = [];
+    targetStudents.forEach(st => {
+      const cleanId = (st.studentId || '').toUpperCase();
+      const bxhEntry = rankingMap[cleanId];
+      if (bxhEntry) {
+        if (keyword) {
+          const m1 = cleanId.toLowerCase().includes(keyword);
+          const m2 = (st.fullName || '').toLowerCase().includes(keyword);
+          if (!m1 && !m2) return;
+        }
+
+        submitted.push({
+          mssv: cleanId,
+          studentId: cleanId,
+          fullName: st.fullName || bxhEntry.fullName || '',
+          rank: bxhEntry.rank || 0,
+          scores: bxhEntry.scores || [],
+          total: bxhEntry.total || { display: '0,0', value: 0 },
+          profileUrl: bxhEntry.profileUrl || '',
+          username: bxhEntry.username || cleanId,
+          subjectName: st.subjectName,
+          group: st.group
+        });
+      }
+    });
+
+    // Sắp xếp danh sách nộp bài theo thứ hạng tăng dần
+    submitted.sort((a, b) => a.rank - b.rank);
+
+    return {
+      sectionLabel: sectionLabel,
+      totalClassStudents: targetStudents.length,
+      problems: problems,
+      students: submitted
+    };
+  },
+
+  /**
+   * Tạo workbook Excel cho lớp học phần (bỏ cột lớp, thay bằng điểm từng câu)
+   */
+  async createSectionScoreExcelWorkbook(sectionData, options = {}) {
+    if (typeof ExcelJS === 'undefined') {
+      throw new Error('Thư viện ExcelJS chưa được nạp!');
+    }
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'CODER HUSC Extension';
+    workbook.created = new Date();
+
+    const sheet = workbook.addWorksheet('Điểm Lớp Học Phần', {
+      views: [{ showGridLines: true }]
+    });
+
+    const problems = sectionData.problems || [];
+    const students = sectionData.students || [];
+    const sectionLabel = sectionData.sectionLabel || options.title || 'Lớp Học Phần';
+
+    // 1. TIÊU ĐỀ BẢNG ĐIỂM
+    const totalCols = 3 + problems.length + 1; // Rank, Mã SV, Họ tên + các bài + Total
+    const lastColLetter = String.fromCharCode(64 + Math.min(totalCols, 26));
+    const titleRange = `A1:${lastColLetter}1`;
+
+    sheet.mergeCells(titleRange);
+    const titleCell = sheet.getCell('A1');
+    titleCell.value = `BẢNG ĐIỂM KỲ THI - ${sectionLabel.toUpperCase()}`;
+    titleCell.font = { name: 'Times New Roman', size: 14, bold: true, color: { argb: 'FFFFFFFF' } };
+    titleCell.alignment = { vertical: 'middle', horizontal: 'center' };
+    titleCell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FF1F4E79' }
+    };
+    sheet.getRow(1).height = 32;
+
+    // 2. TIÊU ĐỀ CÁC CỘT (BỎ CỘT LỚP, CÓ ĐIỂM TỪNG CÂU)
+    const headers = ['Rank', 'Mã SV', 'Họ và tên'];
+    problems.forEach(p => {
+      headers.push(p.label || `Bài ${p.probNum}`);
+    });
+    headers.push('Total');
+
+    const headerRow = sheet.addRow(headers);
+    headerRow.height = 24;
+    headerRow.eachCell((cell) => {
+      cell.font = { name: 'Times New Roman', size: 11, bold: true, color: { argb: 'FFFFFFFF' } };
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FF4472C4' }
+      };
+      cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+      };
+    });
+
+    // Độ rộng các cột
+    const columnsConfig = [
+      { width: 8 },   // Rank
+      { width: 16 },  // Mã SV
+      { width: 28 }   // Họ và tên
+    ];
+    problems.forEach(() => {
+      columnsConfig.push({ width: 12 }); // Mỗi bài
+    });
+    columnsConfig.push({ width: 14 });   // Total
+    sheet.columns = columnsConfig;
+
+    const thinBorder = {
+      top: { style: 'thin', color: { argb: 'FFD3D3D3' } },
+      left: { style: 'thin', color: { argb: 'FFD3D3D3' } },
+      bottom: { style: 'thin', color: { argb: 'FFD3D3D3' } },
+      right: { style: 'thin', color: { argb: 'FFD3D3D3' } }
+    };
+
+    // 3. DỮ LIỆU THÍ SINH ĐÃ NỘP BÀI
+    students.forEach((st, idx) => {
+      const rowValues = [
+        st.rank || (idx + 1),
+        st.mssv || st.studentId,
+        st.fullName || ''
+      ];
+
+      // Điểm từng câu
+      problems.forEach((p, pIdx) => {
+        const scoreObj = (st.scores && st.scores[pIdx]);
+        const valStr = scoreObj ? (scoreObj.display || scoreObj.points || '0,00') : '0,00';
+        rowValues.push(valStr);
+      });
+
+      // Total
+      rowValues.push(st.total ? st.total.display : '0,0');
+
+      const row = sheet.addRow(rowValues);
+      row.height = 20;
+
+      const isEven = idx % 2 === 1;
+      const rowFill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: isEven ? 'FFF9FAFB' : 'FFFFFFFF' }
+      };
+
+      row.eachCell((cell, colNum) => {
+        cell.font = { name: 'Times New Roman', size: 11 };
+        cell.fill = rowFill;
+        cell.border = thinBorder;
+        cell.alignment = {
+          vertical: 'middle',
+          horizontal: colNum === 3 ? 'left' : 'center'
+        };
+      });
+    });
+
+    return workbook;
+  },
+
+  /**
+   * Tạo workbook Excel cho danh sách sinh viên theo môn / lớp
+   */
+  async createStudentsListWorkbook(studentsList, options = {}) {
+    if (typeof ExcelJS === 'undefined') {
+      throw new Error('Thư viện ExcelJS chưa được nạp!');
+    }
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'CODER HUSC Extension';
+    workbook.created = new Date();
+
+    const sheet = workbook.addWorksheet('Danh Sách Sinh Viên', {
+      views: [{ showGridLines: true }]
+    });
+
+    // Tiêu đề danh sách
+    const title = options.title || 'DANH SÁCH SINH VIÊN';
+    sheet.mergeCells('A1:H1');
+    const titleCell = sheet.getCell('A1');
+    titleCell.value = title.toUpperCase();
+    titleCell.font = { name: 'Times New Roman', size: 13, bold: true, color: { argb: 'FFFFFFFF' } };
+    titleCell.alignment = { vertical: 'middle', horizontal: 'center' };
+    titleCell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FF1B365D' }
+    };
+    sheet.getRow(1).height = 30;
+
+    // Header các cột
+    const headers = ['STT', 'Mã SV', 'Họ và tên', 'Lớp', 'Môn học', 'Nhóm HP', 'Điểm BXH', 'Trạng thái'];
+    const headerRow = sheet.addRow(headers);
+    headerRow.height = 24;
+    headerRow.eachCell((cell) => {
+      cell.font = { name: 'Times New Roman', size: 11, bold: true, color: { argb: 'FFFFFFFF' } };
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FF2F5597' }
+      };
+      cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+      };
+    });
+
+    sheet.columns = [
+      { width: 8 },   // STT
+      { width: 16 },  // Mã SV
+      { width: 28 },  // Họ và tên
+      { width: 14 },  // Lớp
+      { width: 26 },  // Môn học
+      { width: 12 },  // Nhóm HP
+      { width: 14 },  // Điểm BXH
+      { width: 16 }   // Trạng thái
+    ];
+
+    const thinBorder = {
+      top: { style: 'thin', color: { argb: 'FFD3D3D3' } },
+      left: { style: 'thin', color: { argb: 'FFD3D3D3' } },
+      bottom: { style: 'thin', color: { argb: 'FFD3D3D3' } },
+      right: { style: 'thin', color: { argb: 'FFD3D3D3' } }
+    };
+
+    studentsList.forEach((st, idx) => {
+      const row = sheet.addRow([
+        idx + 1,
+        st.studentId || st.mssv,
+        st.fullName || '',
+        st.className || '',
+        st.subject || '',
+        st.group || '',
+        st.bxhScore !== undefined && st.bxhScore !== null ? st.bxhScore : '-',
+        st.status || (st.bxhScore !== undefined && st.bxhScore !== null ? 'Đã nộp bài' : 'Chưa nộp bài')
+      ]);
+      row.height = 20;
+
+      const isEven = idx % 2 === 1;
+      const rowFill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: isEven ? 'FFF9FAFB' : 'FFFFFFFF' }
+      };
+
+      row.eachCell((cell, colNum) => {
+        cell.font = { name: 'Times New Roman', size: 11 };
+        cell.fill = rowFill;
+        cell.border = thinBorder;
+        cell.alignment = {
+          vertical: 'middle',
+          horizontal: colNum === 3 ? 'left' : 'center'
+        };
+      });
     });
 
     return workbook;
