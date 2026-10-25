@@ -7,101 +7,73 @@
 
   const defaultYearPrefix = new Date().getFullYear().toString().slice(-2);
 
-  // 1. Khởi tạo cụm nút trên Header: [Thống kê] [Tìm SV (Môn/Lớp)] (chèn vào sau tên người dùng)
-  function initHeaderButtons() {
-    const headerBar = document.querySelector('.fl-header__bar') || document.querySelector('header');
-    if (!headerBar) return;
-
-    // Tìm phần tử hiển thị tài khoản / tên người dùng ở góc phải header
-    let userTarget = null;
-    const avatar = headerBar.querySelector('.fl-avatar');
-    if (avatar) {
-      let curr = avatar;
-      while (
-        curr &&
-        curr.parentElement &&
-        !curr.parentElement.classList.contains('fl-header__actions') &&
-        curr.parentElement !== headerBar
-      ) {
-        curr = curr.parentElement;
-      }
-      userTarget = curr;
+  // 1. Khởi tạo cụm nút nổi (Floating Dock) cố định sát mép phải màn hình, tách biệt hoàn toàn khỏi layout web
+  function initFloatingDock() {
+    // Xóa cụm nút cũ nếu còn tồn tại trong header hoặc toolbar
+    const oldHeaderGroup = document.getElementById('husc-header-btn-group');
+    if (oldHeaderGroup) {
+      oldHeaderGroup.remove();
     }
-
-    if (!userTarget) {
-      const headerActions = headerBar.querySelector('.fl-header__actions');
-      if (headerActions) {
-        userTarget = headerActions.querySelector('.fl-menu-anchor:last-child') ||
-                     headerActions.querySelector('.fl-btn--user') ||
-                     headerActions.lastElementChild;
-      }
-    }
-
-    // Nếu đã có cụm nút và nằm đúng vị trí ngay sau userTarget thì giữ nguyên
-    const existingGroup = document.getElementById('husc-header-btn-group');
-    if (existingGroup) {
-      if (userTarget && existingGroup.previousElementSibling === userTarget) {
-        return; // Đã đúng vị trí
-      }
-      existingGroup.remove();
-    }
-
-    // Xóa các nút lẻ nếu còn tồn tại
     document.querySelectorAll('#husc-header-stats-btn, #husc-header-search-btn').forEach(el => {
-      if (!el.closest('#husc-header-btn-group')) el.remove();
+      if (!el.closest('#husc-floating-dock')) el.remove();
     });
 
-    // Tạo container cụm nút trên Header
-    const group = document.createElement('div');
-    group.id = 'husc-header-btn-group';
-    group.className = 'husc-header-btn-group';
+    // Nếu đã có dock nổi thì không cần tạo lại
+    if (document.getElementById('husc-floating-dock')) {
+      return;
+    }
 
-    // Nút 1: Thống kê (Màu xanh dương)
+    if (!document.body) {
+      return;
+    }
+
+    // Tạo container dock nổi cố định bám sát cạnh phải màn hình
+    const dock = document.createElement('div');
+    dock.id = 'husc-floating-dock';
+    dock.className = 'husc-floating-dock';
+
+    // Nút 1: Thống kê (Màu xanh dương, icon biểu đồ tròn & chữ Thống kê)
     const btnStats = document.createElement('button');
-    btnStats.id = 'husc-header-stats-btn';
-    btnStats.className = 'husc-header-stats-btn';
+    btnStats.id = 'husc-dock-stats-btn';
+    btnStats.className = 'husc-dock-btn husc-dock-stats-btn';
     btnStats.type = 'button';
-    btnStats.title = 'Mở bảng điều khiển Thống kê & Xuất Excel BXH';
+    btnStats.title = 'Thống kê BXH & Xuất Excel';
     btnStats.innerHTML = `
-      <svg viewBox="0 0 24 24">
-        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M9 17H7V10H9V17M13 17H11V7H13V17M17 17H15V13H17V17Z"/>
+      <svg viewBox="0 0 24 24" class="husc-dock-icon">
+        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
       </svg>
-      <span>Thống kê</span>
+      <span class="husc-dock-label">Thống kê</span>
     `;
     btnStats.addEventListener('click', handleOpenStatsModal);
 
-    // Nút 2: Tìm SV theo môn, lớp (Màu xanh lá emerald - Đặt bên phải nút Thống kê)
+    // Nút 2: Tìm SV theo môn, lớp (Màu xanh lá emerald, icon máy tính & chữ Tìm SV (Môn/Lớp))
     const btnSearch = document.createElement('button');
-    btnSearch.id = 'husc-header-search-btn';
-    btnSearch.className = 'husc-header-search-btn';
+    btnSearch.id = 'husc-dock-search-btn';
+    btnSearch.className = 'husc-dock-btn husc-dock-search-btn';
     btnSearch.type = 'button';
-    btnSearch.title = 'Tra cứu sinh viên theo môn, lớp & đối chiếu BXH';
+    btnSearch.title = 'Bảng điểm & Tìm SV (Môn/Lớp)';
     btnSearch.innerHTML = `
-      <svg viewBox="0 0 24 24">
-        <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
+      <svg viewBox="0 0 24 24" class="husc-dock-icon">
+        <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+        <line x1="8" y1="6" x2="16" y2="6"></line>
+        <line x1="16" y1="14" x2="16" y2="18"></line>
+        <path d="M16 10h.01"></path>
+        <path d="M12 10h.01"></path>
+        <path d="M8 10h.01"></path>
+        <path d="M12 14h.01"></path>
+        <path d="M8 14h.01"></path>
+        <path d="M12 18h.01"></path>
+        <path d="M8 18h.01"></path>
       </svg>
-      <span>Tìm SV (Môn/Lớp)</span>
+      <span class="husc-dock-label">Tìm SV (Môn/Lớp)</span>
     `;
     btnSearch.addEventListener('click', handleOpenSearchModal);
 
-    group.appendChild(btnStats);
-    group.appendChild(btnSearch);
+    dock.appendChild(btnStats);
+    dock.appendChild(btnSearch);
 
-    // Chèn cụm nút vào SAU TÊN người dùng ở góc phải
-    if (userTarget && userTarget.parentNode) {
-      if (userTarget.nextSibling) {
-        userTarget.parentNode.insertBefore(group, userTarget.nextSibling);
-      } else {
-        userTarget.parentNode.appendChild(group);
-      }
-    } else {
-      const headerActions = headerBar.querySelector('.fl-header__actions');
-      if (headerActions) {
-        headerActions.appendChild(group);
-      } else {
-        headerBar.appendChild(group);
-      }
-    }
+    document.body.appendChild(dock);
   }
 
   // 2. Mở Modal Thống Kê Bảng Xếp Hạng
@@ -756,17 +728,17 @@
 
   // Khởi chạy khi tải trang & theo dõi cập nhật DOM
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeaderButtons);
+    document.addEventListener('DOMContentLoaded', initFloatingDock);
   } else {
-    initHeaderButtons();
+    initFloatingDock();
   }
 
-  // Theo dõi DOM thay đổi để chèn đúng vị trí sau tên người dùng
+  // Theo dõi DOM để đảm bảo dock nổi luôn có mặt trên body
   const observer = new MutationObserver(() => {
-    initHeaderButtons();
+    initFloatingDock();
   });
   observer.observe(document.body || document.documentElement, {
     childList: true,
-    subtree: true
+    subtree: false
   });
 })();

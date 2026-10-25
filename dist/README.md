@@ -6,8 +6,9 @@ Tiện ích mở rộng (Chrome Extension) hỗ trợ tự động đọc dữ l
 
 ## 🎯 Các tính năng nổi bật
 
-### 1. Hai nút chức năng độc lập trên thanh Header (Góc phải sau Tên người dùng)
-- **Nút "Thống kê" (Nền xanh dương gradient)**:
+### 1. Hai nút chức năng dạng Dock nổi (Floating Dock) cố định sát mép phải màn hình
+- **Tách rời hoàn toàn khỏi web**: Được gắn cố định (`position: fixed; right: 0;`) bám sát mép phải màn hình theo đúng mẫu giao diện hiện đại, không chèn vào DOM trang làm xô lệch bố cục web và luôn luôn hiển thị sẵn sàng khi cuộn trang.
+- **Nút "Thống kê" (Nền xanh dương - Icon Biểu đồ tròn)**:
   - Mở bảng điều khiển phân tích bảng xếp hạng cuộc thi hiện tại.
   - Bộ lọc đối tượng:
     - *Chỉ lấy có Mã sinh viên (Expert)*.
@@ -17,7 +18,7 @@ Tiện ích mở rộng (Chrome Extension) hỗ trợ tự động đọc dữ l
   - **Bảng xem trước dữ liệu nhanh**: Đã thay cột "Họ tên" (bị lặp với cột MSSV) thành các cột điểm từng câu chi tiết (`Bài 1`, `Bài 2`, `Bài 3`...) và `Total`.
   - Nút **Xuất file Excel** bảng xếp hạng cuộc thi chuẩn định dạng SPIT.
 
-- **Nút "Tìm SV (Môn/Lớp)" (Nền xanh emerald gradient - Nằm bên phải nút Thống kê)**:
+- **Nút "Tìm SV (Môn/Lớp)" (Nền xanh lá emerald - Icon Máy tính)**:
   - Tách riêng chuyên biệt để phục vụ việc tra cứu và quản lý điểm số theo lớp học phần.
   - **1 Dropdown duy nhất theo lớp học phần**:
     - Placeholder: `-- Chọn lớp học phần --`
@@ -66,11 +67,11 @@ Tiện ích mở rộng (Chrome Extension) hỗ trợ tự động đọc dữ l
 ---
 
 ## 📖 Hướng dẫn sử dụng trên website CODER HUSC
-
+ 
 1. Đăng nhập và mở bất kỳ trang nào trên website [CODER HUSC](https://coder.husc.edu.vn).
-2. Nhìn lên thanh Header ở góc trên bên phải (sau avatar/tên tài khoản của bạn), bạn sẽ thấy cụm 2 nút:
-   - **Nút "Thống kê" (Xanh dương)**: Bấm vào để mở modal thống kê cuộc thi, chọn lọc Newbie/Expert, lọc điểm > 0 và bấm "Xuất file Excel".
-   - **Nút "Tìm SV (Môn/Lớp)" (Xanh emerald)**: Bấm vào để tra cứu sinh viên theo Môn học (Ngôn ngữ lập trình, Kỹ thuật lập trình), theo Nhóm học phần, kiểm tra xem sinh viên nào trong lớp đã nộp bài, đạt bao nhiêu điểm, hoặc xuất danh sách sinh viên theo lớp học phần ra file Excel!
+2. Nhìn sang **mép phải màn hình** (khoảng giữa màn hình), bạn sẽ thấy cụm 2 nút nổi tiện dụng:
+   - **Nút "Thống kê" (Xanh dương, Icon Biểu đồ)**: Bấm vào để mở modal thống kê cuộc thi, chọn lọc Newbie/Expert, lọc điểm > 0 và bấm "Xuất file Excel".
+   - **Nút "Tìm SV (Môn/Lớp)" (Xanh emerald, Icon Máy tính)**: Bấm vào để tra cứu sinh viên theo Môn học (Ngôn ngữ lập trình, Kỹ thuật lập trình), theo Nhóm học phần, kiểm tra xem sinh viên nào trong lớp đã nộp bài, đạt bao nhiêu điểm, hoặc xuất danh sách sinh viên theo lớp học phần ra file Excel!
 
 ---
 
