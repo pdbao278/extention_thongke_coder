@@ -1,0 +1,692 @@
+<!DOCTYPE html><html lang="vi" data-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <title>Bảng xếp hạng · SPIT Expert Contest 06 · CODER HUSC</title>
+        <meta name="description" content="👉 SPIT Contest là chuỗi contest lập trình thi đấu được tổ chức bởi CLB Hỗ trợ Lập trình, trường Đại học Khoa học, Đại học Huế. Đứng đầu đội ngũ ra đề cho SPIT Contest là những thành viên thuộc Ban Chuyên môn của CLB đã đạt được nhiều giải thưởng tại các kỳ thi cấp khu vực, quốc …">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#FFBB33">
+    <meta property="og:site_name" content="CODER HUSC">
+    <meta property="og:url"
+          content="https://coder.husc.edu.vn/contest/spitexpert06i/ranking/">
+        <meta property="og:description" content="👉 SPIT Contest là chuỗi contest lập trình thi đấu được tổ chức bởi CLB Hỗ trợ Lập trình, trường Đại học Khoa học, Đại học Huế. Đứng đầu đội ngũ ra đề cho SPIT Contest là những thành viên thuộc Ban Chuyên môn của CLB đã đạt được nhiều giải thưởng tại các kỳ thi cấp khu vực, quốc …">
+    <link rel="canonical"
+          href="https://coder.husc.edu.vn/contest/spitexpert06i/ranking/">
+    <link rel="stylesheet" href="/static/fluent.css?v=d69a985f1143">
+<script src="/static/cache/js/output.d06381c17a41.js"></script>    <script>
+        moment.locale('vi');
+        set_date_locale('vi');
+        $(function () {
+            $('img.unveil').unveil(200);
+        });
+    </script>
+        <script>window.user = {};</script>
+    <script>
+        (function () {
+            'use strict';
+
+            function closest(el, selector) {
+                while (el && el.nodeType === 1) {
+                    if ((el.matches || el.msMatchesSelector).call(el, selector)) return el;
+                    el = el.parentNode;
+                }
+                return null;
+            }
+
+            // A disclosure button (a problem row's details): aria-expanded and the hidden part it controls.
+            document.addEventListener('click', function (event) {
+                var button = closest(event.target, '[data-fl-disclosure]');
+                if (!button) return;
+                var target = document.getElementById(button.getAttribute('aria-controls'));
+                var open = button.getAttribute('aria-expanded') !== 'true';
+                button.setAttribute('aria-expanded', open ? 'true' : 'false');
+                if (target) target.hidden = !open;
+            });
+
+            // The current section stays in view where the section bar scrolls sideways (phones).
+            function showCurrentTab() {
+                var nav = document.querySelector('[data-fl-contest-tabs]');
+                var tab = nav && nav.querySelector('[aria-current="page"]');
+                if (nav && tab && nav.scrollWidth > nav.clientWidth) {
+                    nav.scrollLeft = Math.max(0, tab.offsetLeft - (nav.clientWidth - tab.offsetWidth) / 2);
+                }
+            }
+
+            // "Thắc mắc": the announcements posted after the contestant last opened the tab (handoff section 8 row 62;
+            // contest/clarifications.html keeps that time in this browser only).
+            function countNewClarifications() {
+                var tab = document.querySelector('[data-fl-clar-times]');
+                if (!tab || tab.getAttribute('aria-current') === 'page') return;
+                var seen = 0;
+                try {
+                    seen = parseInt(window.localStorage.getItem('fl-clar-seen:' + tab.getAttribute('data-fl-clar-key')), 10) || 0;
+                } catch (e) {
+                    seen = 0;
+                }
+                var count = 0;
+                tab.getAttribute('data-fl-clar-times').split(',').forEach(function (time) {
+                    if (parseInt(time, 10) > seen) count++;
+                });
+                var badge = tab.querySelector('[data-fl-clar-count]');
+                if (!count || !badge) return;
+                var text = tab.getAttribute(count === 1 ? 'data-fl-clar-one' : 'data-fl-clar-many').replace('{n}', count);
+                var label = tab.querySelector('[data-fl-clar-sr]');
+                badge.textContent = count;
+                badge.setAttribute('title', text);
+                badge.hidden = false;
+                if (label) label.textContent = ', ' + text;
+            }
+
+            function ready() {
+                showCurrentTab();
+                countNewClarifications();
+            }
+
+            if (document.readyState !== 'loading') ready();
+            else document.addEventListener('DOMContentLoaded', ready);
+        })();
+    </script>
+    <script src="/static/fluent/ranking.js?v=0722bfa9a629" defer></script>
+</head>
+<body class="fl">
+<a class="fl-skip" href="#noi-dung">Bỏ qua đến nội dung</a>
+<div class="fl-shell" data-fl-shell>
+<header class="fl-header">
+    <div class="fl-header__bar">
+        <button type="button" class="fl-btn fl-btn--subtle fl-btn--icon fl-header__toggle fl-only-md"
+                aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="fl-drawer"
+                data-fl-drawer-toggle>
+            <span class="fl-btn__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#navigation_20_regular"></use></svg></span>
+        </button>
+        <a class="fl-brand" href="/" aria-label="CODER HUSC, trang chủ">
+    <img src="/static/icons/web-app-manifest-192x192.png?v=0124b2a6253c" alt="" width="28" height="28">
+            <span class="fl-brand__name">CODER HUSC</span>
+        </a>
+        <nav class="fl-nav fl-hide-md" aria-label="Điều hướng chính">
+                    <a class="fl-nav__tab" href="/problems/">
+                        <span class="fl-nav__label">Bài tập</span>
+                    </a>
+                    <a class="fl-nav__tab" href="/submissions/">
+                        <span class="fl-nav__label">Bài nộp</span>
+                    </a>
+                    <a class="fl-nav__tab" href="/users/">
+                        <span class="fl-nav__label">Bảng xếp hạng</span>
+                    </a>
+                    <a class="fl-nav__tab" href="/contests/" aria-current="page">
+                        <span class="fl-nav__label">Kỳ thi</span>
+                    </a>
+                    <div class="fl-menu-anchor fl-nav__item">
+                        <button type="button" class="fl-nav__tab" aria-haspopup="menu" aria-expanded="false"
+                                aria-controls="fl-nav-menu-5" data-fl-menu>
+                            <span class="fl-nav__label">Giới thiệu</span>
+                            <span class="fl-nav__chevron"><svg class="fl-icon" width="12" height="12" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#chevron_down_20_regular"></use></svg></span>
+                        </button>
+                        <div class="fl-menu fl-nav__menu" id="fl-nav-menu-5" role="menu" aria-label="Giới thiệu">
+                                <a class="fl-menu__item" role="menuitem" href="/status/">
+<span class="fl-menu__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#board_20_regular"></use></svg></span>                                    <span class="fl-menu__label">Máy chấm</span>
+                                </a>
+                        </div>
+                    </div>
+        </nav>
+        <span class="fl-header__spacer" aria-hidden="true"></span>
+        <form class="fl-field-wrap fl-header__search fl-hide-lg" role="search" action="/problems/" method="get">
+            <label for="fl-header-search" class="fl-sr">Tìm bài tập</label>
+            <span class="fl-field-wrap__before"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#search_20_regular"></use></svg></span>
+            <input id="fl-header-search" class="fl-input" type="search" name="search" autocomplete="off"
+                   placeholder="Tìm bài tập">
+        </form>
+        <div class="fl-header__actions">
+            <a class="fl-btn fl-btn--subtle fl-btn--icon fl-only-lg" href="/problems/"
+               aria-label="Tìm bài tập" title="Tìm bài tập">
+                <span class="fl-btn__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#search_20_regular"></use></svg></span>
+            </a>
+<div class="fl-menu-anchor">
+    <button type="button" class="fl-btn fl-btn--subtle fl-btn--icon" aria-haspopup="menu" aria-expanded="false"
+            aria-controls="fl-theme-menu" data-fl-menu data-fl-theme-button
+            aria-label="Giao diện: Theo hệ thống"
+            title="Giao diện: Theo hệ thống">
+        <span class="fl-btn__icon fl-theme-icon--light"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#weather_sunny_20_regular"></use></svg></span>
+        <span class="fl-btn__icon fl-theme-icon--dark"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#weather_moon_20_regular"></use></svg></span>
+    </button>
+    <div class="fl-menu fl-menu--end" id="fl-theme-menu" role="menu" aria-label="Giao diện"
+         data-fl-theme-menu data-url=""
+         data-label-template="Giao diện: __THEME__">
+        <div class="fl-menu__header" role="presentation">Giao diện</div>
+            <button type="button" class="fl-menu__item" role="menuitemradio" data-fl-theme="auto"
+                    data-label="Theo hệ thống"
+                    aria-checked="true">
+                <span class="fl-menu__check"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#checkmark_20_regular"></use></svg></span>
+                <span class="fl-menu__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#dark_theme_20_regular"></use></svg></span>
+                <span class="fl-menu__label">Theo hệ thống</span>
+            </button>
+            <button type="button" class="fl-menu__item" role="menuitemradio" data-fl-theme="light"
+                    data-label="Sáng"
+                    aria-checked="false">
+                <span class="fl-menu__check"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#checkmark_20_regular"></use></svg></span>
+                <span class="fl-menu__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#weather_sunny_20_regular"></use></svg></span>
+                <span class="fl-menu__label">Sáng</span>
+            </button>
+            <button type="button" class="fl-menu__item" role="menuitemradio" data-fl-theme="dark"
+                    data-label="Tối"
+                    aria-checked="false">
+                <span class="fl-menu__check"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#checkmark_20_regular"></use></svg></span>
+                <span class="fl-menu__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#weather_moon_20_regular"></use></svg></span>
+                <span class="fl-menu__label">Tối</span>
+            </button>
+    </div>
+</div>                <div class="fl-anon">
+                    <a class="fl-btn fl-btn--subtle fl-hide-sm"
+                       href="/accounts/login/?next=/contest/spitexpert06i/ranking/">
+                        <span class="fl-btn__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#person_arrow_right_20_regular"></use></svg></span>Đăng nhập
+                    </a>
+                    <a class="fl-btn fl-btn--subtle fl-btn--icon fl-only-sm"
+                       href="/accounts/login/?next=/contest/spitexpert06i/ranking/"
+                       aria-label="Đăng nhập" title="Đăng nhập">
+                        <span class="fl-btn__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#person_arrow_right_20_regular"></use></svg></span>
+                    </a>
+                        <a class="fl-btn fl-hide-sm" href="/accounts/register/">Đăng ký</a>
+                </div>
+        </div>
+        <nav class="fl-drawer fl-only-md" id="fl-drawer" aria-label="Điều hướng chính" data-fl-drawer>
+            <a class="fl-drawer__item" href="/">
+                <svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#home_20_regular"></use></svg><span>Trang chủ</span>
+            </a>
+                    <a class="fl-drawer__item" href="/problems/">
+<svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#document_bullet_list_20_regular"></use></svg><span>Bài tập</span>
+                    </a>
+                    <a class="fl-drawer__item" href="/submissions/">
+<svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#code_20_regular"></use></svg><span>Bài nộp</span>
+                    </a>
+                    <a class="fl-drawer__item" href="/users/">
+<svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#people_20_regular"></use></svg><span>Bảng xếp hạng</span>
+                    </a>
+                    <a class="fl-drawer__item" href="/contests/" aria-current="page">
+<svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#trophy_20_filled"></use></svg><span>Kỳ thi</span>
+                    </a>
+                    <div class="fl-drawer__divider" role="separator"></div>
+                    <div class="fl-drawer__header">Giới thiệu</div>
+                        <a class="fl-drawer__item" href="/status/">
+<svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#board_20_regular"></use></svg><span>Máy chấm</span>
+                        </a>
+        </nav>
+    </div>
+</header></div>
+<div class="fl-notices" id="fl-old-browser" hidden>
+    <div class="fl-msgbar fl-msgbar--warning">
+        <span class="fl-msgbar__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#warning_20_filled"></use></svg></span>
+        <div class="fl-msgbar__body"><strong class="fl-msgbar__title">Trình duyệt này đã cũ nên một số phần của trang có thể hiển thị sai.</strong>
+            Hãy dùng Chrome hoặc Edge 87, Firefox 85, Safari 15.4 trở lên.</div>
+    </div>
+</div>
+<script>
+    (function (bar) {
+        var css = window.CSS, supported = false;
+        try {
+            supported = !!(css && css.supports && css.supports('selector(:focus-visible)') && css.supports('inset', '0'));
+        } catch (e) {
+            supported = false;
+        }
+        if (!supported) bar.removeAttribute('hidden');
+    })(document.getElementById('fl-old-browser'));
+</script>
+<noscript>
+    <div class="fl-notices">
+        <div class="fl-msgbar fl-msgbar--warning">
+            <span class="fl-msgbar__icon"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#warning_20_filled"></use></svg></span>
+            <div class="fl-msgbar__body">Trang web này hoạt động tốt nhất khi JavaScript được cho phép.</div>
+        </div>
+    </div>
+</noscript>
+<main id="noi-dung" class="fl-main" tabindex="-1">
+<div class="fl-contest-top">
+                <nav class="fl-breadcrumb" aria-label="Đường dẫn">
+        <ol>
+                <li>
+                        <a class="fl-breadcrumb__item" href="/contests/"><span class="fl-breadcrumb__text">Kỳ thi</span></a>
+                </li>
+                    <li class="fl-breadcrumb__sep" aria-hidden="true"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#chevron_right_20_regular"></use></svg></li>
+                <li>
+                        <a class="fl-breadcrumb__item" href="/contest/spitexpert06i"><span class="fl-breadcrumb__text">SPIT Expert Contest 06</span></a>
+                </li>
+                    <li class="fl-breadcrumb__sep" aria-hidden="true"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#chevron_right_20_regular"></use></svg></li>
+                <li>
+                        <span class="fl-breadcrumb__item" aria-current="page"><span class="fl-breadcrumb__text">Bảng xếp hạng</span></span>
+                </li>
+        </ol>
+    </nav>
+
+        <section class="fl-card fl-contest-head" aria-labelledby="fl-contest-title">
+    <div class="fl-contest-head__top">
+        <div class="fl-contest-head__info">
+            <div class="fl-ranking-head__titles">
+                <div class="fl-contest-head__title-row">
+                    <span class="fl-icon-tile fl-icon-tile--page fl-icon-tile--stats" aria-hidden="true"><svg class="fl-icon" width="24" height="24" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#data_bar_vertical_20_regular"></use></svg></span>
+                    <h1 class="fl-contest-head__title" id="fl-contest-title">Bảng xếp hạng</h1>
+                </div>
+                <p class="fl-ranking-head__contest">SPIT Expert Contest 06</p>
+            </div>
+                <ul class="fl-contest-tags" aria-label="Trạng thái, thể thức và rating">
+            <li>    <span class="fl-tag fl-tag--past"><svg class="fl-icon" width="12" height="12" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#history_20_regular"></use></svg>Đã kết thúc</span>
+</li>
+        <li>    <span class="fl-tag fl-tag--fmt-default" title="Thể thức Mặc định"><span class="fl-sr">Thể thức </span>Mặc định</span>
+</li>
+        <li><span class="fl-badge fl-badge--solid">Không tính rating</span></li>
+    </ul>
+
+                <div class="fl-contest-meta">
+        <ul class="fl-contest-meta__line" aria-label="Lịch thi">
+            <li class="fl-contest-meta__item">
+                <span class="fl-contest-meta__icon" aria-hidden="true"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#calendar_ltr_20_regular"></use></svg></span>
+                <span class="fl-contest-meta__tabular"><span class="fl-sr">Thời gian thi: </span>24/10/2026 19:00 – 22:00 (GMT+7)</span>
+            </li>
+            <li class="fl-contest-meta__item">
+                <span class="fl-contest-meta__icon" aria-hidden="true"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#clock_20_regular"></use></svg></span>
+                <span title="Thời lượng 03:00"><span class="fl-sr">Thời lượng: </span>03:00</span>
+            </li>
+        </ul>
+            <ul class="fl-contest-meta__line" aria-label="Thể lệ">
+                    <li class="fl-contest-meta__item">
+                        <span class="fl-contest-meta__icon" aria-hidden="true"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#people_20_regular"></use></svg></span>
+                        <span>39 thí sinh</span>
+                    </li>
+            </ul>
+    </div>
+
+        </div>
+            <div class="fl-contest-clock fl-contest-clock--ended">
+        <div class="fl-contest-clock__head">
+                <span class="fl-contest-clock__label">Đã kết thúc</span>
+                <span class="fl-contest-clock__value"><time datetime="2026-10-24T15:00:00+00:00" title="24/10/2026 22:00" data-fl-reltime>23 giờ trước</time></span>
+        </div>
+            <span class="fl-contest-clock__note">Kết thúc lúc 22:00, 24/10/2026</span>
+    </div>
+
+    </div>
+    <nav class="fl-tabs fl-tabs--card fl-contest-tabs fl-scroll" aria-label="Mục của kỳ thi" data-fl-contest-tabs>
+                <a class="fl-tab" href="/contest/spitexpert06i/info">
+                    <span class="fl-tab__label" data-text="Thông tin">Thông tin</span></a>
+                <a class="fl-tab" href="/contest/spitexpert06i/problems">
+                    <span class="fl-tab__label" data-text="Bài tập">Bài tập</span></a>
+                <a class="fl-tab" href="/contest/spitexpert06i/ranking/" aria-current="page">
+                    <span class="fl-tab__label" data-text="Bảng xếp hạng">Bảng xếp hạng</span></a>
+                <a class="fl-tab" href="/contest/spitexpert06i/stats">
+                    <span class="fl-tab__label" data-text="Thống kê">Thống kê</span></a>
+                <a class="fl-tab" href="/contest/spitexpert06i/clarifications">
+                    <span class="fl-tab__label" data-text="Thắc mắc">Thắc mắc</span></a>
+    </nav>
+        </section>
+    </div>
+
+
+
+
+    <section class="fl-card fl-card--flush fl-ranking-board" aria-labelledby="fl-ranking-title" data-fl-ranking             data-msg-found-one="Tìm thấy __N__ thí sinh khớp với “__Q__”."
+             data-msg-found-other="Tìm thấy __N__ thí sinh khớp với “__Q__”."
+             data-msg-none="Không tìm thấy thí sinh nào khớp với “__Q__”.">
+            <div class="fl-ranking-toolbar">
+                <h2 class="fl-sr" id="fl-ranking-title">Bảng điểm</h2>
+<div class="fl-ranking-fs">
+            <p class="fl-ranking-fs__name" title="SPIT Expert Contest 06">SPIT Expert Contest 06</p>
+        </div>                    <div class="fl-field-wrap fl-ranking-search">
+                        <label class="fl-sr" for="fl-ranking-search">Tìm thí sinh theo tên người dùng</label>
+                        <span class="fl-field-wrap__before"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#search_20_regular"></use></svg></span>
+                        <input id="fl-ranking-search" class="fl-input" type="search" placeholder="Tìm thí sinh" autocomplete="off" spellcheck="false" data-fl-ranking-search>
+                    </div>
+                <span class="fl-ranking-toolbar__spacer" aria-hidden="true"></span>
+                <div class="fl-ranking-toolbar__actions">
+                        <span class="fl-ranking-toolbar__end"><p class="fl-ranking-toolbar__time"><span class="fl-ranking-toolbar__icon" aria-hidden="true"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#flag_20_regular"></use></svg></span><span>Kết quả chung cuộc</span></p><button type="button" class="fl-btn fl-btn--subtle fl-btn--icon fl-ranking-fs-btn" data-fl-ranking-fullscreen hidden
+                aria-label="Toàn màn hình" title="Toàn màn hình" data-label-exit="Thoát toàn màn hình">
+            <span class="fl-btn__icon fl-ranking-fs-btn__enter"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#full_screen_maximize_20_regular"></use></svg></span>
+            <span class="fl-btn__icon fl-ranking-fs-btn__exit"><svg class="fl-icon" width="20" height="20" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#dismiss_20_regular"></use></svg></span>
+        </button></span>
+                </div>
+            </div>
+        <p class="fl-sr" aria-live="polite" data-fl-ranking-status></p>
+
+            <div class="fl-ranking-scroll fl-scroll" role="region" tabindex="0" aria-labelledby="fl-ranking-caption" data-fl-ranking-box>
+<table class="fl-ranking-table fl-ranking-table--oi" data-fl-ranking-table
+       data-fl-ranking-state="public-final-search"       data-msg-all="Đang hiển thị toàn bộ 39 thí sinh.">
+    <caption id="fl-ranking-caption" class="fl-sr">Bảng xếp hạng chung cuộc kỳ thi SPIT Expert Contest 06, thể thức Mặc định, 39 thí sinh. Mỗi ô bài ghi điểm và thời điểm nộp cuối, tính từ lúc bắt đầu.</caption>
+    <thead>
+        <tr>
+            <th scope="col" class="fl-ranking-rank">Hạng</th>
+            <th scope="col" class="fl-ranking-member">Thành viên</th>
+                <th scope="col" class="fl-ranking-problem">
+                    <a class="fl-ranking-problem__link" href="/contest/spitexpert06i/rank/spit0134/"
+                       title="Bài nộp tốt nhất cho bài 1 · Thống kê dãy số"><span class="fl-problem-num fl-problem-num--24"><span class="fl-sr">Bài 1</span><span aria-hidden="true">1</span></span><span class="fl-sr">, Thống kê dãy số</span></a><span class="fl-ranking-problem__points">30<span class="fl-sr"> điểm</span></span></th>
+                <th scope="col" class="fl-ranking-problem">
+                    <a class="fl-ranking-problem__link" href="/contest/spitexpert06i/rank/spit0135/"
+                       title="Bài nộp tốt nhất cho bài 2 · Ước chung lớn nhất Plus"><span class="fl-problem-num fl-problem-num--24"><span class="fl-sr">Bài 2</span><span aria-hidden="true">2</span></span><span class="fl-sr">, Ước chung lớn nhất Plus</span></a><span class="fl-ranking-problem__points">30<span class="fl-sr"> điểm</span></span></th>
+                <th scope="col" class="fl-ranking-problem">
+                    <a class="fl-ranking-problem__link" href="/contest/spitexpert06i/rank/spit0136/"
+                       title="Bài nộp tốt nhất cho bài 3 · Mendel đã đến SPIT"><span class="fl-problem-num fl-problem-num--24"><span class="fl-sr">Bài 3</span><span aria-hidden="true">3</span></span><span class="fl-sr">, Mendel đã đến SPIT</span></a><span class="fl-ranking-problem__points">20<span class="fl-sr"> điểm</span></span></th>
+                <th scope="col" class="fl-ranking-problem">
+                    <a class="fl-ranking-problem__link" href="/contest/spitexpert06i/rank/spit0137/"
+                       title="Bài nộp tốt nhất cho bài 4 · Hành trình trên biển cả"><span class="fl-problem-num fl-problem-num--24"><span class="fl-sr">Bài 4</span><span aria-hidden="true">4</span></span><span class="fl-sr">, Hành trình trên biển cả</span></a><span class="fl-ranking-problem__points">20<span class="fl-sr"> điểm</span></span></th>
+                <th scope="col" class="fl-ranking-total">Tổng điểm</th>
+        </tr>
+    </thead>
+    <tbody><tr id="hang-__JDK___" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-medal fl-ranking-medal--gold" title="Hạng 1"><span aria-hidden="true">1</span><span class="fl-sr">Hạng 1</span></span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--plum fl-avatar--28" aria-hidden="true">JD</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--expert fl-ranking-member__link" href="/user/__JDK___" title="Expert · 1388">__JDK___<span class="fl-sr">, Expert</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Junior Training"><span class="fl-sr">Tổ chức </span>JT</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/__JDK___/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:31:57"><span>30</span><span>01:31:57</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/__JDK___/spit0135/" title="Bài 2 · 30 điểm · nộp lúc 01:26:06"><span>30</span><span>01:26:06</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/__JDK___/spit0136/" title="Bài 3 · 20 điểm · nộp lúc 01:47:16"><span>20</span><span>01:47:16</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/__JDK___/spit0137/" title="Bài 4 · 6 điểm · nộp lúc 02:51:36"><span>6</span><span>02:51:36</span><i style="--fl-share: 30.0%"></i></a></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/__JDK___/" title="Các bài nộp của __JDK___ trong kỳ thi" aria-label="Tổng 86 điểm, thời gian 07:36:57">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">86</span><span class="fl-ranking-total__time">07:36:57</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 86.0%"></span></span></a></td></tr>
+<tr id="hang-hacker" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-medal fl-ranking-medal--silver" title="Hạng 2"><span aria-hidden="true">2</span><span class="fl-sr">Hạng 2</span></span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--plum fl-avatar--28" aria-hidden="true">HA</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--amateur fl-ranking-member__link" href="/user/hacker" title="Amateur · 1289">hacker<span class="fl-sr">, Amateur</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/hacker/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 02:44:23"><span>30</span><span>02:44:23</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/hacker/spit0135/" title="Bài 2 · 30 điểm · nộp lúc 01:47:54"><span>30</span><span>01:47:54</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/hacker/spit0136/" title="Bài 3 · 20 điểm · nộp lúc 02:22:12"><span>20</span><span>02:22:12</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/hacker/spit0137/" title="Bài 4 · 6 điểm · nộp lúc 02:59:58"><span>6</span><span>02:59:58</span><i style="--fl-share: 30.0%"></i></a></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/hacker/" title="Các bài nộp của hacker trong kỳ thi" aria-label="Tổng 86 điểm, thời gian 09:54:28">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">86</span><span class="fl-ranking-total__time">09:54:28</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 86.0%"></span></span></a></td></tr>
+<tr id="hang-25T1029026hoanglonggg" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-medal fl-ranking-medal--bronze" title="Hạng 3"><span aria-hidden="true">3</span><span class="fl-sr">Hạng 3</span></span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--grape fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1029026hoanglonggg" title="Chưa có rating">25T1029026hoanglonggg<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1029026hoanglonggg/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 02:05:40"><span>30</span><span>02:05:40</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1029026hoanglonggg/spit0135/" title="Bài 2 · 30 điểm · nộp lúc 02:05:56"><span>30</span><span>02:05:56</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1029026hoanglonggg/spit0136/" title="Bài 3 · 10,4 điểm · nộp lúc 02:49:21"><span>10,4</span><span>02:49:21</span><i style="--fl-share: 52.0%"></i></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1029026hoanglonggg/spit0137/" title="Bài 4 · 6 điểm · nộp lúc 02:45:58"><span>6</span><span>02:45:58</span><i style="--fl-share: 30.0%"></i></a></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1029026hoanglonggg/" title="Các bài nộp của 25T1029026hoanglonggg trong kỳ thi" aria-label="Tổng 76,4 điểm, thời gian 09:46:57">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">76,4</span><span class="fl-ranking-total__time">09:46:57</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 76.4%"></span></span></a></td></tr>
+<tr id="hang-chatgptplus" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 4">4</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--brass fl-avatar--28" aria-hidden="true">CH</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--candidate-master fl-ranking-member__link" href="/user/chatgptplus" title="Candidate Master · 1639">chatgptplus<span class="fl-sr">, Candidate Master</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/chatgptplus/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:21:32"><span>30</span><span>00:21:32</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/chatgptplus/spit0135/" title="Bài 2 · 30 điểm · nộp lúc 01:39:40"><span>30</span><span>01:39:40</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/chatgptplus/" title="Các bài nộp của chatgptplus trong kỳ thi" aria-label="Tổng 60 điểm, thời gian 02:01:12">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">60</span><span class="fl-ranking-total__time">02:01:12</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 60.0%"></span></span></a></td></tr>
+<tr id="hang-24T1020340" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 5">5</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--grape fl-avatar--28" aria-hidden="true">24</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--expert fl-ranking-member__link" href="/user/24T1020340" title="Expert · 1549">24T1020340<span class="fl-sr">, Expert</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/24T1020340/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:03:36"><span>30</span><span>01:03:36</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/24T1020340/spit0135/" title="Bài 2 · 30 điểm · nộp lúc 01:54:26"><span>30</span><span>01:54:26</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/24T1020340/" title="Các bài nộp của 24T1020340 trong kỳ thi" aria-label="Tổng 60 điểm, thời gian 02:58:02">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">60</span><span class="fl-ranking-total__time">02:58:02</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 60.0%"></span></span></a></td></tr>
+<tr id="hang-25T1029012__KhangDi" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 6">6</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--peach fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1029012__KhangDi" title="Chưa có rating">25T1029012__KhangDi<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1029012__KhangDi/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:03:12"><span>30</span><span>01:03:12</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1029012__KhangDi/spit0135/" title="Bài 2 · 30 điểm · nộp lúc 02:30:57"><span>30</span><span>02:30:57</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1029012__KhangDi/" title="Các bài nộp của 25T1029012__KhangDi trong kỳ thi" aria-label="Tổng 60 điểm, thời gian 03:34:10">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">60</span><span class="fl-ranking-total__time">03:34:10</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 60.0%"></span></span></a></td></tr>
+<tr id="hang-nhathuy61128" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 7">7</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--pumpkin fl-avatar--28" aria-hidden="true">NH</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/nhathuy61128" title="Chưa có rating">nhathuy61128<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/nhathuy61128/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 02:22:58"><span>30</span><span>02:22:58</span></a></td><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/nhathuy61128/spit0135/" title="Bài 2 · 30 điểm · nộp lúc 02:46:49"><span>30</span><span>02:46:49</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/nhathuy61128/" title="Các bài nộp của nhathuy61128 trong kỳ thi" aria-label="Tổng 60 điểm, thời gian 05:09:47">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">60</span><span class="fl-ranking-total__time">05:09:47</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 60.0%"></span></span></a></td></tr>
+<tr id="hang-25T1020369" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 8">8</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--gold fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1020369" title="Chưa có rating">25T1020369<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1020369/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:35:22"><span>30</span><span>00:35:22</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1020369/spit0135/" title="Bài 2 · 6,5 điểm · nộp lúc 02:49:51"><span>6,5</span><span>02:49:51</span><i style="--fl-share: 21.8%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1020369/" title="Các bài nộp của 25T1020369 trong kỳ thi" aria-label="Tổng 36,535 điểm, thời gian 03:25:13">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">36,535</span><span class="fl-ranking-total__time">03:25:13</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 36.5%"></span></span></a></td></tr>
+<tr id="hang-26T1020078" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 9">9</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--lavender fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1020078" title="Chưa có rating">26T1020078<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/26T1020078/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:09:22"><span>30</span><span>00:09:22</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/26T1020078/spit0135/" title="Bài 2 · 3,9 điểm · nộp lúc 01:57:39"><span>3,9</span><span>01:57:39</span><i style="--fl-share: 12.9%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1020078/" title="Các bài nộp của 26T1020078 trong kỳ thi" aria-label="Tổng 33,861 điểm, thời gian 02:07:01">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">33,861</span><span class="fl-ranking-total__time">02:07:01</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 33.9%"></span></span></a></td></tr>
+<tr id="hang-VietKieuNhatNeeee" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 10">10</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--grape fl-avatar--28" aria-hidden="true">VI</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/VietKieuNhatNeeee" title="Chưa có rating">VietKieuNhatNeeee<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/VietKieuNhatNeeee/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:33:12"><span>30</span><span>00:33:12</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/VietKieuNhatNeeee/spit0135/" title="Bài 2 · 3,3 điểm · nộp lúc 00:58:06"><span>3,3</span><span>00:58:06</span><i style="--fl-share: 10.9%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/VietKieuNhatNeeee/" title="Các bài nộp của VietKieuNhatNeeee trong kỳ thi" aria-label="Tổng 33,267 điểm, thời gian 01:31:19">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">33,267</span><span class="fl-ranking-total__time">01:31:19</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 33.3%"></span></span></a></td></tr>
+<tr id="hang-26T1020029" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 11">11</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--seafoam fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1020029" title="Chưa có rating">26T1020029<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/26T1020029/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:16:07"><span>30</span><span>00:16:07</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/26T1020029/spit0135/" title="Bài 2 · 2,4 điểm · nộp lúc 01:40:01"><span>2,4</span><span>01:40:01</span><i style="--fl-share: 7.9%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><a class="fl-ranking-tile is-zero" href="/contest/spitexpert06i/submissions/26T1020029/spit0137/" title="Bài 4 · 0 điểm · nộp lúc 01:16:07"><span>0</span><span>01:16:07</span></a></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1020029/" title="Các bài nộp của 26T1020029 trong kỳ thi" aria-label="Tổng 32,376 điểm, thời gian 01:56:09">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">32,376</span><span class="fl-ranking-total__time">01:56:09</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 32.4%"></span></span></a></td></tr>
+<tr id="hang-25T1020075" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 12">12</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--grape fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1020075" title="Chưa có rating">25T1020075<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1020075/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:17:22"><span>30</span><span>00:17:22</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1020075/spit0135/" title="Bài 2 · 1,2 điểm · nộp lúc 01:45:28"><span>1,2</span><span>01:45:28</span><i style="--fl-share: 4.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1020075/spit0137/" title="Bài 4 · 0,2 điểm · nộp lúc 01:21:55"><span>0,2</span><span>01:21:55</span><i style="--fl-share: 1.0%"></i></a></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1020075/" title="Các bài nộp của 25T1020075 trong kỳ thi" aria-label="Tổng 31,388 điểm, thời gian 03:24:46">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">31,388</span><span class="fl-ranking-total__time">03:24:46</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 31.4%"></span></span></a></td></tr>
+<tr id="hang-24T1020124" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 13">13</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--plum fl-avatar--28" aria-hidden="true">24</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/24T1020124" title="Chưa có rating">24T1020124<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/24T1020124/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:48:10"><span>30</span><span>00:48:10</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/24T1020124/spit0135/" title="Bài 2 · 1,2 điểm · nộp lúc 01:19:37"><span>1,2</span><span>01:19:37</span><i style="--fl-share: 4.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/24T1020124/" title="Các bài nộp của 24T1020124 trong kỳ thi" aria-label="Tổng 31,188 điểm, thời gian 02:07:47">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">31,188</span><span class="fl-ranking-total__time">02:07:47</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 31.2%"></span></span></a></td></tr>
+<tr id="hang-25T1020362_WA" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 14">14</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--grape fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1020362_WA" title="Chưa có rating">25T1020362_WA<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1020362_WA/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:01:06"><span>30</span><span>01:01:06</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1020362_WA/spit0135/" title="Bài 2 · 1,2 điểm · nộp lúc 02:25:28"><span>1,2</span><span>02:25:28</span><i style="--fl-share: 4.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1020362_WA/" title="Các bài nộp của 25T1020362_WA trong kỳ thi" aria-label="Tổng 31,188 điểm, thời gian 03:26:35">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">31,188</span><span class="fl-ranking-total__time">03:26:35</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 31.2%"></span></span></a></td></tr>
+<tr id="hang-24T1020331" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 15">15</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--navy fl-avatar--28" aria-hidden="true">24</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/24T1020331" title="Chưa có rating">24T1020331<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/24T1020331/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 02:11:14"><span>30</span><span>02:11:14</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/24T1020331/spit0135/" title="Bài 2 · 1,2 điểm · nộp lúc 02:57:01"><span>1,2</span><span>02:57:01</span><i style="--fl-share: 4.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/24T1020331/" title="Các bài nộp của 24T1020331 trong kỳ thi" aria-label="Tổng 31,188 điểm, thời gian 05:08:16">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">31,188</span><span class="fl-ranking-total__time">05:08:16</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 31.2%"></span></span></a></td></tr>
+<tr id="hang-25T1020275olpicpc" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 16">16</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--cornflower fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--amateur fl-ranking-member__link" href="/user/25T1020275olpicpc" title="Amateur · 1166">25T1020275olpicpc<span class="fl-sr">, Amateur</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1020275olpicpc/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:17:02"><span>30</span><span>01:17:02</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1020275olpicpc/spit0135/" title="Bài 2 · 0,9 điểm · nộp lúc 01:59:19"><span>0,9</span><span>01:59:19</span><i style="--fl-share: 3.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1020275olpicpc/" title="Các bài nộp của 25T1020275olpicpc trong kỳ thi" aria-label="Tổng 30,891 điểm, thời gian 03:16:21">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30,891</span><span class="fl-ranking-total__time">03:16:21</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.9%"></span></span></a></td></tr>
+<tr id="hang-24T1020299_Vanvolume" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 17">17</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--seafoam fl-avatar--28" aria-hidden="true">24</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/24T1020299_Vanvolume" title="Chưa có rating">24T1020299_Vanvolume<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/24T1020299_Vanvolume/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:03:10"><span>30</span><span>01:03:10</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/24T1020299_Vanvolume/spit0135/" title="Bài 2 · 0,6 điểm · nộp lúc 01:13:54"><span>0,6</span><span>01:13:54</span><i style="--fl-share: 2.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/24T1020299_Vanvolume/" title="Các bài nộp của 24T1020299_Vanvolume trong kỳ thi" aria-label="Tổng 30,594 điểm, thời gian 02:17:04">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30,594</span><span class="fl-ranking-total__time">02:17:04</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.6%"></span></span></a></td></tr>
+<tr id="hang-25t1020347_minhtri" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 18">18</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--lilac fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--expert fl-ranking-member__link" href="/user/25t1020347_minhtri" title="Expert · 1575">25t1020347_minhtri<span class="fl-sr">, Expert</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25t1020347_minhtri/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:20:02"><span>30</span><span>01:20:02</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25t1020347_minhtri/spit0135/" title="Bài 2 · 0,6 điểm · nộp lúc 01:45:24"><span>0,6</span><span>01:45:24</span><i style="--fl-share: 2.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25t1020347_minhtri/" title="Các bài nộp của 25t1020347_minhtri trong kỳ thi" aria-label="Tổng 30,594 điểm, thời gian 03:05:27">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30,594</span><span class="fl-ranking-total__time">03:05:27</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.6%"></span></span></a></td></tr>
+<tr id="hang-25T1020392" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 19">19</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--navy fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1020392" title="Chưa có rating">25T1020392<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1020392/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:28:44"><span>30</span><span>01:28:44</span></a></td><td><a class="fl-ranking-tile is-partial" href="/contest/spitexpert06i/submissions/25T1020392/spit0135/" title="Bài 2 · 0,6 điểm · nộp lúc 01:57:48"><span>0,6</span><span>01:57:48</span><i style="--fl-share: 2.0%"></i></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1020392/" title="Các bài nộp của 25T1020392 trong kỳ thi" aria-label="Tổng 30,594 điểm, thời gian 03:26:32">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30,594</span><span class="fl-ranking-total__time">03:26:32</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.6%"></span></span></a></td></tr>
+<tr id="hang-25t1029025hoanglong" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 20">20</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--pumpkin fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25t1029025hoanglong" title="Chưa có rating">25t1029025hoanglong<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25t1029025hoanglong/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:27:07"><span>30</span><span>00:27:07</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25t1029025hoanglong/" title="Các bài nộp của 25t1029025hoanglong trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 00:27:07">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">00:27:07</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-26T1020209" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 21">21</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--plum fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1020209" title="Chưa có rating">26T1020209<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/26T1020209/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:27:46"><span>30</span><span>00:27:46</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1020209/" title="Các bài nộp của 26T1020209 trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 00:27:46">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">00:27:46</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-BinhMinh" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 22">22</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--lavender fl-avatar--28" aria-hidden="true">BI</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/BinhMinh" title="Chưa có rating">BinhMinh<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/BinhMinh/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:35:36"><span>30</span><span>00:35:36</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/BinhMinh/" title="Các bài nộp của BinhMinh trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 00:35:36">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">00:35:36</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-24T1020174" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 23">23</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--gold fl-avatar--28" aria-hidden="true">24</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/24T1020174" title="Chưa có rating">24T1020174<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/24T1020174/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 00:55:32"><span>30</span><span>00:55:32</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/24T1020174/" title="Các bài nộp của 24T1020174 trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 00:55:32">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">00:55:32</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-26T1029005" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 24">24</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--seafoam fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1029005" title="Chưa có rating">26T1029005<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="ITLab Code Runner"><span class="fl-sr">Tổ chức </span>DMOJ</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/26T1029005/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:06:06"><span>30</span><span>01:06:06</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1029005/" title="Các bài nộp của 26T1029005 trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 01:06:06">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">01:06:06</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-GeminiPro" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 25">25</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--cornflower fl-avatar--28" aria-hidden="true">GE</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/GeminiPro" title="Chưa có rating">GeminiPro<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/GeminiPro/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:06:36"><span>30</span><span>01:06:36</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/GeminiPro/" title="Các bài nộp của GeminiPro trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 01:06:36">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">01:06:36</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-24T1020386_TranDinhKhanhQuan" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 26">26</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--forest fl-avatar--28" aria-hidden="true">24</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/24T1020386_TranDinhKhanhQuan" title="Chưa có rating">24T1020386_TranDinhKhanhQuan<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/24T1020386_TranDinhKhanhQuan/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:13:25"><span>30</span><span>01:13:25</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/24T1020386_TranDinhKhanhQuan/" title="Các bài nộp của 24T1020386_TranDinhKhanhQuan trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 01:13:25">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">01:13:25</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-25T1080048_Thyy" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 27">27</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--lavender fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1080048_Thyy" title="Chưa có rating">25T1080048_Thyy<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1080048_Thyy/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:29:00"><span>30</span><span>01:29:00</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1080048_Thyy/" title="Các bài nộp của 25T1080048_Thyy trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 01:29:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">01:29:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-25T1020229_AnhNhat" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 28">28</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--steel fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1020229_AnhNhat" title="Chưa có rating">25T1020229_AnhNhat<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25T1020229_AnhNhat/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:56:33"><span>30</span><span>01:56:33</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1020229_AnhNhat/" title="Các bài nộp của 25T1020229_AnhNhat trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 01:56:33">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">01:56:33</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-26T1029031k50vj" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 29">29</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--forest fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1029031k50vj" title="Chưa có rating">26T1029031k50vj<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/26T1029031k50vj/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 01:58:08"><span>30</span><span>01:58:08</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1029031k50vj/" title="Các bài nộp của 26T1029031k50vj trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 01:58:08">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">01:58:08</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-25t1020246_" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 30">30</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--forest fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25t1020246_" title="Chưa có rating">25t1020246_<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/25t1020246_/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 02:02:37"><span>30</span><span>02:02:37</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25t1020246_/" title="Các bài nộp của 25t1020246_ trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 02:02:37">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">02:02:37</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-Vinh_07" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 31">31</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--steel fl-avatar--28" aria-hidden="true">VI</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/Vinh_07" title="Chưa có rating">Vinh_07<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/Vinh_07/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 02:13:50"><span>30</span><span>02:13:50</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/Vinh_07/" title="Các bài nộp của Vinh_07 trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 02:13:50">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">02:13:50</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-26T1130004__" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Hạng 32">32</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--lilac fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1130004__" title="Chưa có rating">26T1130004__<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><a class="fl-ranking-tile is-full" href="/contest/spitexpert06i/submissions/26T1130004__/spit0134/" title="Bài 1 · 30 điểm · nộp lúc 02:21:10"><span>30</span><span>02:21:10</span></a></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1130004__/" title="Các bài nộp của 26T1130004__ trong kỳ thi" aria-label="Tổng 30 điểm, thời gian 02:21:10">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">30</span><span class="fl-ranking-total__time">02:21:10</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 30.0%"></span></span></a></td></tr>
+<tr id="hang-22T1020183" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Đồng hạng 33 (7 thí sinh)">33</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--grape fl-avatar--28" aria-hidden="true">22</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--master fl-ranking-member__link" href="/user/22T1020183" title="Master · 2106">22T1020183<span class="fl-sr">, Master</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="ITLab Code Runner"><span class="fl-sr">Tổ chức </span>DMOJ</span></div></div></div></th><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/22T1020183/" title="Các bài nộp của 22T1020183 trong kỳ thi" aria-label="Tổng 0 điểm, thời gian 00:00:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">0</span><span class="fl-ranking-total__time">00:00:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 0.0%"></span></span></a></td></tr>
+<tr id="hang-spit_tester" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Đồng hạng 33 (7 thí sinh)">33</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--plum fl-avatar--28" aria-hidden="true">SP</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--newbie fl-ranking-member__link" href="/user/spit_tester" title="Newbie · 963">spit_tester<span class="fl-sr">, Newbie</span></a></div></div></div></th><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/spit_tester/" title="Các bài nộp của spit_tester trong kỳ thi" aria-label="Tổng 0 điểm, thời gian 00:00:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">0</span><span class="fl-ranking-total__time">00:00:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 0.0%"></span></span></a></td></tr>
+<tr id="hang-25T1020155" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Đồng hạng 33 (7 thí sinh)">33</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--lavender fl-avatar--28" aria-hidden="true">25</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/25T1020155" title="Chưa có rating">25T1020155<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/25T1020155/" title="Các bài nộp của 25T1020155 trong kỳ thi" aria-label="Tổng 0 điểm, thời gian 00:00:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">0</span><span class="fl-ranking-total__time">00:00:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 0.0%"></span></span></a></td></tr>
+<tr id="hang-MamNonTapCode" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Đồng hạng 33 (7 thí sinh)">33</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--navy fl-avatar--28" aria-hidden="true">MA</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/MamNonTapCode" title="Chưa có rating">MamNonTapCode<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/MamNonTapCode/" title="Các bài nộp của MamNonTapCode trong kỳ thi" aria-label="Tổng 0 điểm, thời gian 00:00:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">0</span><span class="fl-ranking-total__time">00:00:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 0.0%"></span></span></a></td></tr>
+<tr id="hang-chatgptplus_" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Đồng hạng 33 (7 thí sinh)">33</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--plum fl-avatar--28" aria-hidden="true">CH</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/chatgptplus_" title="Chưa có rating">chatgptplus_<span class="fl-sr">, Chưa có rating</span></a></div></div></div></th><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/chatgptplus_/" title="Các bài nộp của chatgptplus_ trong kỳ thi" aria-label="Tổng 0 điểm, thời gian 00:00:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">0</span><span class="fl-ranking-total__time">00:00:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 0.0%"></span></span></a></td></tr>
+<tr id="hang-26T1020017" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Đồng hạng 33 (7 thí sinh)">33</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--brass fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1020017" title="Chưa có rating">26T1020017<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1020017/" title="Các bài nộp của 26T1020017 trong kỳ thi" aria-label="Tổng 0 điểm, thời gian 00:00:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">0</span><span class="fl-ranking-total__time">00:00:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 0.0%"></span></span></a></td></tr>
+<tr id="hang-26T1020152" class="fl-ranking-row">
+<td class="fl-ranking-rank"><span class="fl-ranking-rank__num" title="Đồng hạng 33 (7 thí sinh)">33</span></td>
+<th scope="row" class="fl-ranking-member"><div class="fl-ranking-member__box">
+<span class="fl-avatar fl-avatar--gold fl-avatar--28" aria-hidden="true">26</span>
+<div class="fl-ranking-member__text">
+<div class="fl-ranking-member__line"><a class="fl-user fl-tier--none fl-ranking-member__link" href="/user/26T1020152" title="Chưa có rating">26T1020152<span class="fl-sr">, Chưa có rating</span></a></div><div class="fl-ranking-member__sub"><span class="fl-ranking-org" title="Hue University of Sciences"><span class="fl-sr">Tổ chức </span>husc</span></div></div></div></th><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td><span class="fl-sr">Chưa nộp</span></td><td class="fl-ranking-total"><a class="fl-ranking-total__link" href="/contest/spitexpert06i/submissions/26T1020152/" title="Các bài nộp của 26T1020152 trong kỳ thi" aria-label="Tổng 0 điểm, thời gian 00:00:00">
+<span class="fl-ranking-total__text"><span class="fl-ranking-total__points">0</span><span class="fl-ranking-total__time">00:00:00</span></span><span class="fl-ranking-total__bar" aria-hidden="true"><span style="width: 0.0%"></span></span></a></td></tr></tbody>
+</table>            </div>
+                <div class="fl-ranking-noresults" data-fl-ranking-empty hidden>
+                    <span class="fl-ranking-noresults__icon" aria-hidden="true"><svg class="fl-icon" width="32" height="32" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#search_20_regular"></use></svg></span>
+                    <p class="fl-ranking-noresults__title">Không tìm thấy thí sinh</p>
+                    <p data-fl-ranking-empty-text data-template="Không có tên người dùng nào khớp với “__Q__”."></p>
+                </div>
+            <div class="fl-ranking-legend">
+                <div class="fl-ranking-legend__items">
+                    <span class="fl-ranking-legend__label" id="fl-ranking-legend">Chú thích</span>
+                        <ul class="fl-ranking-legend__list" aria-labelledby="fl-ranking-legend">
+                            <li class="fl-ranking-legend__item"><span class="fl-ranking-swatch fl-ranking-swatch--full" aria-hidden="true"></span>Đạt trọn điểm</li>
+                            <li class="fl-ranking-legend__item"><span class="fl-ranking-swatch fl-ranking-swatch--partial" aria-hidden="true"><span></span></span>Một phần</li>
+                            <li class="fl-ranking-legend__item"><span class="fl-ranking-swatch fl-ranking-swatch--zero" aria-hidden="true"></span>0 điểm</li>
+                            <li class="fl-ranking-legend__item"><span class="fl-ranking-swatch fl-ranking-swatch--empty" aria-hidden="true"></span>Chưa nộp</li>
+                        </ul>
+                </div>
+                    <p class="fl-ranking-legend__note">Giờ trong ô là thời điểm nộp bài cuối, tính từ lúc bắt đầu kỳ thi. Bằng điểm thì ai có tổng thời gian ít hơn xếp trên.                        Thanh nhỏ trong ô một phần cho biết tỉ lệ điểm của bài; thanh ở cột Tổng điểm so với tối đa 100 điểm.
+                    </p>
+            </div>
+    </section></main>
+<footer class="fl-footer">
+    <div class="fl-footer__inner">
+        <div class="fl-footer__brand">
+            <img src="/static/icons/web-app-manifest-192x192.png?v=0124b2a6253c" alt="" width="20" height="20">
+            <span>CODER HUSC · Trường Đại học Khoa học, Đại học Huế</span>
+        </div>
+        <nav class="fl-footer__links" aria-label="Liên kết khác">
+            <a href="/organizations/">Tổ chức</a>
+            <a href="/">Bài viết</a>
+            <a href="/status/">Máy chấm</a>
+            <a href="/runtimes/">Trình biên dịch</a>
+        </nav>
+        <span class="fl-footer__spacer" aria-hidden="true"></span>
+        <span class="fl-footer__powered">Dựa trên nền tảng <a href="https://dmoj.ca">DMOJ</a></span>
+        <form class="fl-footer__lang fl-field-wrap" action="/i18n/setlang/" method="post">
+<input type='hidden' name='csrfmiddlewaretoken' value='gPFUaNZZetpgzBCxVEvAJQwc3UjHNDugUEpB1kOaPfkTnMr1iMAoVgWdNMEASEQ7' />            <input name="next" type="hidden" value="/contest/spitexpert06i/ranking/">
+            <label for="fl-footer-lang" class="fl-sr">Ngôn ngữ giao diện</label>
+            <span class="fl-field-wrap__before"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#globe_20_regular"></use></svg></span>
+            <select id="fl-footer-lang" class="fl-select" name="language" data-fl-autosubmit>
+                    <option value="vi" selected>Tiếng Việt</option>
+                    <option value="en">English</option>
+            </select>
+            <span class="fl-field-wrap__after"><svg class="fl-icon" width="16" height="16" focusable="false" aria-hidden="true"><use href="/static/fluent/icons.svg?v=f1647ffc28f6#chevron_down_20_regular"></use></svg></span>
+        </form>
+    </div>
+<!-- Render from WEB5 |  --></footer></body>
+</html>

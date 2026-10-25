@@ -1,0 +1,438 @@
+/* Nút Thống kê trên Header - Chèn sau tên, Nền Xanh Dương */
+.husc-header-stats-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: #2563eb !important; /* Xanh dương nổi bật */
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  color: #ffffff !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  cursor: pointer !important;
+  margin-left: 10px !important;
+  margin-right: 4px !important;
+  transition: all 0.2s ease !important;
+  line-height: 1 !important;
+  white-space: nowrap !important; /* Tuyệt đối không rớt dòng */
+  flex-shrink: 0 !important;
+  min-width: max-content !important;
+  vertical-align: middle !important;
+  text-decoration: none !important;
+  user-select: none !important;
+  box-shadow: 0 2px 6px rgba(29, 78, 216, 0.35) !important;
+}
+
+.husc-header-stats-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 10px rgba(29, 78, 216, 0.5) !important;
+}
+
+.husc-header-stats-btn:active {
+  transform: translateY(0) !important;
+}
+
+.husc-header-stats-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+  fill: #ffffff !important;
+  flex-shrink: 0 !important;
+}
+
+.husc-header-stats-btn span {
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  font-weight: 600 !important;
+}
+
+/* Nút xuất excel nổi (cũ - nếu cần) */
+.husc-export-btn-container {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 14px;
+  vertical-align: middle;
+}
+
+.husc-export-floating-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #107c41, #0b5c30);
+  color: #ffffff !important;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(16, 124, 65, 0.35);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none !important;
+  user-select: none;
+}
+
+.husc-export-floating-btn:hover {
+  background: linear-gradient(135deg, #159c52, #0e723c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 124, 65, 0.45);
+}
+
+/* Modal Overlay & Dialog Thống Kê */
+.husc-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 999990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: huscFadeIn 0.2s ease-out;
+}
+
+.husc-modal-dialog {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: huscScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #0f172a;
+}
+
+.husc-modal-header {
+  background: linear-gradient(135deg, #1b365d, #2f5597);
+  color: #ffffff;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.husc-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #ffffff;
+}
+
+.husc-modal-close {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  padding: 4px;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.husc-modal-close:hover {
+  opacity: 1;
+}
+
+.husc-modal-body {
+  padding: 18px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+/* Thống kê badges */
+.husc-stats-cards {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.husc-stat-card {
+  flex: 1;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.husc-stat-val {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.husc-stat-lbl {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.husc-stat-card.green .husc-stat-val { color: #16a34a; }
+.husc-stat-card.amber .husc-stat-val { color: #d97706; }
+.husc-stat-card.blue .husc-stat-val { color: #2563eb; }
+
+/* Contest Title in Modal */
+.husc-contest-banner {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e40af;
+  text-align: center;
+}
+
+/* Filter Cards */
+.husc-filter-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+.husc-filter-card:hover {
+  border-color: #cbd5e1;
+}
+
+.husc-filter-title-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.husc-filter-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  user-select: none;
+}
+
+.husc-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.husc-custom-select {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.husc-custom-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.husc-freshman-subrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #475569;
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px dashed #93c5fd;
+  margin-top: 8px;
+}
+
+.husc-filter-chk-card {
+  padding: 11px 14px;
+  cursor: pointer;
+}
+
+.husc-filter-chk-card:hover {
+  background: #f1f5f9;
+}
+
+.husc-chk-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #334155;
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+}
+
+.husc-chk-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #16a34a;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.husc-chk-label {
+  line-height: 1.4;
+}
+
+.husc-prefix-input {
+  width: 36px;
+  padding: 2px 4px;
+  font-weight: 700;
+  font-size: 12px;
+  text-align: center;
+  border: 1.5px solid #2563eb;
+  border-radius: 4px;
+  outline: none;
+  color: #1d4ed8;
+}
+
+/* Buttons inside Modal */
+.husc-action-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.husc-btn-main {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #107c41;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.husc-btn-main:hover {
+  background: #0e6e39;
+}
+
+.husc-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.husc-btn-secondary:hover {
+  background: #cbd5e1;
+}
+
+/* Preview table container inside modal */
+.husc-preview-box {
+  margin-top: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+
+.husc-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.husc-preview-table th {
+  background: #2f5597;
+  color: #ffffff;
+  padding: 6px 8px;
+  position: sticky;
+  top: 0;
+  text-align: center;
+}
+
+.husc-preview-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: center;
+}
+
+.husc-preview-table tr.top {
+  background: #fee2e2;
+  font-weight: 600;
+}
+
+/* Toast */
+.husc-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1e293b;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  z-index: 999999;
+  border-left: 4px solid #107c41;
+  animation: huscToastSlideIn 0.3s ease-out;
+}
+
+.husc-toast.error {
+  border-left-color: #ef4444;
+}
+
+@keyframes huscFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes huscScaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes huscToastSlideIn {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
