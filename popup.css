@@ -390,6 +390,7 @@ input[type="text"]:focus {
 .table-container {
   max-height: 250px;
   overflow-y: auto;
+  overflow-x: auto;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: #ffffff;
@@ -410,12 +411,14 @@ input[type="text"]:focus {
   position: sticky;
   top: 0;
   z-index: 2;
+  white-space: nowrap;
 }
 
 .preview-table td {
   padding: 6px 8px;
   border-bottom: 1px solid #f1f5f9;
   text-align: center;
+  white-space: nowrap;
 }
 
 .preview-table tr.top-rank {

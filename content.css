@@ -446,12 +446,14 @@
   position: sticky;
   top: 0;
   text-align: center;
+  white-space: nowrap;
 }
 
 .husc-preview-table td {
   padding: 6px 8px;
   border-bottom: 1px solid #f1f5f9;
   text-align: center;
+  white-space: nowrap;
 }
 
 /* Toast */
@@ -555,12 +557,14 @@
   position: sticky;
   top: 0;
   z-index: 2;
+  white-space: nowrap;
 }
 
 .husc-search-table td {
   padding: 8px 10px;
   border-bottom: 1px solid #f1f5f9;
   text-align: center;
+  white-space: nowrap;
 }
 
 .husc-search-table tr:hover td {

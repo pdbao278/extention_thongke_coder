@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "CODER HUSC - Xuất Bảng Xếp Hạng Excel",
+  "version": "1.0.0",
+  "description": "Tiện ích đọc HTML bảng xếp hạng CODER HUSC, lọc danh sách sinh viên theo MSSV và xuất Excel chuẩn đẹp theo mẫu SPIT.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://coder.husc.edu.vn/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://coder.husc.edu.vn/*"
+      ],
+      "js": [
+        "exceljs.min.js",
+        "students_data.js",
+        "core.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "data.txt",
+        "students_data.js"
+      ],
+      "matches": [
+        "https://coder.husc.edu.vn/*"
+      ]
+    }
+  ]
+}

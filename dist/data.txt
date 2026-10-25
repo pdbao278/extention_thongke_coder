@@ -1,0 +1,1852 @@
+// Ngôn ngữ lập trình
+{
+    "searchName": "2026-2027.1.TIN2015.001",
+    "totalStudents": 56,
+    "students": [
+        {
+            "studentId": "26T1080001",
+            "studentName": "Hoàng Ngọc An"
+        },
+        {
+            "studentId": "26T1080002",
+            "studentName": "Nguyễn Ngọc Trâm Anh"
+        },
+        {
+            "studentId": "26T1080003",
+            "studentName": "Nguyễn Thái Anh"
+        },
+        {
+            "studentId": "26T1080004",
+            "studentName": "Nguyễn Thị Lan Anh"
+        },
+        {
+            "studentId": "26T1080005",
+            "studentName": "Trần Đặng Vân Anh"
+        },
+        {
+            "studentId": "26T1080006",
+            "studentName": "Phạm Võ Quốc Bảo"
+        },
+        {
+            "studentId": "26T1080009",
+            "studentName": "Lê Thị Ngọc Diệp"
+        },
+        {
+            "studentId": "26T1080010",
+            "studentName": "Nguyễn Bá Doãn"
+        },
+        {
+            "studentId": "26T1080012",
+            "studentName": "Bùi Văn Duy"
+        },
+        {
+            "studentId": "26T1080013",
+            "studentName": "Nguyễn Quang Duy"
+        },
+        {
+            "studentId": "26T1080007",
+            "studentName": "Hà Ngọc Đạt"
+        },
+        {
+            "studentId": "26T1080011",
+            "studentName": "Lâm Nhật Việt Đức"
+        },
+        {
+            "studentId": "26T1080014",
+            "studentName": "Lê Việt Hà"
+        },
+        {
+            "studentId": "26T1080016",
+            "studentName": "Lê Thuận Hiếu"
+        },
+        {
+            "studentId": "26T1080017",
+            "studentName": "Nguyễn Trung Hiếu"
+        },
+        {
+            "studentId": "26T1080015",
+            "studentName": "Tạ Quang Hiệp"
+        },
+        {
+            "studentId": "26T1080019",
+            "studentName": "Dương Nhật Tuấn Huy"
+        },
+        {
+            "studentId": "26T1080020",
+            "studentName": "Hoàng Trần Gia Huy"
+        },
+        {
+            "studentId": "26T1080021",
+            "studentName": "Hoàng Văn Nhật Huy"
+        },
+        {
+            "studentId": "26T1080022",
+            "studentName": "Nguyễn Phước Bảo Hoàng Nhật Huy"
+        },
+        {
+            "studentId": "26T1080018",
+            "studentName": "Hà Văn Lê Hùng"
+        },
+        {
+            "studentId": "26T1080023",
+            "studentName": "Trương Nguyễn Viết Khoa"
+        },
+        {
+            "studentId": "26T1080024",
+            "studentName": "Hoàng Văn Kiệt"
+        },
+        {
+            "studentId": "26T1080025",
+            "studentName": "Trần Vương Anh Kiệt"
+        },
+        {
+            "studentId": "26T1080026",
+            "studentName": "Văn Thị Lài"
+        },
+        {
+            "studentId": "26T1080027",
+            "studentName": "Hoàng Nhật Long"
+        },
+        {
+            "studentId": "26T1080028",
+            "studentName": "Lê Tự Hoàng Long"
+        },
+        {
+            "studentId": "26T1080031",
+            "studentName": "Đoàn Công Duy Mạnh"
+        },
+        {
+            "studentId": "26T1080030",
+            "studentName": "Nguyễn Viết Phúc Mẫn"
+        },
+        {
+            "studentId": "26T1080032",
+            "studentName": "Đỗ Văn Khôi Ngô"
+        },
+        {
+            "studentId": "26T1080033",
+            "studentName": "Trần Duy Bảo Nguyên"
+        },
+        {
+            "studentId": "26T1080034",
+            "studentName": "Nguyễn Hoàng Nhân"
+        },
+        {
+            "studentId": "26T1080035",
+            "studentName": "Nguyễn Khánh Nhật"
+        },
+        {
+            "studentId": "26T1080058",
+            "studentName": "Silaphet Nunee"
+        },
+        {
+            "studentId": "26T1080059",
+            "studentName": "Khounnaseng Phetninda"
+        },
+        {
+            "studentId": "26T1080036",
+            "studentName": "Nguyễn Văn Phong"
+        },
+        {
+            "studentId": "26T1080039",
+            "studentName": "Đỗ Đình Quang"
+        },
+        {
+            "studentId": "26T1080037",
+            "studentName": "Nguyễn Kim Thế Quân"
+        },
+        {
+            "studentId": "26T1080038",
+            "studentName": "Phan Cảnh Bảo Quân"
+        },
+        {
+            "studentId": "26T1080040",
+            "studentName": "Nguyễn Thị Như Quỳnh"
+        },
+        {
+            "studentId": "26T1080041",
+            "studentName": "Trương Hữu Minh Tâm"
+        },
+        {
+            "studentId": "26T1080042",
+            "studentName": "Bùi Phương Thảo"
+        },
+        {
+            "studentId": "26T1080043",
+            "studentName": "Dương Thái Thiện"
+        },
+        {
+            "studentId": "26T1080044",
+            "studentName": "Hoàng Anh Thư"
+        },
+        {
+            "studentId": "26T1080045",
+            "studentName": "Nguyễn Trần Đức Toàn"
+        },
+        {
+            "studentId": "26T1080046",
+            "studentName": "Hoàng Ngọc Bảo Trang"
+        },
+        {
+            "studentId": "26T1080047",
+            "studentName": "Nguyễn Văn Triều"
+        },
+        {
+            "studentId": "26T1080048",
+            "studentName": "Hoàng Nguyễn Phi Trường"
+        },
+        {
+            "studentId": "26T1080049",
+            "studentName": "Huỳnh Anh Tuấn"
+        },
+        {
+            "studentId": "26T1080050",
+            "studentName": "Hồ Phước Thanh Tùng"
+        },
+        {
+            "studentId": "26T1080052",
+            "studentName": "Phan Khánh Việt"
+        },
+        {
+            "studentId": "26T1080053",
+            "studentName": "Dụng Văn Vũ"
+        },
+        {
+            "studentId": "26T1080054",
+            "studentName": "Lê Đình Vũ"
+        },
+        {
+            "studentId": "26T1080055",
+            "studentName": "Nguyễn Dương Vũ"
+        },
+        {
+            "studentId": "26T1080056",
+            "studentName": "Trần Anh Vũ"
+        },
+        {
+            "studentId": "26T1080057",
+            "studentName": "Đỗ Thị Hà Vy"
+        }
+    ]
+}
+{
+    "searchName": "2026-2027.1.TIN2015.002",
+    "totalStudents": 48,
+    "students": [
+        {
+            "studentId": "26T1020001",
+            "studentName": "Lô Bảo An"
+        },
+        {
+            "studentId": "26T1020005",
+            "studentName": "Lê Tuấn Anh"
+        },
+        {
+            "studentId": "26T1020009",
+            "studentName": "Trần Nguyễn Đức Anh"
+        },
+        {
+            "studentId": "26T1020011",
+            "studentName": "Lê Hoàng Nhật Bảo"
+        },
+        {
+            "studentId": "26T1020018",
+            "studentName": "Võ Ngọc Bảo Châu"
+        },
+        {
+            "studentId": "26T1020037",
+            "studentName": "Phan Cảnh Thành Duy"
+        },
+        {
+            "studentId": "26T1020034",
+            "studentName": "Nguyễn Nhật Dương"
+        },
+        {
+            "studentId": "26T1020025",
+            "studentName": "Hồ Thành Đạt"
+        },
+        {
+            "studentId": "26T1020030",
+            "studentName": "Hoàng Minh Đức"
+        },
+        {
+            "studentId": "26T1020040",
+            "studentName": "Nguyễn Anh Hải"
+        },
+        {
+            "studentId": "26T1020047",
+            "studentName": "Nguyễn Gia Hiếu"
+        },
+        {
+            "studentId": "26T1020045",
+            "studentName": "Võ Hoàng Hiệp"
+        },
+        {
+            "studentId": "26T1020057",
+            "studentName": "Trần Thiên Hoàng"
+        },
+        {
+            "studentId": "26T1020066",
+            "studentName": "Lê Viết Gia Huy"
+        },
+        {
+            "studentId": "26T1020070",
+            "studentName": "Trần Văn Huy"
+        },
+        {
+            "studentId": "26T1020061",
+            "studentName": "Nguyễn Văn Hùng"
+        },
+        {
+            "studentId": "26T1020073",
+            "studentName": "Nguyễn Khang"
+        },
+        {
+            "studentId": "26T1020080",
+            "studentName": "Hồ Đăng Khoa"
+        },
+        {
+            "studentId": "26T1020084",
+            "studentName": "Nguyễn Thanh Anh Kiệt"
+        },
+        {
+            "studentId": "26T1020088",
+            "studentName": "Nguyễn Viết Duy Kỳ"
+        },
+        {
+            "studentId": "26T1020094",
+            "studentName": "Hồ Khánh Linh"
+        },
+        {
+            "studentId": "26T1020098",
+            "studentName": "Lê Huy Long"
+        },
+        {
+            "studentId": "26T1020101",
+            "studentName": "Hồ Tuấn Minh"
+        },
+        {
+            "studentId": "26T1020105",
+            "studentName": "Lê Vũ Quốc Minh"
+        },
+        {
+            "studentId": "26T1020106",
+            "studentName": "Nguyễn Minh"
+        },
+        {
+            "studentId": "26T1020112",
+            "studentName": "Lê Hoàng Nam"
+        },
+        {
+            "studentId": "26T1020113",
+            "studentName": "Lê Nhật Nam"
+        },
+        {
+            "studentId": "26T1020116",
+            "studentName": "Tôn Nữ Bảo Ngọc"
+        },
+        {
+            "studentId": "26T1020120",
+            "studentName": "Bùi Thị Thanh Nhàn"
+        },
+        {
+            "studentId": "26T1020129",
+            "studentName": "Mai Hồng Nhung"
+        },
+        {
+            "studentId": "26T1020135",
+            "studentName": "Đỗ Thái Phong"
+        },
+        {
+            "studentId": "26T1020138",
+            "studentName": "Ngô Viết Đức Phú"
+        },
+        {
+            "studentId": "26T1020146",
+            "studentName": "Đào Hữu Quang"
+        },
+        {
+            "studentId": "26T1020147",
+            "studentName": "Nguyễn Nhật Quang"
+        },
+        {
+            "studentId": "26T1020141",
+            "studentName": "Hồ Xuân Minh Quân"
+        },
+        {
+            "studentId": "26T1020150",
+            "studentName": "Nguyễn Tấn Sang"
+        },
+        {
+            "studentId": "26T1020153",
+            "studentName": "Cao Ngọc Hoàng Sơn"
+        },
+        {
+            "studentId": "26T1020157",
+            "studentName": "Trần Mai Sơn"
+        },
+        {
+            "studentId": "26T1020160",
+            "studentName": "Nguyễn Tất Tuấn Tài"
+        },
+        {
+            "studentId": "26T1020167",
+            "studentName": "Trương Tiến Thắng"
+        },
+        {
+            "studentId": "26T1020178",
+            "studentName": "Đặng Ngọc Minh Thư"
+        },
+        {
+            "studentId": "26T1020181",
+            "studentName": "Lê Trọng Việt Tiến"
+        },
+        {
+            "studentId": "26T1020188",
+            "studentName": "Trần Lê Thanh Trí"
+        },
+        {
+            "studentId": "26T1020191",
+            "studentName": "Hoàng Ngọc Thành Trung"
+        },
+        {
+            "studentId": "25T1020368",
+            "studentName": "Đào Duy Tuệ"
+        },
+        {
+            "studentId": "26T1020197",
+            "studentName": "Nguyễn Tiến Tú"
+        },
+        {
+            "studentId": "26T1020207",
+            "studentName": "Bùi Trần Hoàng Vũ"
+        },
+        {
+            "studentId": "26T1020209",
+            "studentName": "Ngô Văn Vũ"
+        }
+    ]
+}
+
+{
+    "searchName": "2026-2027.1.TIN2015.003",
+    "totalStudents": 49,
+    "students": [
+        {
+            "studentId": "26T1020008",
+            "studentName": "Nguyễn Tuấn Anh"
+        },
+        {
+            "studentId": "25T1080001",
+            "studentName": "Huỳnh Trọng Ân"
+        },
+        {
+            "studentId": "26T1020003",
+            "studentName": "Trương Khánh Ân"
+        },
+        {
+            "studentId": "26T1020013",
+            "studentName": "Nguyễn Văn Thái Bảo"
+        },
+        {
+            "studentId": "26T1020015",
+            "studentName": "Lê Thị Bé"
+        },
+        {
+            "studentId": "26T1020021",
+            "studentName": "Trần Phương Cường"
+        },
+        {
+            "studentId": "26T1020035",
+            "studentName": "Nguyễn Văn Nhật Duy"
+        },
+        {
+            "studentId": "26T1020022",
+            "studentName": "Đặng Bảo Đan"
+        },
+        {
+            "studentId": "26T1020028",
+            "studentName": "Trần Đức Đạt"
+        },
+        {
+            "studentId": "26T1020038",
+            "studentName": "Trần Thị Hương Giang"
+        },
+        {
+            "studentId": "26T1020041",
+            "studentName": "Phan Hải"
+        },
+        {
+            "studentId": "26T1020044",
+            "studentName": "Võ Nguyễn Thu Hiền"
+        },
+        {
+            "studentId": "26T1020046",
+            "studentName": "Châu Khắc Hiếu"
+        },
+        {
+            "studentId": "26T1020049",
+            "studentName": "Phan Hoàng Hiếu"
+        },
+        {
+            "studentId": "26T1020052",
+            "studentName": "Đào Nguyễn Minh Hoàng"
+        },
+        {
+            "studentId": "26T1020054",
+            "studentName": "Nguyễn Việt Hoàng"
+        },
+        {
+            "studentId": "26T1020059",
+            "studentName": "Nguyễn Gia Huấn"
+        },
+        {
+            "studentId": "26T1020071",
+            "studentName": "Võ Quang Huy"
+        },
+        {
+            "studentId": "26T1020064",
+            "studentName": "Hoàng Thị Thanh Hương"
+        },
+        {
+            "studentId": "26T1020077",
+            "studentName": "Mai Văn Khánh"
+        },
+        {
+            "studentId": "26T1020079",
+            "studentName": "Trần Khắc Khiêm"
+        },
+        {
+            "studentId": "26T1020087",
+            "studentName": "Trương Sĩ Tuấn Kiệt"
+        },
+        {
+            "studentId": "26T1020095",
+            "studentName": "Nguyễn Bảo Linh"
+        },
+        {
+            "studentId": "26T1020100",
+            "studentName": "Nguyễn Văn Nhật Long"
+        },
+        {
+            "studentId": "26T1020108",
+            "studentName": "Nguyễn Văn Ngọc Minh"
+        },
+        {
+            "studentId": "26T1020114",
+            "studentName": "Hoàng Nguyễn Thúy Ngân"
+        },
+        {
+            "studentId": "26T1020119",
+            "studentName": "Nguyễn Phúc Nguyên"
+        },
+        {
+            "studentId": "26T1020123",
+            "studentName": "Nguyễn Văn Phước Nhân"
+        },
+        {
+            "studentId": "25T1029031",
+            "studentName": "Bạch Ngọc Phương Nhi"
+        },
+        {
+            "studentId": "26T1020128",
+            "studentName": "Nguyễn Thị Tâm Như"
+        },
+        {
+            "studentId": "26T1020130",
+            "studentName": "Lê Phú Ninh"
+        },
+        {
+            "studentId": "26T1020134",
+            "studentName": "Nguyễn Văn Phi"
+        },
+        {
+            "studentId": "26T1020136",
+            "studentName": "Lê Thanh Phong"
+        },
+        {
+            "studentId": "26T1020145",
+            "studentName": "Trần Minh Quân"
+        },
+        {
+            "studentId": "26T1020154",
+            "studentName": "Lê Xuân Sơn"
+        },
+        {
+            "studentId": "26T1020161",
+            "studentName": "Hồ Phú Quốc Tâm"
+        },
+        {
+            "studentId": "26T1020163",
+            "studentName": "Nguyễn Văn Trọng Tấn"
+        },
+        {
+            "studentId": "26T1020165",
+            "studentName": "Lê Quốc Thạch"
+        },
+        {
+            "studentId": "26T1020174",
+            "studentName": "Bùi Nguyễn Bảo Thi"
+        },
+        {
+            "studentId": "26T1020175",
+            "studentName": "Nguyễn Văn Thiên"
+        },
+        {
+            "studentId": "26T1020179",
+            "studentName": "Trần Thị Mỹ Tiên"
+        },
+        {
+            "studentId": "26T1020189",
+            "studentName": "Lê Quang Thành Triều"
+        },
+        {
+            "studentId": "26T1020186",
+            "studentName": "Nguyễn Minh Trí"
+        },
+        {
+            "studentId": "26T1020194",
+            "studentName": "Cao Phước Hoàng Trường"
+        },
+        {
+            "studentId": "26T1020202",
+            "studentName": "Phan Tuyển"
+        },
+        {
+            "studentId": "26T1020203",
+            "studentName": "Trịnh Lương Uy"
+        },
+        {
+            "studentId": "26T1020208",
+            "studentName": "Lê Phước Nguyên Vũ"
+        },
+        {
+            "studentId": "26T1020211",
+            "studentName": "Trần Dư Hoàn Vũ"
+        },
+        {
+            "studentId": "26T1020213",
+            "studentName": "Nguyễn Thị Hoàng Yến"
+        }
+    ]
+}
+{
+    "searchName": "2026-2027.1.TIN2015.004",
+    "totalStudents": 44,
+    "students": [
+        {
+            "studentId": "26T1130001",
+            "studentName": "Nguyễn Thuỳ An"
+        },
+        {
+            "studentId": "26T1130002",
+            "studentName": "Phan Nguyễn Mỹ An"
+        },
+        {
+            "studentId": "26T1130003",
+            "studentName": "Hồ Đức Anh"
+        },
+        {
+            "studentId": "26T1130004",
+            "studentName": "Nguyễn Ngọc Bảo Anh"
+        },
+        {
+            "studentId": "26T1130006",
+            "studentName": "Nguyễn Hoàng Gia Bảo"
+        },
+        {
+            "studentId": "26T1130005",
+            "studentName": "Phạm Nguyễn Ly Băng"
+        },
+        {
+            "studentId": "26T1130007",
+            "studentName": "Bùi Xuân Boy"
+        },
+        {
+            "studentId": "26T1130008",
+            "studentName": "Đặng Như Nhật Chương"
+        },
+        {
+            "studentId": "26T1130012",
+            "studentName": "Huỳnh Thị Huyền Diệu"
+        },
+        {
+            "studentId": "26T1130013",
+            "studentName": "Lê Thị Bích Diệu"
+        },
+        {
+            "studentId": "26T1130011",
+            "studentName": "Nguyễn Lê Thành Đạt"
+        },
+        {
+            "studentId": "26T1130010",
+            "studentName": "Nguyễn Hải Đăng"
+        },
+        {
+            "studentId": "26T1130014",
+            "studentName": "Trần Đại Kiến Đức"
+        },
+        {
+            "studentId": "26T1130015",
+            "studentName": "Trần Trung Hiếu"
+        },
+        {
+            "studentId": "26T1130016",
+            "studentName": "Nguyễn Phan Bảo Hoàng"
+        },
+        {
+            "studentId": "26T1130018",
+            "studentName": "Trần Văn Huế"
+        },
+        {
+            "studentId": "25T1020120",
+            "studentName": "Bùi Quang Huy"
+        },
+        {
+            "studentId": "26T1130019",
+            "studentName": "Nguyễn Văn Hùng"
+        },
+        {
+            "studentId": "26T1130022",
+            "studentName": "Hồ Ngọc Bảo Khang"
+        },
+        {
+            "studentId": "26T1130023",
+            "studentName": "Đoàn Trung Kiên"
+        },
+        {
+            "studentId": "26T1130024",
+            "studentName": "Võ Tấn Kiệt"
+        },
+        {
+            "studentId": "26T1130025",
+            "studentName": "Nguyễn Thành Lương"
+        },
+        {
+            "studentId": "26T1130026",
+            "studentName": "Lê Bá Quang Minh"
+        },
+        {
+            "studentId": "26T1130027",
+            "studentName": "Lê Bùi Quang Minh"
+        },
+        {
+            "studentId": "26T1130028",
+            "studentName": "Lê Thị Nhật Minh"
+        },
+        {
+            "studentId": "26T1130029",
+            "studentName": "Nguyễn Văn Bình Minh"
+        },
+        {
+            "studentId": "26T1130030",
+            "studentName": "Đỗ Triều Nguyên"
+        },
+        {
+            "studentId": "26T1130031",
+            "studentName": "Thái Quốc Nguyên"
+        },
+        {
+            "studentId": "26T1130032",
+            "studentName": "Hà Thị Nhàn"
+        },
+        {
+            "studentId": "26T1130033",
+            "studentName": "Hồ Văn Phong"
+        },
+        {
+            "studentId": "26T1130034",
+            "studentName": "Lê Hồng Phong"
+        },
+        {
+            "studentId": "26T1130035",
+            "studentName": "Hoàng Hồ Xuân Phước"
+        },
+        {
+            "studentId": "26T1130037",
+            "studentName": "Phan Vinh Quang"
+        },
+        {
+            "studentId": "26T1130038",
+            "studentName": "Lê Thị Như Quỳnh"
+        },
+        {
+            "studentId": "26T1130039",
+            "studentName": "Nguyễn Thanh Tâm"
+        },
+        {
+            "studentId": "26T1130040",
+            "studentName": "Thái Đạt Thành"
+        },
+        {
+            "studentId": "26T1130041",
+            "studentName": "Nguyễn Khánh Toàn"
+        },
+        {
+            "studentId": "26T1130043",
+            "studentName": "Ngô Minh Trí"
+        },
+        {
+            "studentId": "26T1130044",
+            "studentName": "Phan Võ Minh Trí"
+        },
+        {
+            "studentId": "26T1130045",
+            "studentName": "Nguyễn Thị Thu Uyên"
+        },
+        {
+            "studentId": "26T1130046",
+            "studentName": "Trần Lê Khánh Vân"
+        },
+        {
+            "studentId": "26T1130047",
+            "studentName": "Trần Quang Vinh"
+        },
+        {
+            "studentId": "26T1130048",
+            "studentName": "Lê Nguyễn Tường Vy"
+        },
+        {
+            "studentId": "26T1130049",
+            "studentName": "Chung Hùng Vỹ"
+        }
+    ]
+}
+{
+    "searchName": "2026-2027.1.TIN2015.005",
+    "totalStudents": 35,
+    "students": [
+        {
+            "studentId": "26T1029038",
+            "studentName": "Nguyễn Bình An"
+        },
+        {
+            "studentId": "26T1029001",
+            "studentName": "Việt Đàm Phú An"
+        },
+        {
+            "studentId": "26T1029002",
+            "studentName": "Quách Văn Bình"
+        },
+        {
+            "studentId": "26T1029003",
+            "studentName": "Nguyễn Thành Công"
+        },
+        {
+            "studentId": "26T1029005",
+            "studentName": "Lương Gia Đạt"
+        },
+        {
+            "studentId": "26T1029004",
+            "studentName": "Lê Phan Nhật Đăng"
+        },
+        {
+            "studentId": "26T1029006",
+            "studentName": "Nguyễn Hồng Đức"
+        },
+        {
+            "studentId": "26T1029007",
+            "studentName": "Võ Minh Đức"
+        },
+        {
+            "studentId": "26T1029010",
+            "studentName": "Hoàng Nhật Hào"
+        },
+        {
+            "studentId": "26T1029008",
+            "studentName": "Nguyễn Mạnh Hải"
+        },
+        {
+            "studentId": "26T1029009",
+            "studentName": "Trần Hoàng Hải"
+        },
+        {
+            "studentId": "26T1029011",
+            "studentName": "Nguyễn Anh Hiến"
+        },
+        {
+            "studentId": "26T1029014",
+            "studentName": "Cao Anh Huy"
+        },
+        {
+            "studentId": "26T1029012",
+            "studentName": "Nguyễn Mạnh Hùng"
+        },
+        {
+            "studentId": "26T1029015",
+            "studentName": "Nguyễn Hữu Đăng Khôi"
+        },
+        {
+            "studentId": "26T1029016",
+            "studentName": "Phạm Minh Khôi"
+        },
+        {
+            "studentId": "26T1029017",
+            "studentName": "Nguyễn Trung Kiên"
+        },
+        {
+            "studentId": "26T1029018",
+            "studentName": "Phan Quý Lễ"
+        },
+        {
+            "studentId": "26T1029019",
+            "studentName": "Nguyễn Thành Lộc"
+        },
+        {
+            "studentId": "26T1029020",
+            "studentName": "Phan Hồ Hoàng Mai"
+        },
+        {
+            "studentId": "26T1029021",
+            "studentName": "Lê Nguyễn Bình Minh"
+        },
+        {
+            "studentId": "26T1029022",
+            "studentName": "Trần Anh Minh"
+        },
+        {
+            "studentId": "26T1029023",
+            "studentName": "Võ Đức Nhật Minh"
+        },
+        {
+            "studentId": "26T1029024",
+            "studentName": "Hoàng Ngọc Khôi Nguyên"
+        },
+        {
+            "studentId": "26T1029025",
+            "studentName": "Nguyễn Minh Nhật"
+        },
+        {
+            "studentId": "26T1029026",
+            "studentName": "Phạm Văn Khánh Nhật"
+        },
+        {
+            "studentId": "26T1029027",
+            "studentName": "Nguyễn Văn Nhật Quang"
+        },
+        {
+            "studentId": "26T1029028",
+            "studentName": "Phạm Viết Quang"
+        },
+        {
+            "studentId": "26T1029029",
+            "studentName": "Đặng Trần Anh Quốc"
+        },
+        {
+            "studentId": "26T1029030",
+            "studentName": "Đặng Thành Tài"
+        },
+        {
+            "studentId": "26T1029031",
+            "studentName": "Trần Thị Anh Tâm"
+        },
+        {
+            "studentId": "26T1029032",
+            "studentName": "Phạm Phước Thanh"
+        },
+        {
+            "studentId": "26T1029034",
+            "studentName": "Nguyễn Minh Trường"
+        },
+        {
+            "studentId": "26T1029036",
+            "studentName": "Trần Tuấn Vũ"
+        },
+        {
+            "studentId": "26T1029037",
+            "studentName": "Cao Tường Vy"
+        }
+    ]
+}
+
+{
+    "searchName": "2026-2027.1.TIN2015.006",
+    "totalStudents": 48,
+    "students": [
+        {
+            "studentId": "26T1020002",
+            "studentName": "Nguyễn Quốc Đại An"
+        },
+        {
+            "studentId": "26T1020006",
+            "studentName": "Nguyễn Ngọc Anh"
+        },
+        {
+            "studentId": "26T1020012",
+            "studentName": "Nguyễn Gia Bảo"
+        },
+        {
+            "studentId": "26T1020017",
+            "studentName": "Phạm Thị Tâm Châu"
+        },
+        {
+            "studentId": "26T1020036",
+            "studentName": "Phạm Vũ Mạnh Duy"
+        },
+        {
+            "studentId": "26T1020032",
+            "studentName": "Nguyễn Chí Dũng"
+        },
+        {
+            "studentId": "26T1020026",
+            "studentName": "Lê Gia Tuấn Đạt"
+        },
+        {
+            "studentId": "26T1020023",
+            "studentName": "Trương Hải Đăng"
+        },
+        {
+            "studentId": "26T1020042",
+            "studentName": "Lê Thị Bảo Hân"
+        },
+        {
+            "studentId": "26T1020048",
+            "studentName": "Nguyễn Minh Hiếu"
+        },
+        {
+            "studentId": "26T1020051",
+            "studentName": "Đặng Huy Hoàng"
+        },
+        {
+            "studentId": "26T1020058",
+            "studentName": "Võ Hoàng"
+        },
+        {
+            "studentId": "26T1020067",
+            "studentName": "Ngô Đặng Minh Huy"
+        },
+        {
+            "studentId": "26T1020062",
+            "studentName": "Trần Văn Hùng"
+        },
+        {
+            "studentId": "26T1020065",
+            "studentName": "Ngô Đức Hữu"
+        },
+        {
+            "studentId": "26T1020072",
+            "studentName": "Nguyễn Lê Tấn Kha"
+        },
+        {
+            "studentId": "26T1020075",
+            "studentName": "Phan Gia Khang"
+        },
+        {
+            "studentId": "26T1020076",
+            "studentName": "Lê Hữu Khánh"
+        },
+        {
+            "studentId": "26T1020078",
+            "studentName": "Nguyễn Văn Quốc Khánh"
+        },
+        {
+            "studentId": "26T1020082",
+            "studentName": "Phan Đăng Khoa"
+        },
+        {
+            "studentId": "26T1020085",
+            "studentName": "Phan Hồ Tuấn Kiệt"
+        },
+        {
+            "studentId": "26T1020089",
+            "studentName": "Huỳnh Ngọc Khánh Lam"
+        },
+        {
+            "studentId": "26T1020092",
+            "studentName": "Trần Viết Lanh"
+        },
+        {
+            "studentId": "26T1020099",
+            "studentName": "Nguyễn Phi Long"
+        },
+        {
+            "studentId": "26T1020102",
+            "studentName": "Hoàng Hữu Tuấn Minh"
+        },
+        {
+            "studentId": "26T1020104",
+            "studentName": "Lê Sĩ Quang Minh"
+        },
+        {
+            "studentId": "26T1020110",
+            "studentName": "Huỳnh Ngọc Diễm My"
+        },
+        {
+            "studentId": "26T1020117",
+            "studentName": "Giả Thị Thảo Nguyên"
+        },
+        {
+            "studentId": "26T1020125",
+            "studentName": "Huỳnh Nhật"
+        },
+        {
+            "studentId": "26T1020132",
+            "studentName": "Nguyễn Sim Paxan"
+        },
+        {
+            "studentId": "26T1020133",
+            "studentName": "Dương Bá Phát"
+        },
+        {
+            "studentId": "26T1020137",
+            "studentName": "Trần Tuấn Phong"
+        },
+        {
+            "studentId": "26T1020140",
+            "studentName": "Nguyễn Lê Thanh Phương"
+        },
+        {
+            "studentId": "26T1020142",
+            "studentName": "Lê Ngọc Minh Quân"
+        },
+        {
+            "studentId": "26T1020148",
+            "studentName": "Đoàn Hồ Anh Quốc"
+        },
+        {
+            "studentId": "26T1020151",
+            "studentName": "Phan Hoàng Sang"
+        },
+        {
+            "studentId": "26T1020155",
+            "studentName": "Ngô Nguyễn Công Sơn"
+        },
+        {
+            "studentId": "26T1020159",
+            "studentName": "Châu Anh Tài"
+        },
+        {
+            "studentId": "26T1020171",
+            "studentName": "Phạm Minh Thành"
+        },
+        {
+            "studentId": "26T1020176",
+            "studentName": "Hoàng Anh Thiện"
+        },
+        {
+            "studentId": "26T1020180",
+            "studentName": "Trần Thị Thùy Tiên"
+        },
+        {
+            "studentId": "26T1020185",
+            "studentName": "Phạm Thị Thùy Trang"
+        },
+        {
+            "studentId": "26T1020190",
+            "studentName": "Phạm Tiến Trình"
+        },
+        {
+            "studentId": "26T1020192",
+            "studentName": "Lê Quốc Trung"
+        },
+        {
+            "studentId": "26T1020200",
+            "studentName": "Trần Thanh Tuấn"
+        },
+        {
+            "studentId": "26T1020195",
+            "studentName": "Huỳnh Lê Tuấn Tú"
+        },
+        {
+            "studentId": "26T1020204",
+            "studentName": "Nguyễn Ngọc Khánh Vân"
+        },
+        {
+            "studentId": "26T1020206",
+            "studentName": "Phan Xuân Việt"
+        }
+    ]
+}
+
+{
+    "searchName": "2026-2027.1.TIN2015.007",
+    "totalStudents": 48,
+    "students": [
+        {
+            "studentId": "26T1020004",
+            "studentName": "Hoàng Nguyễn Nguyên Anh"
+        },
+        {
+            "studentId": "26T1020007",
+            "studentName": "Nguyễn Tuấn Anh"
+        },
+        {
+            "studentId": "26T1020014",
+            "studentName": "Trương Công Bảo"
+        },
+        {
+            "studentId": "26T1020020",
+            "studentName": "Nguyễn Cửu Bảo Cơ"
+        },
+        {
+            "studentId": "26T1020024",
+            "studentName": "Đinh Mạnh Danh"
+        },
+        {
+            "studentId": "26T1020033",
+            "studentName": "Nguyễn Văn Dũng"
+        },
+        {
+            "studentId": "26T1020027",
+            "studentName": "Ngô Phan Tiến Đạt"
+        },
+        {
+            "studentId": "26T1020029",
+            "studentName": "Trần Nhơn Hoàng Đạt"
+        },
+        {
+            "studentId": "26T1020039",
+            "studentName": "Huỳnh Ngọc Quỳnh Giao"
+        },
+        {
+            "studentId": "26T1020043",
+            "studentName": "Trần Lê Thúy Hằng"
+        },
+        {
+            "studentId": "26T1020050",
+            "studentName": "Phan Trung Hiếu"
+        },
+        {
+            "studentId": "26T1020053",
+            "studentName": "Nguyễn Phi Hoàng"
+        },
+        {
+            "studentId": "26T1020068",
+            "studentName": "Nguyễn Gia Huy"
+        },
+        {
+            "studentId": "26T1020069",
+            "studentName": "Nguyễn Quang Huy"
+        },
+        {
+            "studentId": "26T1020060",
+            "studentName": "Lê Đăng Hùng"
+        },
+        {
+            "studentId": "26T1020063",
+            "studentName": "Lê Nguyễn Minh Hưng"
+        },
+        {
+            "studentId": "26T1020074",
+            "studentName": "Nguyễn Lê Anh Khang"
+        },
+        {
+            "studentId": "26T1020081",
+            "studentName": "Hoàng Đình Minh Khoa"
+        },
+        {
+            "studentId": "26T1020086",
+            "studentName": "Trần Đặng Văn Kiệt"
+        },
+        {
+            "studentId": "26T1020091",
+            "studentName": "Hoàng Sùng Lãm"
+        },
+        {
+            "studentId": "26T1020090",
+            "studentName": "Nguyễn Hoàng Lâm"
+        },
+        {
+            "studentId": "26T1020096",
+            "studentName": "Phan Thị Khánh Linh"
+        },
+        {
+            "studentId": "26T1020097",
+            "studentName": "Nguyễn Công Lộc"
+        },
+        {
+            "studentId": "26T1020103",
+            "studentName": "Hoàng Văn Nhật Minh"
+        },
+        {
+            "studentId": "26T1020109",
+            "studentName": "Trần Quốc Minh"
+        },
+        {
+            "studentId": "26T1020111",
+            "studentName": "Nguyễn Lê Kiều My"
+        },
+        {
+            "studentId": "26T1020115",
+            "studentName": "Trần Thị Thanh Ngân"
+        },
+        {
+            "studentId": "26T1020118",
+            "studentName": "Mai Tuấn Nguyên"
+        },
+        {
+            "studentId": "26T1020122",
+            "studentName": "Hồ Tùng Nhân"
+        },
+        {
+            "studentId": "26T1020124",
+            "studentName": "Phạm Nguyễn Thành Nhân"
+        },
+        {
+            "studentId": "26T1020126",
+            "studentName": "Hoàng Ái Nhi"
+        },
+        {
+            "studentId": "26T1020139",
+            "studentName": "Nguyễn Ngọc Phước"
+        },
+        {
+            "studentId": "26T1020149",
+            "studentName": "Huỳnh Thị Tú Quyên"
+        },
+        {
+            "studentId": "26T1020152",
+            "studentName": "Nguyễn Xuân Sáng"
+        },
+        {
+            "studentId": "26T1020158",
+            "studentName": "Võ Trần Hải Sơn"
+        },
+        {
+            "studentId": "26T1020170",
+            "studentName": "Nguyễn Xuân Thành"
+        },
+        {
+            "studentId": "26T1020172",
+            "studentName": "Trần Bình Thạnh"
+        },
+        {
+            "studentId": "26T1020143",
+            "studentName": "Nguyễn Hữu Quân"
+        },
+        {
+            "studentId": "26T1020156",
+            "studentName": "Nguyễn Hoàng Sơn"
+        },
+        {
+            "studentId": "26T1020164",
+            "studentName": "Phan Anh Tây"
+        },
+        {
+            "studentId": "26T1020177",
+            "studentName": "Cao Hoàng Thịnh"
+        },
+        {
+            "studentId": "25T1020316",
+            "studentName": "Nguyễn Hoàng Quốc Thịnh"
+        },
+        {
+            "studentId": "26T1020187",
+            "studentName": "Nguyễn Thanh Trí"
+        },
+        {
+            "studentId": "26T1020193",
+            "studentName": "Trương Duy Trung"
+        },
+        {
+            "studentId": "26T1020198",
+            "studentName": "Nguyễn Thanh Tuân"
+        },
+        {
+            "studentId": "26T1020201",
+            "studentName": "Phan Quốc Tường"
+        },
+        {
+            "studentId": "26T1020205",
+            "studentName": "Phan Văn Quốc Việt"
+        },
+        {
+            "studentId": "26T1020210",
+            "studentName": "Nguyễn Đăng Hoàng Vũ"
+        }
+    ]
+}
+
+{
+    "searchName": "2026-2027.1.TIN2015.008",
+    "totalStudents": 39,
+    "students": [
+        {
+            "studentId": "26T1020229",
+            "studentName": "Nguyễn Thành An"
+        },
+        {
+            "studentId": "26T1020214",
+            "studentName": "Sisouphan Chandavone"
+        },
+        {
+            "studentId": "26T1020231",
+            "studentName": "Trần Nguyên Chương"
+        },
+        {
+            "studentId": "26T1020236",
+            "studentName": "Võ Phước Duy"
+        },
+        {
+            "studentId": "26T1020234",
+            "studentName": "Nguyễn Tuấn Dũng"
+        },
+        {
+            "studentId": "26T1020232",
+            "studentName": "Nguyễn Đức Thành Đạt"
+        },
+        {
+            "studentId": "26T1020233",
+            "studentName": "Nguyễn Tiến Đạt"
+        },
+        {
+            "studentId": "26T1020215",
+            "studentName": "Douangmala Hatthasone"
+        },
+        {
+            "studentId": "26T1020240",
+            "studentName": "Trương Phạm Văn Hiếu"
+        },
+        {
+            "studentId": "26T1020216",
+            "studentName": "Phengthavong Hongmany"
+        },
+        {
+            "studentId": "26T1020242",
+            "studentName": "Mai Quốc Hùng"
+        },
+        {
+            "studentId": "26T1020243",
+            "studentName": "Trần Mạnh Hùng"
+        },
+        {
+            "studentId": "26T1020244",
+            "studentName": "Phạm Thế Kha"
+        },
+        {
+            "studentId": "26T1020217",
+            "studentName": "Symoukda Khamphar"
+        },
+        {
+            "studentId": "26T1020218",
+            "studentName": "Douang Oudom Khonekham"
+        },
+        {
+            "studentId": "26T1020219",
+            "studentName": "Bounyaseng Lotchana"
+        },
+        {
+            "studentId": "26T1020248",
+            "studentName": "Nguyễn Huy Nam"
+        },
+        {
+            "studentId": "26T1020251",
+            "studentName": "Hoàng Trần Hạnh Nguyên"
+        },
+        {
+            "studentId": "26T1020254",
+            "studentName": "Hồ Uyển Nhi"
+        },
+        {
+            "studentId": "26T1020256",
+            "studentName": "Trương Thị Tuyết Nhung"
+        },
+        {
+            "studentId": "26T1020257",
+            "studentName": "Võ Thị Nhung"
+        },
+        {
+            "studentId": "26T1020220",
+            "studentName": "Khamdalanikone Phayvan"
+        },
+        {
+            "studentId": "26T1020221",
+            "studentName": "Chanmexay Phouthasone"
+        },
+        {
+            "studentId": "26T1020222",
+            "studentName": "Siliphanh Phoutthachit"
+        },
+        {
+            "studentId": "26T1020259",
+            "studentName": "Phan Trường Phú"
+        },
+        {
+            "studentId": "26T1020260",
+            "studentName": "Nguyễn Hoàng Phúc"
+        },
+        {
+            "studentId": "26T1020223",
+            "studentName": "Lorvankham Saiyfon"
+        },
+        {
+            "studentId": "26T1020224",
+            "studentName": "Pengsavath Salidta"
+        },
+        {
+            "studentId": "26T1020225",
+            "studentName": "Aphailath Sintavanh"
+        },
+        {
+            "studentId": "26T1020263",
+            "studentName": "Võ Ngọc Tài"
+        },
+        {
+            "studentId": "26T1020226",
+            "studentName": "Phommachanh Thanongsak"
+        },
+        {
+            "studentId": "26T1020264",
+            "studentName": "Nguyễn Toàn"
+        },
+        {
+            "studentId": "26T1020267",
+            "studentName": "Trần Phước Đức Tuấn"
+        },
+        {
+            "studentId": "26T1020268",
+            "studentName": "Trần Quốc Tuấn"
+        },
+        {
+            "studentId": "26T1020270",
+            "studentName": "Trần Thị Thu Uyên"
+        },
+        {
+            "studentId": "26T1020227",
+            "studentName": "Sihaphom Vilasak"
+        },
+        {
+            "studentId": "26T1020271",
+            "studentName": "Lương Triệu Vỹ"
+        },
+        {
+            "studentId": "26T1020272",
+            "studentName": "Bùi Thị Hải Yến"
+        },
+        {
+            "studentId": "26T1020228",
+            "studentName": "Syhathep Yotee"
+        }
+    ]
+}
+
+// Kỹ thuật lập Trình
+
+{
+    "searchName": "2026-2027.1.TIN2022.001",
+    "totalStudents": 35,
+    "students": [
+        {
+            "studentId": "26T1029038",
+            "studentName": "Nguyễn Bình An"
+        },
+        {
+            "studentId": "26T1029001",
+            "studentName": "Việt Đàm Phú An"
+        },
+        {
+            "studentId": "26T1029002",
+            "studentName": "Quách Văn Bình"
+        },
+        {
+            "studentId": "26T1029003",
+            "studentName": "Nguyễn Thành Công"
+        },
+        {
+            "studentId": "26T1029005",
+            "studentName": "Lương Gia Đạt"
+        },
+        {
+            "studentId": "26T1029004",
+            "studentName": "Lê Phan Nhật Đăng"
+        },
+        {
+            "studentId": "26T1029006",
+            "studentName": "Nguyễn Hồng Đức"
+        },
+        {
+            "studentId": "26T1029007",
+            "studentName": "Võ Minh Đức"
+        },
+        {
+            "studentId": "26T1029010",
+            "studentName": "Hoàng Nhật Hào"
+        },
+        {
+            "studentId": "26T1029008",
+            "studentName": "Nguyễn Mạnh Hải"
+        },
+        {
+            "studentId": "26T1029009",
+            "studentName": "Trần Hoàng Hải"
+        },
+        {
+            "studentId": "26T1029011",
+            "studentName": "Nguyễn Anh Hiến"
+        },
+        {
+            "studentId": "26T1029014",
+            "studentName": "Cao Anh Huy"
+        },
+        {
+            "studentId": "26T1029012",
+            "studentName": "Nguyễn Mạnh Hùng"
+        },
+        {
+            "studentId": "26T1029015",
+            "studentName": "Nguyễn Hữu Đăng Khôi"
+        },
+        {
+            "studentId": "26T1029016",
+            "studentName": "Phạm Minh Khôi"
+        },
+        {
+            "studentId": "26T1029017",
+            "studentName": "Nguyễn Trung Kiên"
+        },
+        {
+            "studentId": "26T1029018",
+            "studentName": "Phan Quý Lễ"
+        },
+        {
+            "studentId": "26T1029019",
+            "studentName": "Nguyễn Thành Lộc"
+        },
+        {
+            "studentId": "26T1029020",
+            "studentName": "Phan Hồ Hoàng Mai"
+        },
+        {
+            "studentId": "26T1029021",
+            "studentName": "Lê Nguyễn Bình Minh"
+        },
+        {
+            "studentId": "26T1029022",
+            "studentName": "Trần Anh Minh"
+        },
+        {
+            "studentId": "26T1029023",
+            "studentName": "Võ Đức Nhật Minh"
+        },
+        {
+            "studentId": "26T1029024",
+            "studentName": "Hoàng Ngọc Khôi Nguyên"
+        },
+        {
+            "studentId": "26T1029025",
+            "studentName": "Nguyễn Minh Nhật"
+        },
+        {
+            "studentId": "26T1029026",
+            "studentName": "Phạm Văn Khánh Nhật"
+        },
+        {
+            "studentId": "26T1029027",
+            "studentName": "Nguyễn Văn Nhật Quang"
+        },
+        {
+            "studentId": "26T1029028",
+            "studentName": "Phạm Viết Quang"
+        },
+        {
+            "studentId": "26T1029029",
+            "studentName": "Đặng Trần Anh Quốc"
+        },
+        {
+            "studentId": "26T1029030",
+            "studentName": "Đặng Thành Tài"
+        },
+        {
+            "studentId": "26T1029031",
+            "studentName": "Trần Thị Anh Tâm"
+        },
+        {
+            "studentId": "26T1029032",
+            "studentName": "Phạm Phước Thanh"
+        },
+        {
+            "studentId": "26T1029034",
+            "studentName": "Nguyễn Minh Trường"
+        },
+        {
+            "studentId": "26T1029036",
+            "studentName": "Trần Tuấn Vũ"
+        },
+        {
+            "studentId": "26T1029037",
+            "studentName": "Cao Tường Vy"
+        }
+    ]
+}
+{
+    "searchName": "2026-2027.1.TIN2022.002",
+    "totalStudents": 44,
+    "students": [
+        {
+            "studentId": "26T1130001",
+            "studentName": "Nguyễn Thuỳ An"
+        },
+        {
+            "studentId": "26T1130002",
+            "studentName": "Phan Nguyễn Mỹ An"
+        },
+        {
+            "studentId": "26T1130003",
+            "studentName": "Hồ Đức Anh"
+        },
+        {
+            "studentId": "26T1130004",
+            "studentName": "Nguyễn Ngọc Bảo Anh"
+        },
+        {
+            "studentId": "26T1130006",
+            "studentName": "Nguyễn Hoàng Gia Bảo"
+        },
+        {
+            "studentId": "26T1130005",
+            "studentName": "Phạm Nguyễn Ly Băng"
+        },
+        {
+            "studentId": "26T1130007",
+            "studentName": "Bùi Xuân Boy"
+        },
+        {
+            "studentId": "26T1130008",
+            "studentName": "Đặng Như Nhật Chương"
+        },
+        {
+            "studentId": "26T1130012",
+            "studentName": "Huỳnh Thị Huyền Diệu"
+        },
+        {
+            "studentId": "26T1130013",
+            "studentName": "Lê Thị Bích Diệu"
+        },
+        {
+            "studentId": "26T1130011",
+            "studentName": "Nguyễn Lê Thành Đạt"
+        },
+        {
+            "studentId": "26T1130010",
+            "studentName": "Nguyễn Hải Đăng"
+        },
+        {
+            "studentId": "26T1130014",
+            "studentName": "Trần Đại Kiến Đức"
+        },
+        {
+            "studentId": "20T1020024",
+            "studentName": "Kiều Phúc Hải"
+        },
+        {
+            "studentId": "26T1130015",
+            "studentName": "Trần Trung Hiếu"
+        },
+        {
+            "studentId": "26T1130016",
+            "studentName": "Nguyễn Phan Bảo Hoàng"
+        },
+        {
+            "studentId": "26T1130018",
+            "studentName": "Trần Văn Huế"
+        },
+        {
+            "studentId": "26T1130019",
+            "studentName": "Nguyễn Văn Hùng"
+        },
+        {
+            "studentId": "26T1130022",
+            "studentName": "Hồ Ngọc Bảo Khang"
+        },
+        {
+            "studentId": "26T1130023",
+            "studentName": "Đoàn Trung Kiên"
+        },
+        {
+            "studentId": "26T1130024",
+            "studentName": "Võ Tấn Kiệt"
+        },
+        {
+            "studentId": "26T1130025",
+            "studentName": "Nguyễn Thành Lương"
+        },
+        {
+            "studentId": "26T1130026",
+            "studentName": "Lê Bá Quang Minh"
+        },
+        {
+            "studentId": "26T1130027",
+            "studentName": "Lê Bùi Quang Minh"
+        },
+        {
+            "studentId": "26T1130028",
+            "studentName": "Lê Thị Nhật Minh"
+        },
+        {
+            "studentId": "26T1130029",
+            "studentName": "Nguyễn Văn Bình Minh"
+        },
+        {
+            "studentId": "26T1130030",
+            "studentName": "Đỗ Triều Nguyên"
+        },
+        {
+            "studentId": "26T1130031",
+            "studentName": "Thái Quốc Nguyên"
+        },
+        {
+            "studentId": "26T1130032",
+            "studentName": "Hà Thị Nhàn"
+        },
+        {
+            "studentId": "26T1130033",
+            "studentName": "Hồ Văn Phong"
+        },
+        {
+            "studentId": "26T1130034",
+            "studentName": "Lê Hồng Phong"
+        },
+        {
+            "studentId": "26T1130035",
+            "studentName": "Hoàng Hồ Xuân Phước"
+        },
+        {
+            "studentId": "26T1130037",
+            "studentName": "Phan Vinh Quang"
+        },
+        {
+            "studentId": "26T1130038",
+            "studentName": "Lê Thị Như Quỳnh"
+        },
+        {
+            "studentId": "26T1130039",
+            "studentName": "Nguyễn Thanh Tâm"
+        },
+        {
+            "studentId": "26T1130040",
+            "studentName": "Thái Đạt Thành"
+        },
+        {
+            "studentId": "26T1130041",
+            "studentName": "Nguyễn Khánh Toàn"
+        },
+        {
+            "studentId": "26T1130043",
+            "studentName": "Ngô Minh Trí"
+        },
+        {
+            "studentId": "26T1130044",
+            "studentName": "Phan Võ Minh Trí"
+        },
+        {
+            "studentId": "26T1130045",
+            "studentName": "Nguyễn Thị Thu Uyên"
+        },
+        {
+            "studentId": "26T1130046",
+            "studentName": "Trần Lê Khánh Vân"
+        },
+        {
+            "studentId": "26T1130047",
+            "studentName": "Trần Quang Vinh"
+        },
+        {
+            "studentId": "26T1130048",
+            "studentName": "Lê Nguyễn Tường Vy"
+        },
+        {
+            "studentId": "26T1130049",
+            "studentName": "Chung Hùng Vỹ"
+        }
+    ]
+}
